@@ -1,8 +1,9 @@
 "use client";
 
-import { ArrowUpRight, MapPin, Calendar, Sparkles } from "lucide-react";
+import { ArrowUpRight, Calendar, Sparkles } from "lucide-react";
 import Image from "next/image";
 import PrimaryButton from "./PrimaryButton";
+import { useEffect, useRef, useState } from "react";
 
 const tours = [
   {
@@ -51,9 +52,248 @@ const tours = [
   },
 ];
 
+function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!cardRef.current) return;
+
+      const rect = cardRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate when card enters viewport
+      const cardTop = rect.top;
+      const cardHeight = rect.height;
+
+      // Start animation when card is 80% in viewport
+      const triggerPoint = windowHeight * 0.8;
+
+      if (cardTop < triggerPoint && cardTop > -cardHeight) {
+        // Calculate progress (0 to 1)
+        const progress = Math.min(
+          Math.max((triggerPoint - cardTop) / (cardHeight * 0.8), 0),
+          1
+        );
+        setScrollProgress(progress);
+      } else if (cardTop >= triggerPoint) {
+        setScrollProgress(0);
+      } else {
+        setScrollProgress(1);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  // Calculate individual element animations based on scroll progress
+  const titleProgress = Math.min(scrollProgress * 2, 1);
+  const descProgress = Math.min(Math.max((scrollProgress - 0.2) * 2, 0), 1);
+  const highlightsProgress = Math.min(
+    Math.max((scrollProgress - 0.4) * 2, 0),
+    1
+  );
+  const priceProgress = Math.min(Math.max((scrollProgress - 0.6) * 2, 0), 1);
+
+  return (
+    <div
+      ref={cardRef}
+      className="min-h-screen flex items-center py-12 sticky top-0"
+      style={{
+        zIndex: 10 - index,
+      }}
+    >
+      <div className="container mx-auto px-6">
+        <div className="relative">
+          {/* Animated border gradient */}
+          <div
+            className="absolute -inset-px bg-linear-to-r from-primary-scarlet-600/0 via-primary-scarlet-500/30 to-primary-scarlet-600/0 rounded-[28px] blur-sm transition-opacity duration-700"
+            style={{ opacity: scrollProgress * 0.8 }}
+          />
+
+          {/* Main card */}
+          <div className="relative bg-linear-to-br from-white/[0.07] to-white/3 backdrop-blur-xl rounded-[28px] overflow-hidden border border-white/8 shadow-2xl shadow-black/20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 relative min-h-[600px]">
+              {/* Fixed Image Section - Left */}
+              <div className="relative h-[400px] lg:h-full overflow-hidden">
+                <div
+                  className="absolute inset-0 transition-transform duration-1000 ease-out"
+                  style={{
+                    transform: `scale(${1 + scrollProgress * 0.1})`,
+                  }}
+                >
+                  <Image
+                    src={tour.image}
+                    alt={tour.title}
+                    fill
+                    className="object-cover"
+                    quality={95}
+                  />
+                </div>
+
+                {/* Multi-layer gradient overlay */}
+                <div className="absolute inset-0 bg-linear-to-br from-black/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-r from-transparent to-[#121417]/60 lg:to-[#121417]/80" />
+
+                {/* Animated glow */}
+                <div
+                  className="absolute inset-0 bg-linear-to-tr from-primary-scarlet-600/20 via-primary-scarlet-500/10 to-transparent transition-opacity duration-700"
+                  style={{ opacity: scrollProgress * 0.5 }}
+                />
+
+                {/* Premium Duration Badge */}
+                <div
+                  className="absolute top-8 left-8 transition-all duration-700"
+                  style={{
+                    opacity: scrollProgress,
+                    transform: `translateY(${(1 - scrollProgress) * 20}px)`,
+                  }}
+                >
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-white/20 backdrop-blur-md rounded-full blur-sm" />
+                    <div className="relative flex items-center gap-2 px-5 py-3 bg-white/90 backdrop-blur-md rounded-full shadow-lg">
+                      <Calendar
+                        size={16}
+                        className="text-primary-scarlet-600"
+                      />
+                      <span className="text-sm font-bold text-gray-900">
+                        {tour.duration}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tour number */}
+                <div className="absolute bottom-8 left-8">
+                  <div
+                    className="text-8xl font-black text-white/10 leading-none transition-opacity duration-700"
+                    style={{ opacity: scrollProgress }}
+                  >
+                    0{tour.id}
+                  </div>
+                </div>
+              </div>
+
+              {/* Animated Content Section - Right */}
+              <div className="p-10 lg:p-14 flex flex-col justify-center relative">
+                {/* Decorative element */}
+                <div
+                  className="absolute top-0 right-0 w-40 h-40 bg-primary-scarlet-500/5 rounded-full blur-3xl transition-all duration-700"
+                  style={{ opacity: scrollProgress * 0.5 }}
+                />
+
+                <div className="relative space-y-6">
+                  {/* Title - appears first */}
+                  <div
+                    className="transition-all duration-1000 ease-out"
+                    style={{
+                      opacity: titleProgress,
+                      transform: `translateX(${(1 - titleProgress) * 50}px)`,
+                    }}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-[2px] bg-linear-to-r from-primary-scarlet-500 to-transparent rounded-full" />
+                      <span className="text-sm font-bold text-primary-scarlet-400 tracking-widest uppercase">
+                        Тур #{tour.id}
+                      </span>
+                    </div>
+
+                    <h3 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
+                      {tour.title}
+                    </h3>
+                  </div>
+
+                  {/* Description - appears second */}
+                  <div
+                    className="transition-all duration-1000 ease-out delay-100"
+                    style={{
+                      opacity: descProgress,
+                      transform: `translateX(${(1 - descProgress) * 50}px)`,
+                    }}
+                  >
+                    <p className="text-gray-400 text-lg lg:text-xl leading-relaxed">
+                      {tour.description}
+                    </p>
+                  </div>
+
+                  {/* Highlights - appears third */}
+                  <div
+                    className="flex flex-wrap gap-2 transition-all duration-1000 ease-out delay-200"
+                    style={{
+                      opacity: highlightsProgress,
+                      transform: `translateX(${
+                        (1 - highlightsProgress) * 50
+                      }px)`,
+                    }}
+                  >
+                    {tour.highlights.map((highlight, i) => (
+                      <div
+                        key={i}
+                        className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 hover:bg-white/10 hover:border-primary-scarlet-500/30 hover:text-white transition-all duration-300"
+                      >
+                        {highlight}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Price and CTA - appears last */}
+                  <div
+                    className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-white/10 transition-all duration-1000 ease-out delay-300"
+                    style={{
+                      opacity: priceProgress,
+                      transform: `translateX(${(1 - priceProgress) * 50}px)`,
+                    }}
+                  >
+                    <div className="relative">
+                      <div className="absolute -inset-4 bg-primary-scarlet-500/10 rounded-2xl blur-xl" />
+                      <div className="relative">
+                        <div className="text-sm text-gray-500 font-medium mb-1">
+                          Стоимость
+                        </div>
+                        <div className="text-4xl lg:text-5xl font-black bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                          {tour.price}
+                        </div>
+                        <div className="text-sm text-gray-500 mt-1">
+                          на человека
+                        </div>
+                      </div>
+                    </div>
+
+                    <PrimaryButton className="w-full sm:w-auto">
+                      Подробнее о туре
+                    </PrimaryButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Premium hover glow effect */}
+            <div
+              className="absolute inset-0 pointer-events-none transition-opacity duration-700"
+              style={{ opacity: scrollProgress * 0.5 }}
+            >
+              <div className="absolute inset-0 bg-linear-to-br from-primary-scarlet-500/[0.07] via-transparent to-primary-scarlet-700/[0.07]" />
+              <div className="absolute top-0 left-1/4 right-1/4 h-px bg-linear-to-r from-transparent via-primary-scarlet-400/50 to-transparent" />
+              <div className="absolute bottom-0 left-1/4 right-1/4 h-px bg-linear-to-r from-transparent via-primary-scarlet-400/50 to-transparent" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PopularTours() {
   return (
-    <section id="tours" className="py-32 bg-[#121417] relative overflow-hidden">
+    <section id="tours" className="relative bg-[#121417] overflow-hidden">
       {/* Enhanced Decorative elements */}
       <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-primary-scarlet-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
       <div
@@ -71,9 +311,9 @@ export default function PopularTours() {
         }}
       />
 
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Header with premium styling */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20">
+      {/* Header */}
+      <div className="container mx-auto px-6 pt-32 pb-12 relative z-20">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-scarlet-500/10 border border-primary-scarlet-500/20 mb-6">
               <Sparkles size={16} className="text-primary-scarlet-400" />
@@ -100,148 +340,17 @@ export default function PopularTours() {
             />
           </button>
         </div>
-
-        {/* Premium tour cards */}
-        <div className="space-y-8">
-          {tours.map((tour, index) => (
-            <div key={tour.id} className="group relative">
-              {/* Animated border gradient */}
-              <div className="absolute -inset-px bg-linear-to-r from-primary-scarlet-600/0 via-primary-scarlet-500/30 to-primary-scarlet-600/0 rounded-[28px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm" />
-
-              {/* Main card */}
-              <div className="relative bg-linear-to-br from-white/[0.07] to-white/3 backdrop-blur-xl rounded-[28px] overflow-hidden border border-white/8 hover:border-white/20 transition-all duration-700 shadow-2xl shadow-black/20 group-hover:shadow-primary-scarlet-900/20">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 relative">
-                  {/* Premium Image Section */}
-                  <div className="lg:col-span-5 relative h-80 lg:h-[500px] overflow-hidden">
-                    {/* Image with parallax effect */}
-                    <div className="absolute inset-0 group-hover:scale-110 transition-transform duration-1000 ease-out">
-                      <Image
-                        src={tour.image}
-                        alt={tour.title}
-                        fill
-                        className="object-cover"
-                        quality={95}
-                      />
-                    </div>
-
-                    {/* Multi-layer gradient overlay */}
-                    <div className="absolute inset-0 bg-linear-to-br from-black/30 via-transparent to-transparent" />
-                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-[#121417]/80 lg:to-[#121417]" />
-
-                    {/* Animated glow effect on hover */}
-                    <div className="absolute inset-0 bg-linear-to-tr from-primary-scarlet-600/0 via-primary-scarlet-500/0 to-primary-scarlet-400/0 group-hover:from-primary-scarlet-600/20 group-hover:via-primary-scarlet-500/10 group-hover:to-transparent transition-all duration-700" />
-
-                    {/* Premium Duration Badge */}
-                    <div className="absolute top-8 left-8">
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-white/20 backdrop-blur-md rounded-full blur-sm" />
-                        <div className="relative flex items-center gap-2 px-5 py-3 bg-white/90 backdrop-blur-md rounded-full shadow-lg">
-                          <Calendar
-                            size={16}
-                            className="text-primary-scarlet-600"
-                          />
-                          <span className="text-sm font-bold text-gray-900">
-                            {tour.duration}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Tour number with premium styling */}
-                    <div className="absolute bottom-8 left-8">
-                      <div className="text-8xl font-black text-white/5 leading-none">
-                        0{tour.id}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Premium Content Section */}
-                  <div className="lg:col-span-7 p-10 lg:p-14 flex flex-col justify-center relative">
-                    {/* Decorative element */}
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-primary-scarlet-500/5 rounded-full blur-3xl group-hover:bg-primary-scarlet-500/10 transition-colors duration-700" />
-
-                    <div className="relative">
-                      {/* Category badge */}
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="flex items-center gap-2 text-sm font-bold text-primary-scarlet-400 tracking-widest uppercase">
-                          <div className="w-12 h-[2px] bg-linear-to-r from-primary-scarlet-500 to-transparent rounded-full" />
-                          <span>Тур #{tour.id}</span>
-                        </div>
-                      </div>
-
-                      {/* Title with gradient on hover */}
-                      <h3 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                        <span className="text-white group-hover:bg-linear-to-r group-hover:from-white group-hover:via-primary-scarlet-200 group-hover:to-white group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
-                          {tour.title}
-                        </span>
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-gray-400 text-lg lg:text-xl leading-relaxed mb-8">
-                        {tour.description}
-                      </p>
-
-                      {/* Highlights */}
-                      <div className="flex flex-wrap gap-2 mb-10">
-                        {tour.highlights.map((highlight, i) => (
-                          <div
-                            key={i}
-                            className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 hover:bg-white/10 hover:border-primary-scarlet-500/30 hover:text-white transition-all duration-300 cursor-default"
-                          >
-                            {highlight}
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Price and CTA */}
-                      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-white/10">
-                        <div className="relative">
-                          <div className="absolute -inset-4 bg-primary-scarlet-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          <div className="relative">
-                            <div className="flex items-baseline gap-2 mb-1">
-                              <div className="text-sm text-gray-500 font-medium">
-                                Стоимость
-                              </div>
-                            </div>
-                            <div className="text-4xl lg:text-5xl font-black bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                              {tour.price}
-                            </div>
-                            <div className="text-sm text-gray-500 mt-1">
-                              на человека
-                            </div>
-                          </div>
-                        </div>
-
-                        <PrimaryButton className="w-full sm:w-auto group-hover:scale-105 transition-transform duration-300">
-                          Подробнее о туре
-                        </PrimaryButton>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Premium hover glow effect */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                  <div className="absolute inset-0 bg-linear-to-br from-primary-scarlet-500/[0.07] via-transparent to-primary-scarlet-700/[0.07]" />
-                  <div className="absolute top-0 left-1/4 right-1/4 h-px bg-linear-to-r from-transparent via-primary-scarlet-400/50 to-transparent" />
-                  <div className="absolute bottom-0 left-1/4 right-1/4 h-px bg-linear-to-r from-transparent via-primary-scarlet-400/50 to-transparent" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Footer CTA */}
-        <div className="mt-16 text-center">
-          <button className="inline-flex items-center gap-3 px-8 py-4 rounded-full border-2 border-white/10 hover:border-primary-scarlet-500/50 text-white/80 hover:text-white font-semibold transition-all group hover:bg-white/5 md:hidden">
-            <span>Все туры</span>
-            <ArrowUpRight
-              size={20}
-              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-            />
-          </button>
-        </div>
       </div>
+
+      {/* Scroll-driven tour cards */}
+      <div className="relative">
+        {tours.map((tour, index) => (
+          <TourCard key={tour.id} tour={tour} index={index} />
+        ))}
+      </div>
+
+      {/* Add spacing at bottom */}
+      <div className="h-32" />
 
       <style jsx>{`
         @keyframes pulse-slow {
