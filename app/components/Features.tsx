@@ -30,7 +30,7 @@ export default function Features() {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-white">
+    <section className="py-24 md:py-46 bg-white">
       <div className="container mx-auto px-6 md:px-12 lg:px-16">
         {/* Header */}
         <div className="mb-16 md:mb-20">
@@ -88,17 +88,17 @@ export default function Features() {
                     <div className="text-6xl md:text-7xl font-bold text-black mb-6">
                       0{index + 1}
                     </div>
-                    
+
                     {/* Title */}
                     <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
                       {feature.title}
                     </h4>
-                    
+
                     {/* Description */}
                     <p className="text-lg text-gray-600 leading-relaxed">
                       {feature.description}
                     </p>
-                    
+
                     {/* Decorative line */}
                     <div className="mt-8 w-16 h-1 bg-primary-scarlet-500 rounded-full" />
                   </div>

@@ -29,7 +29,10 @@ export default function Hero() {
   const parallaxOffset = isMobile ? 0 : Math.min(scrollY * 0.3, 100);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-[#121417] flex items-center">
+    <section
+      id="hero"
+      className="relative h-screen w-full overflow-hidden bg-[#121417] flex items-center"
+    >
       <div className="relative w-full left-0 md:left-[5%] px-4 sm:px-6 md:px-12 lg:px-16">
         <h1 className="relative z-10 font-bold tracking-tight leading-[0.95] text-[14vw] sm:text-[13vw] md:text-[10vw] lg:text-[9vw] text-[#f5f5f4] select-none">
           <span
@@ -45,7 +48,7 @@ export default function Hero() {
             ПО КИТАЮ.
           </span>
           <span
-            className="block ml-[5%] sm:ml-[6%] md:ml-[8%] transition-transform duration-300 ease-out"
+            className="block ml-[5%] sm:ml-[6%] md:ml-[15%] transition-transform duration-300 ease-out"
             style={{ transform: `translateX(-${parallaxOffset * 0.5}px)` }}
           >
             ВМЕСТЕ С НАМИ.
