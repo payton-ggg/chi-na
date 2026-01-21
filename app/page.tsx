@@ -15,7 +15,7 @@ export default function Home() {
       <PopularTours />
       <HowItWorks />
       <FinalCTA />
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }
