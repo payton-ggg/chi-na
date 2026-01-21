@@ -1,35 +1,79 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function FinalCTA() {
   return (
-    <section className="py-24 bg-primary-scarlet-600 text-white relative overflow-hidden">
-      {/* Abstract Background Shapes */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-black opacity-10 rounded-full translate-x-1/3 translate-y-1/3 pointer-events-none" />
+    <section className="py-32 bg-[#121417] text-white relative overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-20">
+          {/* Left Side: Form */}
+          <div className="w-full lg:w-1/2 max-w-xl">
+            <h2 className="text-5xl md:text-7xl font-bold mb-16 text-white tracking-tight">
+              Напишите нам
+            </h2>
 
-      <div className="container mx-auto px-6 relative z-10 text-center">
-        <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-          Готовы открыть Китай?
-        </h2>
-        <p className="text-xl text-primary-scarlet-100 mb-10 max-w-2xl mx-auto font-light">
-          Оставьте заявку, и мы составим для вас идеальный маршрут путешествия.
-        </p>
+            <div className="relative mb-12">
+              <input
+                type="email"
+                placeholder="Ваш email адрес"
+                className="w-full bg-transparent border-b border-white/10 py-4 text-xl md:text-2xl text-white placeholder:text-gray-600 focus:outline-none focus:border-primary-scarlet-500 transition-all duration-300"
+              />
+            </div>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="px-10 py-5 bg-white text-primary-scarlet-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-xl transform hover:scale-105 duration-300">
-            Оставить заявку
-          </button>
-          <button className="px-10 py-5 bg-transparent border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-            Связаться в WhatsApp <ArrowRight size={20} />
-          </button>
+            <div className="flex items-center justify-between gap-6">
+              <div className="flex items-center gap-4 cursor-pointer group">
+                <div className="w-5 h-5 rounded-full border border-gray-600 shrink-0 group-hover:border-primary-scarlet-500 transition-colors" />
+                <p className="text-sm text-gray-500 max-w-xs leading-relaxed group-hover:text-gray-400 transition-colors">
+                  Нажимая кнопку, вы соглашаетесь с{" "}
+                  <span className="underline decoration-gray-600 underline-offset-4">
+                    политикой конфиденциальности
+                  </span>
+                </p>
+              </div>
+
+              <button className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 group shrink-0">
+                <ArrowUpRight
+                  size={24}
+                  className="group-hover:rotate-45 transition-transform duration-300"
+                />
+              </button>
+            </div>
+          </div>
+
+          {/* Right Side: Button from Hero */}
+          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+            <button className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full border-2 border-white/10 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-700 z-20 hover:scale-105 hover:border-primary-scarlet-500/30 shadow-2xl">
+              <div className="absolute inset-3 rounded-full border border-white/10 group-hover:border-primary-scarlet-400/30 transition-all duration-700" />
+
+              <div className="absolute inset-0 rounded-full bg-linear-to-br from-primary-scarlet-600/0 via-primary-scarlet-500/0 to-primary-scarlet-700/0 group-hover:from-primary-scarlet-600/20 group-hover:via-primary-scarlet-500/30 group-hover:to-transparent transition-all duration-700" />
+
+              <div className="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(220,38,38,0.0)] group-hover:shadow-[0_0_100px_rgba(220,38,38,0.3)] transition-all duration-700" />
+
+              <span className="text-sm sm:text-base uppercase tracking-widest text-white/50 group-hover:text-white text-center relative z-10 font-bold transition-all duration-500 leading-relaxed">
+                Оставить
+                <br />
+                Заявку
+              </span>
+            </button>
+          </div>
         </div>
-
-        <p className="mt-8 text-sm text-primary-scarlet-200 opacity-80">
-          Мы ответим в течение 15 минут
-        </p>
       </div>
+
+      <style jsx>{`
+        @keyframes float-slow {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        .animate-float-slow {
+          animation: float-slow 6s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }
