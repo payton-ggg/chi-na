@@ -42,13 +42,13 @@ export default function Hero() {
             ПУТЕШЕСТВИЯ
           </span>
           <span
-            className="block ml-[10%] sm:ml-[12%] md:ml-[15%] mr-[-5%] transition-transform duration-300 ease-out"
+            className="block ml-[1%] sm:ml-[5%] md:ml-[10%] mr-[-5%] transition-transform duration-300 ease-out"
             style={{ transform: `translateX(${parallaxOffset}px)` }}
           >
             ПО КИТАЮ.
           </span>
           <span
-            className="block ml-[5%] sm:ml-[6%] md:ml-[15%] transition-transform duration-300 ease-out"
+            className="block ml-[1%] sm:ml-[5%] md:ml-[10%] transition-transform duration-300 ease-out"
             style={{ transform: `translateX(-${parallaxOffset * 0.5}px)` }}
           >
             ВМЕСТЕ С НАМИ.
