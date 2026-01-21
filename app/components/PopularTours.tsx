@@ -23,8 +23,7 @@ const tours = [
     description:
       "Аватар-парк Чжанцзяцзе, горы Хуаншань и стеклянные мосты. Для любителей природы.",
     duration: "12 дней",
-    image:
-      "https://images.unsplash.com/photo-1518022525094-218fc0eb7f95?q=80&w=1974&auto=format&fit=crop",
+    image: "https://media.vand.ru/tourgallery/121299/ib17068689283633.webp",
     price: "от $2,800",
     highlights: ["Парк Чжанцзяцзе", "Стеклянный мост", "Желтые горы"],
   },
