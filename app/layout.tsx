@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Roboto_Slab } from "next/font/google"; // Import Roboto Slab
+import { Roboto_Slab } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "./components/SmoothScroll";
 
 const robotoSlab = Roboto_Slab({
   variable: "--font-roboto-slab",
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${robotoSlab.variable} antialiased`}>{children}</body>
+      <body className={`${robotoSlab.variable} antialiased`}>
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }
