@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Hero() {
@@ -33,7 +34,51 @@ export default function Hero() {
       id="hero"
       className="relative h-screen w-full overflow-hidden bg-[#121417] flex items-center"
     >
-      <div className="relative w-full left-0 md:left-[5%] px-4 sm:px-6 md:px-12 lg:px-16">
+      {/* Decorative Atmosphere Elements */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Bamboo - Top Left */}
+        <div
+          className="absolute top-5 left-5 w-44 h-44 md:w-[400px] md:h-[400px] opacity-20 md:opacity-30 blur-[2px] transition-transform duration-300 ease-out"
+          style={{
+            transform: `translate(${parallaxOffset * 0.4}px, ${
+              parallaxOffset * 0.2
+            }px) rotate(-10deg)`,
+          }}
+        >
+          <Image
+            src="/bamboo.png"
+            alt="Bamboo"
+            fill
+            className="object-contain"
+          />
+        </div>
+
+        {/* Panda - Bottom Right */}
+        <div
+          className="absolute -bottom-10 -right-10 w-48 h-48 md:w-[400px] md:h-[400px] opacity-20 md:opacity-30 transition-transform duration-500 ease-out"
+          style={{
+            transform: `translate(-${parallaxOffset * 0.5}px, -${
+              parallaxOffset * 0.25
+            }px)`,
+          }}
+        >
+          <Image src="/panda.png" alt="Panda" fill className="object-contain" />
+        </div>
+
+        {/* Tea - Bottom Left */}
+        <div
+          className="absolute bottom-10 left-[5%] w-32 h-32 md:w-64 md:h-64 opacity-20 md:opacity-30 blur-[2px] transition-transform duration-300 ease-out"
+          style={{
+            transform: `translate(${parallaxOffset * 0.2}px, -${
+              parallaxOffset * 0.1
+            }px) rotate(15deg)`,
+          }}
+        >
+          <Image src="/tea.png" alt="Tea" fill className="object-contain" />
+        </div>
+      </div>
+
+      <div className="relative w-full left-0 md:left-[5%] px-4 sm:px-6 md:px-12 lg:px-16 z-10">
         <h1 className="relative z-10 font-bold tracking-tight leading-[0.95] text-[14vw] sm:text-[13vw] md:text-[10vw] lg:text-[9vw] text-[#f5f5f4] select-none">
           <span
             className="block transition-transform duration-300 ease-out"

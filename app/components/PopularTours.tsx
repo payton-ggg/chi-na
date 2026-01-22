@@ -291,8 +291,61 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
 }
 
 export default function PopularTours() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section id="tours" className="relative bg-[#121417] overflow-hidden">
+      {/* Decorative Atmosphere Elements */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Monach - Top Right */}
+        <div
+          className="absolute top-40 -right-20 w-80 h-80 opacity-20 transition-transform duration-500"
+          style={{
+            transform: `translate(-${scrollY * 0.1}px, ${
+              scrollY * 0.05
+            }px) rotate(10deg)`,
+          }}
+        >
+          <Image
+            src="/monach.png"
+            alt="Monach"
+            fill
+            className="object-contain"
+          />
+        </div>
+
+        {/* Flash - Mid Left */}
+        <div
+          className="absolute top-1/2 -left-20 w-64 h-64 opacity-15"
+          style={{
+            transform: `translate(${scrollY * 0.08}px, -50%) rotate(-20deg)`,
+          }}
+        >
+          <Image src="/flash.png" alt="Flash" fill className="object-contain" />
+        </div>
+
+        {/* Bamboo - Bottom Left */}
+        <div
+          className="absolute bottom-40 -left-10 w-96 h-96 opacity-25"
+          style={{
+            transform: `translate(${scrollY * 0.12}px, -${scrollY * 0.04}px)`,
+          }}
+        >
+          <Image
+            src="/bamboo.png"
+            alt="Bamboo"
+            fill
+            className="object-contain"
+          />
+        </div>
+      </div>
+
       {/* Enhanced Decorative elements */}
       <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-primary-scarlet-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
       <div
