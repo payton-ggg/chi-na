@@ -291,26 +291,53 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
 }
 
 export default function PopularTours() {
-  const [scrollY, setScrollY] = useState(0);
+  const monachRef = useRef<HTMLDivElement>(null);
+  const flashRef = useRef<HTMLDivElement>(null);
+  const bambooRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+
+          if (monachRef.current) {
+            // Optimized subtle movement for Monach
+            monachRef.current.style.transform = `translate3d(-${
+              scrollY * 0.05
+            }px, ${scrollY * 0.02}px, 0) rotate(10deg)`;
+          }
+          if (flashRef.current) {
+            flashRef.current.style.transform = `translate3d(${
+              scrollY * 0.08
+            }px, -50%, 0) rotate(-20deg)`;
+          }
+          if (bambooRef.current) {
+            bambooRef.current.style.transform = `translate3d(${
+              scrollY * 0.12
+            }px, -${scrollY * 0.04}px, 0)`;
+          }
+
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <section id="tours" className="relative bg-[#121417] overflow-hidden">
-      {/* Decorative Atmosphere Elements */}
+      {/* Decorative Atmosphere Elements - Optimized with will-change-transform */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        {/* Monach - Top Right */}
         <div
-          className="absolute top-40 -right-20 w-80 h-80 opacity-20 transition-transform duration-500"
-          style={{
-            transform: `translate(-${scrollY * 0.1}px, ${
-              scrollY * 0.05
-            }px) rotate(10deg)`,
-          }}
+          ref={monachRef}
+          className="absolute top-40 -right-20 w-80 h-80 opacity-20 will-change-transform"
         >
           <Image
             src="/monach.png"
@@ -320,22 +347,16 @@ export default function PopularTours() {
           />
         </div>
 
-        {/* Flash - Mid Left */}
         <div
-          className="absolute top-1/2 -left-20 w-64 h-64 opacity-15"
-          style={{
-            transform: `translate(${scrollY * 0.08}px, -50%) rotate(-20deg)`,
-          }}
+          ref={flashRef}
+          className="absolute top-[33%] -left-20 w-64 h-64 opacity-15 will-change-transform"
         >
           <Image src="/flash.png" alt="Flash" fill className="object-contain" />
         </div>
 
-        {/* Bamboo - Bottom Left */}
         <div
-          className="absolute bottom-40 -left-10 w-96 h-96 opacity-25"
-          style={{
-            transform: `translate(${scrollY * 0.12}px, -${scrollY * 0.04}px)`,
-          }}
+          ref={bambooRef}
+          className="absolute bottom-40 -left-10 w-96 h-96 opacity-25 will-change-transform"
         >
           <Image
             src="/bamboo.png"
@@ -346,7 +367,6 @@ export default function PopularTours() {
         </div>
       </div>
 
-      {/* Enhanced Decorative elements */}
       <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-primary-scarlet-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
       <div
         className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-primary-scarlet-500/8 rounded-full blur-[100px] pointer-events-none animate-pulse-slow"
@@ -354,7 +374,6 @@ export default function PopularTours() {
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/2 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Animated grid background */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -363,7 +382,6 @@ export default function PopularTours() {
         }}
       />
 
-      {/* Header */}
       <div className="container mx-auto px-6 pt-32 pb-12 relative z-20">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div className="max-w-2xl">
