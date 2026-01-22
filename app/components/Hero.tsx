@@ -38,7 +38,7 @@ export default function Hero() {
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Bamboo - Top Left */}
         <div
-          className="absolute top-5 left-5 w-44 h-44 md:w-[400px] md:h-[400px] opacity-20 md:opacity-30 blur-[2px] transition-transform duration-300 ease-out"
+          className="absolute top-5 left-5 w-32 h-32 md:w-[370px] md:h-[370px] opacity-20 md:opacity-30 blur-[2px] transition-transform duration-300 ease-out"
           style={{
             transform: `translate(${parallaxOffset * 0.4}px, ${
               parallaxOffset * 0.2
@@ -55,7 +55,7 @@ export default function Hero() {
 
         {/* Panda - Bottom Right */}
         <div
-          className="absolute -bottom-10 -right-10 w-48 h-48 md:w-[400px] md:h-[400px] opacity-20 md:opacity-30 transition-transform duration-500 ease-out"
+          className="absolute bottom-1 right-5 w-48 h-48 md:w-[400px] md:h-[400px] opacity-10 md:opacity-20 transition-transform duration-500 ease-out blur-[1px]"
           style={{
             transform: `translate(-${parallaxOffset * 0.5}px, -${
               parallaxOffset * 0.25
@@ -77,6 +77,15 @@ export default function Hero() {
           <Image src="/tea.png" alt="Tea" fill className="object-contain" />
         </div>
       </div>
+
+      {/* Animated grid background */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
 
       <div className="relative w-full left-0 md:left-[5%] px-4 sm:px-6 md:px-12 lg:px-16 z-10">
         <h1 className="relative z-10 font-bold tracking-tight leading-[0.95] text-[14vw] sm:text-[13vw] md:text-[10vw] lg:text-[9vw] text-[#f5f5f4] select-none">
