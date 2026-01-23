@@ -93,13 +93,13 @@ export default function Hero() {
             className="block transition-transform duration-300 ease-out"
             style={{ transform: `translateX(-${parallaxOffset}px)` }}
           >
-            ПУТЕШЕСТВИЯ
+            КИТАЙ. ШАНХАЙ.
           </span>
           <span
             className="block ml-[1%] sm:ml-[5%] md:ml-[10%] mr-[-5%] transition-transform duration-300 ease-out"
             style={{ transform: `translateX(${parallaxOffset}px)` }}
           >
-            ПО КИТАЮ.
+            ГОРЫ АВАТАРА.
           </span>
           <span
             className="block ml-[1%] sm:ml-[5%] md:ml-[10%] transition-transform duration-300 ease-out"
