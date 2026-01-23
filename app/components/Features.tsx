@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 export default function Features() {
   const [activeFeature, setActiveFeature] = useState<number | null>(0);
@@ -30,7 +31,7 @@ export default function Features() {
   ];
 
   return (
-    <section className="py-24 md:py-56 bg-white">
+    <section className="py-24 md:py-56 bg-main-bg">
       <div className="container mx-auto px-6 md:px-12 lg:px-16">
         {/* Header */}
         <div className="mb-16 md:mb-20">
@@ -54,7 +55,7 @@ export default function Features() {
                     className={`text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight transition-all duration-300 ${
                       activeFeature === index
                         ? "text-gray-900"
-                        : "text-gray-400 group-hover:text-gray-600"
+                        : "text-gray-600 group-hover:text-gray-800"
                     }`}
                   >
                     {feature.title}
@@ -83,24 +84,32 @@ export default function Features() {
                       : "opacity-0 translate-y-4 absolute inset-0 pointer-events-none"
                   }`}
                 >
-                  <div className="bg-gray-50 backdrop-blur-sm border border-gray-200 rounded-2xl p-8 md:p-10 shadow-lg">
+                  <div className="bg-accent-cta backdrop-blur-sm border border-gray-200 rounded-2xl p-8 md:p-10 shadow-lg relative overflow-hidden">
+                    <Image
+                      src="/torch.png"
+                      alt="Torch"
+                      width={200}
+                      height={200}
+                      className="absolute -top-2 right-5 opacity-20 object-contain pointer-events-none"
+                    />
+
                     {/* Number */}
-                    <div className="text-6xl md:text-7xl font-bold text-black mb-6">
+                    <div className="text-6xl md:text-7xl font-bold text-light-surface mb-6 relative z-10">
                       0{index + 1}
                     </div>
 
                     {/* Title */}
-                    <h4 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                    <h4 className="text-2xl md:text-3xl font-bold text-light-surface mb-6">
                       {feature.title}
                     </h4>
 
                     {/* Description */}
-                    <p className="text-lg text-gray-600 leading-relaxed">
+                    <p className="text-lg text-light-surface leading-relaxed">
                       {feature.description}
                     </p>
 
                     {/* Decorative line */}
-                    <div className="mt-8 w-16 h-1 bg-primary-scarlet-500 rounded-full" />
+                    <div className="mt-8 w-16 h-1 bg-light-surface rounded-full" />
                   </div>
                 </div>
               ))}

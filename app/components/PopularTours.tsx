@@ -332,7 +332,7 @@ export default function PopularTours() {
   }, []);
 
   return (
-    <section id="tours" className="relative bg-[#121417] overflow-hidden">
+    <section id="tours" className="relative bg-dark-section overflow-hidden">
       {/* Decorative Atmosphere Elements - Optimized with will-change-transform */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div

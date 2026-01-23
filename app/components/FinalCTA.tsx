@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function FinalCTA() {
   return (
-    <section className="py-32 bg-[#121417] text-white relative overflow-hidden">
+    <section className="py-32 bg-dark-section text-white relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-20">
           {/* Left Side: Form */}

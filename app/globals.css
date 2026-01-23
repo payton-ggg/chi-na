@@ -3,15 +3,26 @@
 :root {
   --background: #fdfdfd; /* Almost white */
   --foreground: #171717;
+
+  /* User Defined Palette */
+  --main-bg: #ebe9da; /* Основной фон */
+  --accent-cta: #c2381c; /* Акцентные блоки / CTA */
+  --light-surface: #fff9ed; /* Светлые поверхности / карточки */
+  --dark-section: #28231f; /* Темный фон для некоторых секций */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-roboto-slab);
-  /* --font-mono: var(--font-geist-mono); Removed mono for now as we didn't import a mono font */
 
-  /* Primary Scarlet Palette */
+  /* User Defined Colors */
+  --color-main-bg: var(--main-bg);
+  --color-accent-cta: var(--accent-cta);
+  --color-light-surface: var(--light-surface);
+  --color-dark-section: var(--dark-section);
+
+  /* Primary Scarlet Palette (Existing) */
   --color-primary-scarlet-50: #fce8e8;
   --color-primary-scarlet-100: #fad1d1;
   --color-primary-scarlet-200: #f4a4a4;

@@ -32,7 +32,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative h-screen w-full overflow-hidden bg-[#121417] flex items-center"
+      className="relative h-screen w-full overflow-hidden bg-dark-section flex items-center"
     >
       {/* Decorative Atmosphere Elements */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
