@@ -50,24 +50,24 @@ export default function Navbar() {
       return "bg-transparent";
     }
     return isDarkSection
-      ? "bg-[#121417]/90 backdrop-blur-md border-b border-white/10"
-      : "bg-white/90 backdrop-blur-md border-b border-gray-100";
+      ? "bg-dark-section/90 backdrop-blur-md border-b border-light-surface/10"
+      : "bg-light-surface/90 backdrop-blur-md border-b border-dark-section/10";
   };
 
   const getTextColor = () => {
     if (!isScrolled) {
-      return "text-white";
+      return "text-light-surface";
     }
-    return isDarkSection ? "text-white" : "text-gray-900";
+    return isDarkSection ? "text-light-surface" : "text-dark-section";
   };
 
   const getLinkColor = () => {
     if (!isScrolled) {
-      return "text-white/90 hover:text-white";
+      return "text-light-surface/90 hover:text-light-surface";
     }
     return isDarkSection
-      ? "text-white/80 hover:text-white"
-      : "text-gray-700 hover:text-gray-900";
+      ? "text-light-surface/80 hover:text-light-surface"
+      : "text-dark-section/80 hover:text-accent-cta";
   };
 
   return (
@@ -80,7 +80,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold tracking-tighter">
           <span className={getTextColor()}>TSUNAMI</span>
-          <span className="text-primary-scarlet-500">TRAVEL</span>
+          <span className="text-accent-cta">TRAVEL</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -89,12 +89,12 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary-scarlet-500 ${getLinkColor()}`}
+              className={`text-sm font-medium transition-colors hover:text-accent-cta ${getLinkColor()}`}
             >
               {link.name}
             </Link>
           ))}
-          <button className="bg-primary-scarlet-600 hover:bg-primary-scarlet-700 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-primary-scarlet-500/20">
+          <button className="bg-accent-cta hover:bg-accent-cta/90 text-light-surface px-5 py-2.5 rounded-full text-sm font-medium transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-accent-cta/20">
             Подобрать тур
           </button>
         </div>
@@ -113,23 +113,23 @@ export default function Navbar() {
         <div
           className={`absolute top-full left-0 right-0 p-6 md:hidden flex flex-col space-y-4 shadow-xl ${
             isDarkSection
-              ? "bg-[#121417] border-b border-white/10"
-              : "bg-white border-b border-gray-100"
+              ? "bg-dark-section border-b border-light-surface/10"
+              : "bg-light-surface border-b border-dark-section/10"
           }`}
         >
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className={`text-lg font-medium transition-colors hover:text-primary-scarlet-500 ${
-                isDarkSection ? "text-white" : "text-gray-900"
+              className={`text-lg font-medium transition-colors hover:text-accent-cta ${
+                isDarkSection ? "text-light-surface" : "text-dark-section"
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <button className="w-full bg-primary-scarlet-600 hover:bg-primary-scarlet-700 text-white px-5 py-3 rounded-xl font-bold transition-colors">
+          <button className="w-full bg-accent-cta hover:bg-accent-cta/90 text-light-surface px-5 py-3 rounded-xl font-bold transition-colors">
             Подобрать тур
           </button>
         </div>
