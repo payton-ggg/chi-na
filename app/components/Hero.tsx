@@ -38,7 +38,7 @@ export default function Hero() {
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Bamboo - Top Left */}
         <div
-          className="absolute top-5 left-5 w-32 h-32 md:w-[370px] md:h-[370px] opacity-20 md:opacity-30 blur-[2px] transition-transform duration-300 ease-out"
+          className="absolute top-5 left-5 w-30 h-40 md:w-[300px] md:h-[300px] opacity-80 transition-transform blur-[1px] duration-300 ease-out"
           style={{
             transform: `translate(${parallaxOffset * 0.4}px, ${
               parallaxOffset * 0.2
@@ -55,7 +55,7 @@ export default function Hero() {
 
         {/* Panda - Bottom Right */}
         <div
-          className="absolute bottom-1 right-5 w-48 h-48 md:w-[400px] md:h-[400px] opacity-10 md:opacity-20 transition-transform duration-500 ease-out blur-[1px]"
+          className="absolute bottom-68 right-5 w-32 h-32 md:w-[250px] md:h-[250px] transition-transform opacity-80 duration-500 ease-out "
           style={{
             transform: `translate(-${parallaxOffset * 0.5}px, -${
               parallaxOffset * 0.25
@@ -67,7 +67,7 @@ export default function Hero() {
 
         {/* Tea - Bottom Left */}
         <div
-          className="absolute bottom-10 left-[5%] w-32 h-32 md:w-64 md:h-64 opacity-20 md:opacity-30 blur-[2px] transition-transform duration-300 ease-out"
+          className="absolute bottom-10 left-[5%] w-32 h-32 md:w-64 md:h-64 opacity-60   transition-transform duration-300 ease-out"
           style={{
             transform: `translate(${parallaxOffset * 0.2}px, -${
               parallaxOffset * 0.1

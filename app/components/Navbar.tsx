@@ -51,7 +51,7 @@ export default function Navbar() {
     }
     return isDarkSection
       ? "bg-dark-section/90 backdrop-blur-md border-b border-light-surface/10"
-      : "bg-light-surface/90 backdrop-blur-md border-b border-dark-section/10";
+      : "bg-light-surface/70 backdrop-blur-md border-b border-dark-section/10";
   };
 
   const getTextColor = () => {

@@ -6,7 +6,7 @@ export default function ChinaContrast() {
   return (
     <section className="relative h-[80vh] w-full flex items-center justify-start overflow-hidden bg-black">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0 opacity-80">
+      <div className="absolute inset-0 z-0 ">
         <Image
           src="/contrast-bg.png"
           alt="China Contrast: Old vs New"
