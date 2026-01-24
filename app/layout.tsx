@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "./components/SmoothScroll";
+import SmoothScroll from "./components/common/SmoothScroll";
 
 const robotoSlab = Roboto_Slab({
   variable: "--font-roboto-slab",

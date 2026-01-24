@@ -1,11 +1,11 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import PopularTours from "./components/PopularTours";
-import TourSummary from "./components/TourSummary";
-import HowItWorks from "./components/HowItWorks";
-import FinalCTA from "./components/FinalCTA";
-import Footer from "./components/Footer";
+import Navbar from "./components/layout/Navbar";
+import Hero from "./components/sections/Hero";
+import Features from "./components/sections/Features";
+import PopularTours from "./components/sections/PopularTours";
+import TourSummary from "./components/sections/TourSummary";
+import HowItWorks from "./components/sections/HowItWorks";
+import FinalCTA from "./components/sections/FinalCTA";
+import Footer from "./components/layout/Footer";
 
 export default function Home() {
   return (
@@ -14,8 +14,8 @@ export default function Home() {
       <Hero />
       <Features />
       <PopularTours />
-      <TourSummary />
       <HowItWorks />
+      <TourSummary />
       <FinalCTA />
       {/* <Footer /> */}
     </main>

@@ -2,7 +2,7 @@
 
 import { ArrowUpRight, Calendar, Sparkles } from "lucide-react";
 import Image from "next/image";
-import PrimaryButton from "./PrimaryButton";
+import PrimaryButton from "../ui/PrimaryButton";
 import { useEffect, useRef, useState } from "react";
 
 const tours = [
