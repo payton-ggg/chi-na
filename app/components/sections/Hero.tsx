@@ -37,7 +37,7 @@ export default function Hero() {
       {/* Decorative Atmosphere Elements */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div
-          className="absolute bottom-68 right-5 w-32 h-32 md:w-[250px] md:h-[250px] transition-transform opacity-80 duration-500 ease-out "
+          className="absolute top-18 right-5 w-32 h-32 md:w-[250px] md:h-[250px] transition-transform opacity-80 duration-500 ease-out "
           style={{
             transform: `translate(-${parallaxOffset * 0.5}px, -${
               parallaxOffset * 0.25

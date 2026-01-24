@@ -1,44 +1,70 @@
 "use client";
 
-import { MapPin, ShieldCheck, Ticket, Sparkles } from "lucide-react";
+import {
+  MapPin,
+  ShieldCheck,
+  Ticket,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function TourSummary() {
   const [isVisible, setIsVisible] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      setMousePos({
+        x: (e.clientX - rect.left) / rect.width - 0.5,
+        y: (e.clientY - rect.top) / rect.height - 0.5,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   const details = [
     {
-      icon: <MapPin className="text-accent-cta" size={32} />,
-      label: "Старт и окончание",
-      value: "аэропорт Шанхая",
-      sub: "Встречаем и провожаем",
+      icon: <MapPin size={24} />,
+      label: "Локация",
+      value: "Аэропорт Шанхая",
+      sub: "Старт и финиш",
+      rotate: "-3deg",
+      translate: "-20px, 0",
     },
     {
-      icon: <ShieldCheck className="text-accent-cta" size={32} />,
-      label: "Тариф",
+      icon: <ShieldCheck size={24} />,
+      label: "Формат",
       value: "Все включено",
-      sub: "*билет в Китай не входит",
+      sub: "Кроме перелета",
+      rotate: "2deg",
+      translate: "10px, -10px",
     },
     {
-      icon: <Ticket className="text-accent-cta" size={32} />,
-      label: "Виза в Китай",
-      value: "Не нужна",
+      icon: <Ticket size={24} />,
+      label: "Документы",
+      value: "Без визы",
       sub: "Для граждан РФ",
+      rotate: "-1deg",
+      translate: "-5px, 20px",
     },
   ];
 
@@ -46,104 +72,200 @@ export default function TourSummary() {
     <section
       ref={sectionRef}
       id="about"
-      className="py-24 md:py-32 bg-dark-section relative overflow-hidden"
+      className="py-32 md:py-48 bg-dark-section relative overflow-hidden selection:bg-accent-cta selection:text-white"
     >
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-cta/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent-cta/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background Decorative Text */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.02] whitespace-nowrap">
+        <span className="text-[30vw] font-black leading-none tracking-tighter text-white">
+          CHINA DISCOVERY
+        </span>
+      </div>
+
+      {/* Dynamic Glows sensitive to mouse */}
+      <div
+        className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
+        style={{
+          background: `radial-gradient(circle at ${50 + mousePos.x * 20}% ${
+            50 + mousePos.y * 20
+          }%, rgba(194,56,28,0.15) 0%, transparent 50%)`,
+        }}
+      />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div
-          className={`transition-all duration-1000 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <div className="flex flex-col lg:flex-row gap-16 items-start">
-            {/* Left Column: Narrative */}
-            <div className="lg:w-3/5">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/10 border border-accent-cta/20 mb-8">
-                <Sparkles size={16} className="text-accent-cta" />
-                <span className="text-sm font-semibold text-accent-cta tracking-wide uppercase">
-                  Ваше приключение
+        <div className="flex flex-col lg:flex-row items-center gap-20">
+          {/* LEFT: Abstract Visual Layout */}
+          <div className="w-full lg:w-1/2 relative h-[500px] md:h-[600px]">
+            {/* Main Narrative Card - Floating & Unusual Shape */}
+            <div
+              className={`absolute top-0 left-0 w-full md:w-[110%] bg-white/5 backdrop-blur-2xl border border-white/10 p-10 md:p-14 rounded-[3rem] rounded-tr-[10rem] transition-all duration-1000 ease-out z-20 shadow-2xl ${
+                isVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-20"
+              }`}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/20 border border-accent-cta/30 mb-8">
+                <Sparkles size={14} className="text-accent-cta" />
+                <span className="text-[10px] font-bold text-accent-cta tracking-[0.2em] uppercase">
+                  Tsunami Travel Exclusive
                 </span>
               </div>
 
-              <h2 className="text-5xl md:text-7xl font-bold text-light-surface mb-8 leading-[1.1]">
-                Шанхай и <br />
-                <span className="bg-linear-to-r from-accent-cta to-accent-cta/70 bg-clip-text text-transparent">
-                  горы Аватара
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-[1.05]">
+                Шанхай <br />
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-accent-cta via-white to-accent-cta/40">
+                  & Горы Аватара
                 </span>
               </h2>
 
-              <p className="text-2xl font-medium text-light-surface/80 mb-6 italic">
-                Мы отправляемся в новое путешествие с Tsunami Travel!
-              </p>
-
-              <div className="space-y-6 text-xl text-light-surface/70 leading-relaxed font-light">
-                <p>
-                  Будем восхищаться красотой и инновациями современного Шанхая.
-                  Познакомимся с исторической частью города и окунемся в будни
-                  местных жителей.
+              <div className="space-y-6 text-lg md:text-xl text-white/70 leading-relaxed max-w-lg">
+                <p className="border-l-2 border-accent-cta pl-6 py-2">
+                  Мы отправляемся в путешествие, где инновации Шанхая
+                  встречаются с вечностью гор Чжанцзяцзе.
                 </p>
-                <p>
-                  Освоим мастерство китайской каллиграфии в Шанхайской Венеции и
-                  словим дзен на высотах гор Аватара.
+                <p className="font-light italic">
+                  Познакомьтесь с Шанхайской Венецией, освойте каллиграфию и
+                  найдите свой дзен над облаками.
                 </p>
-                <p>
-                  А напоследок вместе побываем в сказке Диснея. <br />
-                  <span className="font-bold text-light-surface">
-                    Будет сказочно!
-                  </span>
+                <p className="text-accent-cta font-bold tracking-tight">
+                  А напоследок — сказка Диснея. Будет легендарно!
                 </p>
               </div>
             </div>
 
-            {/* Right Column: Info Cards */}
-            <div className="lg:w-2/5 w-full space-y-6">
+            {/* Decorative Floating Tokens */}
+            <div className="absolute -top-10 -right-10 w-32 h-32 md:w-48 md:h-48 z-10 animate-float-slow opacity-20">
+              <Image
+                src="/tea.png"
+                alt=""
+                fill
+                className="object-contain grayscale contrast-125"
+              />
+            </div>
+            <div className="absolute -bottom-10 left-1/4 w-40 h-40 z-30 animate-pulse-slow opacity-40">
+              <Image src="/monach.png" alt="" fill className="object-contain" />
+            </div>
+          </div>
+
+          {/* RIGHT: Staggered Info Grid */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-8 md:gap-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
+              {/* Vertical Decorative Bar */}
+              <div className="absolute -left-6 top-1/4 bottom-1/4 w-px bg-linear-to-b from-transparent via-accent-cta/50 to-transparent hidden md:block" />
+
               {details.map((item, idx) => (
                 <div
                   key={idx}
-                  className={`bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-3xl transition-all duration-500 hover:border-accent-cta/30 hover:shadow-2xl hover:shadow-accent-cta/10 group delay-[${
-                    idx * 150
-                  }ms]`}
+                  className={`group relative p-8 rounded-4xl border transition-all duration-700 hover:scale-105 ${
+                    idx === 0
+                      ? "sm:col-span-2 bg-accent-cta/5 border-accent-cta/20"
+                      : "bg-white/5 border-white/10"
+                  }`}
+                  style={{
+                    transform: isVisible
+                      ? `rotate(${item.rotate}) translate(${item.translate})`
+                      : "none",
+                    transitionDelay: `${idx * 100}ms`,
+                  }}
                 >
-                  <div className="flex gap-6 items-center">
-                    <div className="w-16 h-16 rounded-2xl bg-accent-cta/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="flex flex-col gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-accent-cta/20 flex items-center justify-center text-accent-cta group-hover:bg-accent-cta group-hover:text-white transition-all duration-500">
                       {item.icon}
                     </div>
                     <div>
-                      <p className="text-sm uppercase tracking-widest text-light-surface/40 font-bold mb-1">
+                      <h4 className="text-[10px] font-bold text-accent-cta tracking-widest uppercase mb-1 opacity-60">
                         {item.label}
-                      </p>
-                      <p className="text-2xl font-bold text-light-surface">
+                      </h4>
+                      <p className="text-xl md:text-2xl font-black text-white mb-1">
                         {item.value}
                       </p>
-                      <p className="text-sm text-light-surface/50">
+                      <p className="text-xs text-white/40 group-hover:text-white/60 transition-colors">
                         {item.sub}
                       </p>
                     </div>
                   </div>
+
+                  {/* Hover Accent Glow */}
+                  <div className="absolute inset-0 rounded-4xl bg-accent-cta/0 group-hover:bg-accent-cta/5 transition-colors overflow-hidden -z-10" />
                 </div>
               ))}
 
-              {/* Special CTA Card */}
-              <div className="bg-linear-to-br from-accent-cta/20 to-transparent border border-white/10 p-8 rounded-3xl text-light-surface overflow-hidden relative group">
-                <div className="relative z-10">
-                  <h4 className="text-xl font-bold mb-2">Готовы к поездке?</h4>
-                  <p className="text-light-surface/60 mb-6 font-light">
-                    Забронируйте свое место в группе прямо сейчас. Количество
-                    мест ограничено.
-                  </p>
-                  <button className="w-full bg-accent-cta hover:bg-accent-cta/90 text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-accent-cta/20 transform hover:-translate-y-1">
-                    Забронировать тур
+              {/* Unique Final Step / CTA Mini-Card */}
+              <div
+                className={`sm:col-span-2 relative mt-4 overflow-hidden rounded-4xl p-1 
+                ${
+                  isVisible
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 translate-y-20 scale-95"
+                }`}
+                style={{
+                  transitionDelay: "400ms",
+                  transitionDuration: "1000ms",
+                }}
+              >
+                <div className="absolute inset-0 bg-linear-to-r from-accent-cta via-white/20 to-accent-cta animate-gradient-x" />
+                <div className="relative bg-dark-section rounded-[1.9rem] p-8 flex flex-col md:flex-row items-center justify-between gap-6 group hover:cursor-pointer">
+                  <div>
+                    <h3 className="text-2xl font-black text-white italic tracking-tighter mb-1">
+                      ВСЕ ВКЛЮЧЕНО?
+                    </h3>
+                    <p className="text-sm text-white/50">
+                      Да, кроме билета до Шанхая. Обо всем остальном позаботимся
+                      мы.
+                    </p>
+                  </div>
+                  <button className="flex items-center gap-3 bg-white text-dark-section font-black px-6 py-4 rounded-full hover:bg-accent-cta hover:text-white transition-all duration-500 whitespace-nowrap group-hover:translate-x-2">
+                    ЗАБРОНИРОВАТЬ <ArrowRight size={20} />
                   </button>
                 </div>
-                <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-40 h-40 bg-accent-cta/30 rounded-full blur-3xl opacity-50 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float-slow {
+          0%,
+          100% {
+            transform: translateY(0) rotate(-10deg);
+          }
+          50% {
+            transform: translateY(-30px) rotate(5deg);
+          }
+        }
+        @keyframes pulse-slow {
+          0%,
+          100% {
+            transform: scale(1) translateY(0);
+            opacity: 0.3;
+          }
+          50% {
+            transform: scale(1.1) translateY(-10px);
+            opacity: 0.6;
+          }
+        }
+        @keyframes gradient-x {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .animate-float-slow {
+          animation: float-slow 8s ease-in-out infinite;
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 6s ease-in-out infinite;
+        }
+        .animate-gradient-x {
+          background-size: 200% 100%;
+          animation: gradient-x 5s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }
