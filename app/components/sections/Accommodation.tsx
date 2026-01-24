@@ -4,6 +4,127 @@ import { Bed, Star, Users, Sparkles, Home, Camera } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+function HotelCard({
+  hotel,
+  isVisible,
+  index,
+}: {
+  hotel: any;
+  isVisible: boolean;
+  index: number;
+}) {
+  const [activeImage, setActiveImage] = useState(hotel.gallery[0]);
+
+  return (
+    <div
+      className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center transition-all duration-1000 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+      }`}
+      style={{ transitionDelay: `${index * 200}ms` }}
+    >
+      {/* Hotel Info & Gallery Collage */}
+      <div
+        className={`lg:col-span-5 ${
+          index % 2 === 0 ? "lg:order-1" : "lg:order-2"
+        }`}
+      >
+        <div className="space-y-8">
+          <div>
+            <span className="text-accent-cta font-black text-[10px] uppercase tracking-[0.3em] mb-3 block">
+              {hotel.location}
+            </span>
+            <h3 className="text-4xl md:text-5xl font-bold text-dark-section mb-6">
+              {hotel.title}
+            </h3>
+            <p className="text-dark-section/60 font-light leading-relaxed text-lg mb-8 max-w-md">
+              {hotel.description}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mb-10">
+              {hotel.amenities.map((tag: string, i: number) => (
+                <span
+                  key={i}
+                  className="px-4 py-1.5 rounded-full bg-accent-cta/5 border border-accent-cta/10 text-[10px] font-bold text-accent-cta uppercase tracking-widest"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* MINI GALLERY COLLAGE */}
+          <div className="relative h-48 md:h-64 grid grid-cols-4 gap-3">
+            {hotel.gallery.map((img: string, i: number) => (
+              <div
+                key={i}
+                onMouseEnter={() => setActiveImage(img)}
+                className={`group relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:z-20 hover:scale-110 cursor-pointer border-2 ${
+                  activeImage === img
+                    ? "border-accent-cta"
+                    : "border-transparent"
+                } ${i % 2 === 0 ? "mt-4" : "mb-4"}`}
+              >
+                <Image
+                  src={img}
+                  alt={`${hotel.title} photo ${i + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div
+                  className={`absolute inset-0 bg-accent-cta/10 transition-opacity ${
+                    activeImage === img
+                      ? "opacity-100"
+                      : "opacity-0 group-hover:opacity-50"
+                  }`}
+                />
+              </div>
+            ))}
+
+            {/* Tiny decorative label */}
+            <div className="absolute -bottom-6 left-0 flex items-center gap-2 text-[10px] font-bold text-dark-section/30 uppercase tracking-widest">
+              <Camera size={12} />
+              <span>Наведите, чтобы сменить фото</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Image - Changes on Hover */}
+      <div
+        className={`lg:col-span-7 ${
+          index % 2 === 0 ? "lg:order-2" : "lg:order-1"
+        }`}
+      >
+        <div className="relative group">
+          <div className="relative aspect-16/10 md:aspect-video overflow-hidden rounded-4xl shadow-2xl transition-transform duration-700 hover:-translate-y-2 border-x-8 border-main-bg">
+            <div className="absolute inset-0 transition-opacity duration-500">
+              <Image
+                src={activeImage}
+                alt={hotel.title}
+                fill
+                className="object-cover transition-transform duration-2000 group-hover:scale-110"
+              />
+            </div>
+            <div className="absolute inset-0 bg-linear-to-t from-dark-section/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            {/* Floating Badge */}
+            <div className="absolute top-8 right-8 w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+              <Sparkles size={24} className="animate-pulse-slow" />
+            </div>
+          </div>
+
+          {/* Decorative background element */}
+          <div
+            className={`absolute -inset-4 bg-accent-cta/5 rounded-[3rem] -z-10 blur-xl transition-all duration-700 group-hover:bg-accent-cta/10 ${
+              index % 2 === 0 ? "rotate-2" : "-rotate-2"
+            }`}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Accommodation() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -28,20 +149,16 @@ export default function Accommodation() {
       location: "Центр Шанхая",
       description:
         "Пятизвездочный отель с панорамным видом на город и легендарной вращающейся крышей.",
-      image: "/hotel-shanghai.png",
       amenities: ["5 звезд", "Центр города", "Панорама"],
       gallery: ["/hotel/1.png", "/hotel/2.png", "/hotel/3.png", "/hotel/4.png"],
-      stagger: 0,
     },
     {
       title: "Mountain Resort Zhangjiajie",
       location: "Горы Аватара",
       description:
         "Эко-отель с потрясающим видом на песчаниковые столбы прямо из окна вашего номера.",
-      image: "/hotel-avatar.png",
       amenities: ["Nature", "Eco-luxury", "Quiet"],
       gallery: ["/hotel/5.png", "/hotel/6.png", "/hotel/7.png", "/hotel/8.png"],
-      stagger: 300,
     },
   ];
 
@@ -91,105 +208,12 @@ export default function Accommodation() {
         {/* Hotels Display */}
         <div className="space-y-40 md:space-y-64">
           {hotels.map((hotel, hotelIdx) => (
-            <div
+            <HotelCard
               key={hotelIdx}
-              className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center transition-all duration-1000 ease-out ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-20"
-              }`}
-              style={{ transitionDelay: `${hotel.stagger}ms` }}
-            >
-              {/* Hotel Info & Gallery Collage */}
-              <div
-                className={`lg:col-span-5 ${
-                  hotelIdx % 2 === 0 ? "lg:order-1" : "lg:order-2"
-                }`}
-              >
-                <div className="space-y-8">
-                  <div>
-                    <span className="text-accent-cta font-black text-[10px] uppercase tracking-[0.3em] mb-3 block">
-                      {hotel.location}
-                    </span>
-                    <h3 className="text-4xl md:text-5xl font-bold text-dark-section mb-6">
-                      {hotel.title}
-                    </h3>
-                    <p className="text-dark-section/60 font-light leading-relaxed text-lg mb-8 max-w-md">
-                      {hotel.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-10">
-                      {hotel.amenities.map((tag, i) => (
-                        <span
-                          key={i}
-                          className="px-4 py-1.5 rounded-full bg-accent-cta/5 border border-accent-cta/10 text-[10px] font-bold text-accent-cta uppercase tracking-widest"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* MINI GALLERY COLLAGE - Low-key & Unique */}
-                  <div className="relative h-48 md:h-64 grid grid-cols-4 gap-3">
-                    {hotel.gallery.map((img, i) => (
-                      <div
-                        key={i}
-                        className={`group relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:z-20 hover:scale-110 ${
-                          i % 2 === 0 ? "mt-4" : "mb-4"
-                        }`}
-                      >
-                        <Image
-                          src={img}
-                          alt={`${hotel.title} photo ${i + 1}`}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-dark-section/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </div>
-                    ))}
-
-                    {/* Tiny decorative label */}
-                    <div className="absolute -bottom-6 left-0 flex items-center gap-2 text-[10px] font-bold text-dark-section/30 uppercase tracking-widest">
-                      <Camera size={12} />
-                      <span>Интерьеры и детали</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Main Image - Large & Impactful */}
-              <div
-                className={`lg:col-span-7 ${
-                  hotelIdx % 2 === 0 ? "lg:order-2" : "lg:order-1"
-                }`}
-              >
-                <div className="relative group">
-                  <div className="relative aspect-16/10 md:aspect-video overflow-hidden rounded-4xl shadow-2xl transition-transform duration-700 hover:-translate-y-2 border-x-8 border-main-bg">
-                    <Image
-                      src={hotel.image}
-                      alt={hotel.title}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                      priority={hotelIdx === 0}
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-dark-section/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                    {/* Floating Badge */}
-                    <div className="absolute top-8 right-8 w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                      <Sparkles size={24} className="animate-pulse-slow" />
-                    </div>
-                  </div>
-
-                  {/* Decorative background element for main image */}
-                  <div
-                    className={`absolute -inset-4 bg-accent-cta/5 rounded-[3rem] -z-10 blur-xl transition-all duration-700 group-hover:bg-accent-cta/10 ${
-                      hotelIdx % 2 === 0 ? "rotate-2" : "-rotate-2"
-                    }`}
-                  />
-                </div>
-              </div>
-            </div>
+              hotel={hotel}
+              isVisible={isVisible}
+              index={hotelIdx}
+            />
           ))}
         </div>
 
