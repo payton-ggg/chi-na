@@ -63,13 +63,13 @@ body {
     transform: translateY(0px) translateX(0px);
   }
   25% {
-    transform: translateY(-10px) translateX(5px);
+    transform: translateY(-2px) translateX(1px);
   }
   50% {
-    transform: translateY(-20px) translateX(-1px);
+    transform: translateY(-5px) translateX(0px);
   }
   75% {
-    transform: translateY(-5px) translateX(-10px);
+    transform: translateY(-2px) translateX(-1px);
   }
 }
 
@@ -79,10 +79,10 @@ body {
     transform: translateY(0px) translateX(0px);
   }
   33% {
-    transform: translateY(20px) translateX(-12px);
+    transform: translateY(6px) translateX(-3px);
   }
   66% {
-    transform: translateY(-18px) translateX(15px);
+    transform: translateY(-5px) translateX(4px);
   }
 }
 
@@ -92,26 +92,26 @@ body {
     transform: translateY(0px) translateX(0px);
   }
   25% {
-    transform: translateY(12px) translateX(-8px);
+    transform: translateY(4px) translateX(-2px);
   }
   50% {
-    transform: translateY(-15px) translateX(10px);
+    transform: translateY(-6px) translateX(3px);
   }
   75% {
-    transform: translateY(8px) translateX(12px);
+    transform: translateY(3px) translateX(4px);
   }
 }
 
 @layer utilities {
   .animate-float-slow {
-    animation: float-slow 8s ease-in-out infinite;
+    animation: float-slow 12s ease-in-out infinite;
   }
 
   .animate-float-medium {
-    animation: float-medium 6s ease-in-out infinite;
+    animation: float-medium 8s ease-in-out infinite;
   }
 
   .animate-float-fast {
-    animation: float-fast 5s ease-in-out infinite;
+    animation: float-fast 6s ease-in-out infinite;
   }
 }
