@@ -11,7 +11,7 @@ const tours = [
     title: "Шанхай",
     description:
       "Футуристический мегаполис, Диснейленд и водные города. Контраст будущего и прошлого.",
-    duration: "",
+    duration: "День 1-4",
     image: "/shangai.png",
     highlights: ["Shanghai Tower", "Bund", "Водные города"],
   },
@@ -20,7 +20,7 @@ const tours = [
     title: "Горы Аватара",
     description:
       "Аватар-парк Чжанцзяцзе, горы Хуаншань и стеклянные мосты. Для любителей природы.",
-    duration: "",
+    duration: "День 5-8",
     image: "/avatar.png",
     highlights: ["Парк Чжанцзяцзе", "Стеклянный мост", "Желтые горы"],
   },
@@ -29,7 +29,7 @@ const tours = [
     title: "Восточная Венеция",
     description:
       "Сучжоу и Ханчжоу — города садов, шелка и чая. Классика Китая.",
-    duration: "",
+    duration: "День 9-12",
     image: "/venice.png",
     highlights: ["Сучжоу", "Ханчжоу", "Шелк", "Чай"],
   },
@@ -103,7 +103,7 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
           />
 
           {/* Main card */}
-          <div className="relative bg-linear-to-br from-white/[0.07] to-white/3 backdrop-blur-xl rounded-[28px] overflow-hidden border border-white/8 shadow-2xl shadow-black/20">
+          <div className="relative bg-linear-to-br from-light-surface/[0.07] to-light-surface/3 backdrop-blur-xl rounded-[28px] overflow-hidden border border-light-surface/10 shadow-2xl shadow-black/20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 relative min-h-[600px]">
               {/* Fixed Image Section - Left */}
               <div className="relative h-[400px] lg:h-full overflow-hidden">
@@ -124,11 +124,11 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
 
                 {/* Multi-layer gradient overlay */}
                 <div className="absolute inset-0 bg-linear-to-br from-black/40 via-transparent to-transparent" />
-                <div className="absolute inset-0 bg-linear-to-r from-transparent to-[#121417]/60 lg:to-[#121417]/80" />
+                <div className="absolute inset-0 bg-linear-to-r from-transparent to-dark-section/60 lg:to-dark-section/80" />
 
                 {/* Animated glow */}
                 <div
-                  className="absolute inset-0 bg-linear-to-tr from-primary-scarlet-600/20 via-primary-scarlet-500/10 to-transparent transition-opacity duration-700"
+                  className="absolute inset-0 bg-linear-to-tr from-accent-cta/20 via-accent-cta/10 to-transparent transition-opacity duration-700"
                   style={{ opacity: scrollProgress * 0.5 }}
                 />
 
@@ -142,11 +142,8 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
                 >
                   <div className="relative">
                     <div className="absolute inset-0 bg-white/20 backdrop-blur-md rounded-full blur-sm" />
-                    <div className="relative flex items-center gap-2 px-5 py-3 bg-white/90 backdrop-blur-md rounded-full shadow-lg">
-                      <Calendar
-                        size={16}
-                        className="text-primary-scarlet-600"
-                      />
+                    <div className="relative flex items-center gap-2 px-5 py-3 bg-light-surface/90 backdrop-blur-md rounded-full shadow-lg">
+                      <Calendar size={16} className="text-accent-cta" />
                       <span className="text-sm font-bold text-gray-900">
                         {tour.duration}
                       </span>
@@ -157,7 +154,7 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
                 {/* Tour number */}
                 <div className="absolute bottom-8 left-8">
                   <div
-                    className="text-8xl font-black text-white/10 leading-none transition-opacity duration-700"
+                    className="text-8xl font-black text-light-surface/10 leading-none transition-opacity duration-700"
                     style={{ opacity: scrollProgress }}
                   >
                     0{tour.id}
@@ -169,7 +166,7 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
               <div className="p-10 lg:p-14 flex flex-col justify-center relative">
                 {/* Decorative element */}
                 <div
-                  className="absolute top-0 right-0 w-40 h-40 bg-primary-scarlet-500/5 rounded-full blur-3xl transition-all duration-700"
+                  className="absolute top-0 right-0 w-40 h-40 bg-accent-cta/5 rounded-full blur-3xl transition-all duration-700"
                   style={{ opacity: scrollProgress * 0.5 }}
                 />
 
@@ -183,9 +180,9 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
                     }}
                   >
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-[2px] bg-linear-to-r from-primary-scarlet-500 to-transparent rounded-full" />
-                      <span className="text-sm font-bold text-primary-scarlet-400 tracking-widest uppercase">
-                        Тур #{tour.id}
+                      <div className="w-12 h-[2px] bg-linear-to-r from-accent-cta to-transparent rounded-full" />
+                      <span className="text-sm font-bold text-accent-cta tracking-widest uppercase">
+                        Этап #{tour.id}
                       </span>
                     </div>
 
@@ -220,7 +217,7 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
                     {tour.highlights.map((highlight, i) => (
                       <div
                         key={i}
-                        className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 hover:bg-white/10 hover:border-primary-scarlet-500/30 hover:text-white transition-all duration-300"
+                        className="px-4 py-2 bg-light-surface/5 border border-light-surface/10 rounded-full text-sm text-light-surface/80 hover:bg-light-surface/10 hover:border-accent-cta/30 hover:text-light-surface transition-all duration-300"
                       >
                         {highlight}
                       </div>
@@ -228,27 +225,16 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
                   </div>
 
                   {/* Price and CTA - appears last */}
+                  {/* CTA - appears last */}
                   <div
-                    className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-white/10 transition-all duration-1000 ease-out delay-300"
+                    className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-light-surface/10 transition-all duration-1000 ease-out delay-300"
                     style={{
                       opacity: priceProgress,
                       transform: `translateX(${(1 - priceProgress) * 50}px)`,
                     }}
                   >
-                    <div className="relative">
-                      <div className="absolute -inset-4 bg-primary-scarlet-500/10 rounded-2xl blur-xl" />
-                      <div className="relative">
-                        <div className="text-sm text-gray-500 font-medium mb-1">
-                          Стоимость
-                        </div>
-                        <div className="text-sm text-gray-500 mt-1">
-                          на человека
-                        </div>
-                      </div>
-                    </div>
-
                     <PrimaryButton className="w-full sm:w-auto">
-                      Подробнее о туре
+                      Подробнее об этапе
                     </PrimaryButton>
                   </div>
                 </div>
@@ -260,9 +246,9 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
               className="absolute inset-0 pointer-events-none transition-opacity duration-700"
               style={{ opacity: scrollProgress * 0.5 }}
             >
-              <div className="absolute inset-0 bg-linear-to-br from-primary-scarlet-500/[0.07] via-transparent to-primary-scarlet-700/[0.07]" />
-              <div className="absolute top-0 left-1/4 right-1/4 h-px bg-linear-to-r from-transparent via-primary-scarlet-400/50 to-transparent" />
-              <div className="absolute bottom-0 left-1/4 right-1/4 h-px bg-linear-to-r from-transparent via-primary-scarlet-400/50 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-br from-accent-cta/[0.07] via-transparent to-accent-cta/[0.07]" />
+              <div className="absolute top-0 left-1/4 right-1/4 h-px bg-linear-to-r from-transparent via-accent-cta/50 to-transparent" />
+              <div className="absolute bottom-0 left-1/4 right-1/4 h-px bg-linear-to-r from-transparent via-accent-cta/50 to-transparent" />
             </div>
           </div>
         </div>
@@ -348,9 +334,9 @@ export default function PopularTours() {
         </div>
       </div>
 
-      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-primary-scarlet-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
+      <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-accent-cta/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
       <div
-        className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-primary-scarlet-500/8 rounded-full blur-[100px] pointer-events-none animate-pulse-slow"
+        className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent-cta/8 rounded-full blur-[100px] pointer-events-none animate-pulse-slow"
         style={{ animationDelay: "1s" }}
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/2 rounded-full blur-3xl pointer-events-none" />
@@ -366,25 +352,25 @@ export default function PopularTours() {
       <div className="container mx-auto px-6 pt-32 pb-12 relative z-20">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-scarlet-500/10 border border-primary-scarlet-500/20 mb-6">
-              <Sparkles size={16} className="text-primary-scarlet-400" />
-              <span className="text-sm font-semibold text-primary-scarlet-400 tracking-wide uppercase">
-                Эксклюзивные маршруты
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/10 border border-accent-cta/20 mb-6">
+              <Sparkles size={16} className="text-accent-cta" />
+              <span className="text-sm font-semibold text-accent-cta tracking-wide uppercase">
+                Гран-тур по Китаю
               </span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1]">
-              Популярные{" "}
-              <span className="bg-linear-to-r from-primary-scarlet-400 via-primary-scarlet-500 to-primary-scarlet-600 bg-clip-text text-transparent">
-                Направления
+            <h2 className="text-5xl md:text-7xl font-bold text-light-surface mb-6 leading-[1.1]">
+              Программа{" "}
+              <span className="bg-linear-to-r from-accent-cta via-brand-gold to-accent-cta bg-clip-text text-transparent">
+                Тура
               </span>
             </h2>
-            <p className="text-gray-400 text-xl leading-relaxed">
-              Выбранные маршруты, которые раскрывают Китай с лучших сторон.
-              Каждый тур — это уникальная история.
+            <p className="text-light-surface/70 text-xl leading-relaxed">
+              Три уникальные локации за одно путешествие. Шанхай, Горы Аватара и
+              Восточная Венеция в одной поездке.
             </p>
           </div>
-          <button className="hidden md:flex items-center gap-2 text-white/80 hover:text-white font-semibold transition-all group px-6 py-3 rounded-full border border-white/10 hover:border-primary-scarlet-500/50 hover:bg-white/5">
-            <span>Все туры</span>
+          <button className="hidden md:flex items-center gap-2 text-light-surface/80 hover:text-light-surface font-semibold transition-all group px-6 py-3 rounded-full border border-light-surface/10 hover:border-accent-cta/50 hover:bg-light-surface/5">
+            <span>Полная программа</span>
             <ArrowUpRight
               size={20}
               className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
