@@ -13,24 +13,26 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Check if we're on a dark section (Hero, PopularTours, or FinalCTA)
       const heroSection = document.getElementById("hero");
       const toursSection = document.getElementById("tours");
+      const aboutSection = document.getElementById("about");
       const contactSection = document.getElementById("contact");
 
-      if (heroSection && toursSection && contactSection) {
+      if (heroSection && toursSection && aboutSection && contactSection) {
         const heroRect = heroSection.getBoundingClientRect();
         const toursRect = toursSection.getBoundingClientRect();
+        const aboutRect = aboutSection.getBoundingClientRect();
         const contactRect = contactSection.getBoundingClientRect();
 
         // Check if navbar overlaps with dark sections
         const navbarHeight = 80; // Approximate navbar height
         const isOnHero = heroRect.top < navbarHeight && heroRect.bottom > 0;
         const isOnTours = toursRect.top < navbarHeight && toursRect.bottom > 0;
+        const isOnAbout = aboutRect.top < navbarHeight && aboutRect.bottom > 0;
         const isOnContact =
           contactRect.top < navbarHeight && contactRect.bottom > 0;
 
-        setIsDarkSection(isOnHero || isOnTours || isOnContact);
+        setIsDarkSection(isOnHero || isOnTours || isOnAbout || isOnContact);
       }
     };
 
