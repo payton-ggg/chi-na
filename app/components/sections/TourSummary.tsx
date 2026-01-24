@@ -47,7 +47,7 @@ export default function TourSummary() {
       label: "Локация",
       value: "Аэропорт Шанхая",
       sub: "Старт и финиш",
-      rotate: "-3deg",
+      rotate: "0",
       translate: "-20px, 0",
     },
     {
@@ -141,7 +141,7 @@ export default function TourSummary() {
                 className="object-contain grayscale contrast-125"
               />
             </div>
-            <div className="absolute -bottom-10 left-1/4 w-40 h-40 z-30 animate-pulse-slow opacity-40">
+            <div className="absolute -bottom-15 left-1/4 w-40 h-40 z-30 animate-pulse-slow opacity-40">
               <Image src="/monach.png" alt="" fill className="object-contain" />
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function TourSummary() {
                   key={idx}
                   className={`group relative p-8 rounded-4xl border transition-all duration-700 hover:scale-105 ${
                     idx === 0
-                      ? "sm:col-span-2 bg-accent-cta/5 border-accent-cta/20"
+                      ? "sm:col-span-2 ml-10 bg-accent-cta/5 border-accent-cta/20"
                       : "bg-white/5 border-white/10"
                   }`}
                   style={{

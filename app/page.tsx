@@ -18,7 +18,6 @@ export default function Home() {
       <HowItWorks />
       <TourSummary />
       <Accommodation />
-
       <FinalCTA />
       {/* <Footer /> */}
     </main>
