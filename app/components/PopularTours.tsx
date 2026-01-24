@@ -8,46 +8,30 @@ import { useEffect, useRef, useState } from "react";
 const tours = [
   {
     id: 1,
-    title: "Величие Империи",
+    title: "Шанхай",
     description:
-      "Пекин, Сиань и Великая Китайская стена. Погружение в историю древней цивилизации.",
-    duration: "10 дней",
-    image:
-      "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=2070&auto=format&fit=crop",
-    price: "от $2,450",
-    highlights: ["Запретный город", "Терракотовая армия", "Великая стена"],
+      "Футуристический мегаполис, Диснейленд и водные города. Контраст будущего и прошлого.",
+    duration: "",
+    image: "/shangai.png",
+    highlights: ["Shanghai Tower", "Bund", "Водные города"],
   },
   {
     id: 2,
-    title: "Мистические Горы",
+    title: "Горы Аватара",
     description:
       "Аватар-парк Чжанцзяцзе, горы Хуаншань и стеклянные мосты. Для любителей природы.",
-    duration: "12 дней",
-    image: "https://media.vand.ru/tourgallery/121299/ib17068689283633.webp",
-    price: "от $2,800",
+    duration: "",
+    image: "/avatar.png",
     highlights: ["Парк Чжанцзяцзе", "Стеклянный мост", "Желтые горы"],
   },
   {
     id: 3,
-    title: "Шанхайский Модерн",
+    title: "Восточная Венеция",
     description:
-      "Футуристический мегаполис, Диснейленд и водные города. Контраст будущего и прошлого.",
-    duration: "8 дней",
-    image:
-      "https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?q=80&w=2070&auto=format&fit=crop",
-    price: "от $1,950",
-    highlights: ["Shanghai Tower", "Bund", "Водные города"],
-  },
-  {
-    id: 4,
-    title: "Тайны Тибета",
-    description:
-      "Дворцы Лхасы, базовый лагерь Эвереста и духовные практики в горах.",
-    duration: "14 дней",
-    image:
-      "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=2076&auto=format&fit=crop",
-    price: "от $3,100",
-    highlights: ["Потала", "Эверест BC", "Монастыри"],
+      "Сучжоу и Ханчжоу — города садов, шелка и чая. Классика Китая.",
+    duration: "",
+    image: "/venice.png",
+    highlights: ["Сучжоу", "Ханчжоу", "Шелк", "Чай"],
   },
 ];
 
@@ -256,9 +240,6 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
                       <div className="relative">
                         <div className="text-sm text-gray-500 font-medium mb-1">
                           Стоимость
-                        </div>
-                        <div className="text-4xl lg:text-5xl font-black bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                          {tour.price}
                         </div>
                         <div className="text-sm text-gray-500 mt-1">
                           на человека

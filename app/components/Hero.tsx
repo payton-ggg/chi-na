@@ -36,24 +36,6 @@ export default function Hero() {
     >
       {/* Decorative Atmosphere Elements */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Bamboo - Top Left */}
-        <div
-          className="absolute top-5 left-5 w-30 h-40 md:w-[300px] md:h-[300px] opacity-80 transition-transform blur-[1px] duration-300 ease-out"
-          style={{
-            transform: `translate(${parallaxOffset * 0.4}px, ${
-              parallaxOffset * 0.2
-            }px) rotate(-10deg)`,
-          }}
-        >
-          <Image
-            src="/bamboo.png"
-            alt="Bamboo"
-            fill
-            className="object-contain"
-          />
-        </div>
-
-        {/* Panda - Bottom Right */}
         <div
           className="absolute bottom-68 right-5 w-32 h-32 md:w-[250px] md:h-[250px] transition-transform opacity-80 duration-500 ease-out "
           style={{
