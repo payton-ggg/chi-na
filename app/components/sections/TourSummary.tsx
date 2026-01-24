@@ -12,10 +12,18 @@ import Image from "next/image";
 
 export default function TourSummary() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
@@ -38,6 +46,7 @@ export default function TourSummary() {
     return () => {
       observer.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", checkMobile);
     };
   }, []);
 
@@ -141,13 +150,13 @@ export default function TourSummary() {
                 className="object-contain grayscale contrast-125"
               />
             </div>
-            <div className="absolute -bottom-15 left-1/4 w-40 h-40 z-30 animate-pulse-slow opacity-40">
+            <div className="absolute -bottom-15 left-1/4 w-40 h-40 z-30 animate-pulse-slow opacity-40 max-md:hidden">
               <Image src="/monach.png" alt="" fill className="object-contain" />
             </div>
           </div>
 
           {/* RIGHT: Staggered Info Grid */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-8 md:gap-12">
+          <div className="w-full lg:w-1/2 max-md:mt-10 flex flex-col gap-8 md:gap-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
               {/* Vertical Decorative Bar */}
               <div className="absolute -left-6 top-1/4 bottom-1/4 w-px bg-linear-to-b from-transparent via-accent-cta/50 to-transparent hidden md:block" />
@@ -157,13 +166,14 @@ export default function TourSummary() {
                   key={idx}
                   className={`group relative p-8 rounded-4xl border transition-all duration-700 hover:scale-105 ${
                     idx === 0
-                      ? "sm:col-span-2 ml-10 bg-accent-cta/5 border-accent-cta/20"
+                      ? "sm:col-span-2 ml-10 max-md:ml-0 bg-accent-cta/5 border-accent-cta/20"
                       : "bg-white/5 border-white/10"
                   }`}
                   style={{
-                    transform: isVisible
-                      ? `rotate(${item.rotate}) translate(${item.translate})`
-                      : "none",
+                    transform:
+                      isVisible && !isMobile
+                        ? `rotate(${item.rotate}) translate(${item.translate})`
+                        : "none",
                     transitionDelay: `${idx * 100}ms`,
                   }}
                 >
