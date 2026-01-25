@@ -10,9 +10,7 @@ export default function Features() {
   const features = [
     {
       title: "Кто организатор тура",
-      description: `Лев Логачев — блогер и знаток Китая, который живёт в стране уже несколько лет.
-За это время он глубоко погрузился в местную культуру, быт и ритм жизни, снял более 10 авторских фильмов о Китае и его городах.
-В этом туре Лев лично сопровождает группу, делится своим опытом и показывает страну не с туристической стороны, а такой, какой он знает её изнутри.`,
+      description: `Лев Логачев — блогер и знаток Китая, живет там несколько лет, снял 10+ фильмов и теперь лично ведёт вас в своё любимое место.`,
     },
     {
       title: "Формат путешествия",
@@ -86,32 +84,68 @@ export default function Features() {
                       : "opacity-0 translate-y-4 absolute inset-0 pointer-events-none"
                   }`}
                 >
-                  <div className="bg-accent-cta backdrop-blur-sm border border-gray-200 rounded-2xl p-8 md:p-10 shadow-lg relative overflow-hidden">
-                    <Image
-                      src="/torch.png"
-                      alt="Torch"
-                      width={200}
-                      height={200}
-                      className="absolute -top-2 right-5 opacity-20 object-contain pointer-events-none"
-                    />
+                  <div
+                    className={`backdrop-blur-sm border rounded-2xl p-8 md:p-10 shadow-lg relative overflow-hidden transition-colors duration-500 ${
+                      index === 0 || index === 2
+                        ? "bg-transparent border-accent-cta border-2"
+                        : "bg-accent-cta border-gray-200"
+                    }`}
+                  >
+                    {index !== 2 && (
+                      <Image
+                        src={index === 0 ? "/lev.png" : "/torch.png"}
+                        alt={index === 0 ? "Lev" : "Torch"}
+                        width={index === 0 ? 300 : 200}
+                        height={index === 0 ? 300 : 200}
+                        className={`absolute object-contain pointer-events-none transition-all duration-500 ${
+                          index === 0
+                            ? "bottom-0 right-0 opacity-100 translate-x-4 translate-y-4 scale-110"
+                            : "-top-2 right-5 opacity-20"
+                        }`}
+                      />
+                    )}
 
                     {/* Number */}
-                    <div className="text-6xl md:text-7xl font-bold text-light-surface mb-6 relative z-10">
+                    <div
+                      className={`text-6xl md:text-7xl font-bold mb-6 relative z-10 ${
+                        index === 0 || index === 2
+                          ? "text-accent-cta/20"
+                          : "text-light-surface"
+                      }`}
+                    >
                       0{index + 1}
                     </div>
 
                     {/* Title */}
-                    <h4 className="text-2xl md:text-3xl font-bold text-light-surface mb-6">
+                    <h4
+                      className={`text-2xl md:text-3xl font-bold mb-6 relative z-10 ${
+                        index === 0 || index === 2
+                          ? "text-dark-section"
+                          : "text-light-surface"
+                      }`}
+                    >
                       {feature.title}
                     </h4>
 
                     {/* Description */}
-                    <p className="text-lg text-light-surface leading-relaxed">
+                    <p
+                      className={`text-lg leading-relaxed relative z-10 ${
+                        index === 0 || index === 2
+                          ? "text-dark-section/80 max-w-[70%]"
+                          : "text-light-surface"
+                      }`}
+                    >
                       {feature.description}
                     </p>
 
                     {/* Decorative line */}
-                    <div className="mt-8 w-16 h-1 bg-light-surface rounded-full" />
+                    <div
+                      className={`mt-8 w-16 h-1 rounded-full relative z-10 ${
+                        index === 0 || index === 2
+                          ? "bg-accent-cta"
+                          : "bg-light-surface"
+                      }`}
+                    />
                   </div>
                 </div>
               ))}
