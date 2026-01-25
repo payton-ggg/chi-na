@@ -1,28 +1,25 @@
 "use client";
 
 import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
+import BookingHero from "../components/booking/BookingHero";
+import BookingForm from "../components/booking/BookingForm";
+import SmoothScroll from "../components/common/SmoothScroll";
 
 export default function BookingPage() {
   return (
-    <main className="min-h-screen bg-dark-section text-light-surface flex flex-col items-center justify-center p-6 bg-[radial-gradient(circle_at_center,rgba(194,56,28,0.1)_0%,transparent_70%)]">
+    <main className="min-h-screen bg-dark-section text-light-surface relative">
+      <SmoothScroll />
       <Navbar />
-      <div className="max-w-2xl text-center space-y-8 mt-20 transition-all duration-1000 animate-in fade-in slide-in-from-bottom-10">
-        <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">
-          Записаться <br />
-          <span className="text-accent-cta">на тур</span>
-        </h1>
-        <p className="text-xl text-light-surface/60 font-light leading-relaxed">
-          Здесь будет форма бронирования. Мы уже готовим её, чтобы вы могли
-          забронировать своё место в путешествии за пару кликов.
-        </p>
-        <div className="pt-12">
-          <a
-            href="/"
-            className="px-10 py-5 bg-accent-cta text-white font-black uppercase tracking-widest text-sm rounded-full shadow-2xl shadow-accent-cta/30 hover:scale-105 active:scale-95 transition-all"
-          >
-            Вернуться на главную
-          </a>
-        </div>
+
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent-cta/10 rounded-full blur-[150px] opacity-20" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[120px] opacity-10" />
+      </div>
+
+      <div className="relative z-10">
+        <BookingHero />
+        <BookingForm />
       </div>
     </main>
   );
