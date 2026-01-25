@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Compass, Shield, Users, Map } from "lucide-react";
 import Image from "next/image";
 
 export default function Features() {
@@ -10,61 +10,116 @@ export default function Features() {
   const features = [
     {
       title: "Кто организатор тура",
-      description: `Лев Логачев — блогер и знаток Китая, живет там несколько лет, снял 10+ фильмов и теперь лично ведёт вас в своё любимое место.`,
+      short: "Лев Логачев — исследователь и ваш проводник.",
+      description: `Лев Логачев — не просто гид, а исследователь и вдохновитель. Прожив в Китае 10 лет, он изучил его изнутри: от футуристичных небоскребов до затерянных в облаках деревень. Сняв более 10 документальных фильмов, Лев научился видеть красоту в деталях, которые ускользают от обычного туриста. В этом путешествии он станет вашим проводником в настоящий, непарадный Китай.`,
+      icon: <Compass size={20} />,
     },
     {
       title: "Формат путешествия",
-      description: `Авторский тур в мини-группе, построенный без шаблонных маршрутов и жёсткого расписания.
-В программе — редкие локации, продуманный, но гибкий ритм путешествия и внимание к каждому участнику.
-Маршрут адаптируется под группу, настроение и интересы, создавая ощущение личного и комфортного путешествия.`,
+      short: "Живое приключение в мини-группе.",
+      description: `Мы отказались от автобусных экскурсий и беготни за гидом с флажком. Наш формат — это живое приключение в группе до 5 человек. Это позволяет нам быть гибкими: задержаться в уютном чайном домике или изменить маршрут ради закатного вида. Мы передвигаемся на комфортном транспорте, едим там, где вкусно местным, и ведем диалог с культурой без посредников.`,
+      icon: <Users size={20} />,
     },
     {
       title: "Для кого этот тур",
-      description: `Для тех, кто ценит смысл и глубину в путешествиях.
-Кому важны атмосфера, личный подход и спокойный формат без суеты и туристических толп.`,
+      short: "Для эстетов и искателей новых смыслов.",
+      description: `Этот тур создан для тех, кто ищет перезагрузки. Если вы устали от массового туризма и жаждете аутентичного опыта, глубокого погружения в культуру и качественного общения — вы по адресу. Это путешествие для тех, кто готов удивляться инновациям будущего в Шанхае и замирать перед величием древних столбов Чжанцзяцзе.`,
+      icon: <Shield size={20} />,
     },
     {
-      title: "Что вас ожидает в путешествии",
-      description: `Пять дней в Шанхае — городе контрастов, вкуса и живой энергии.
-Не стандартный маршрут, а опыт, выстроенный под вас и ваши интересы.`,
+      title: "Что вас ожидает",
+      short: "Контрасты Шанхая и магия гор Аватара.",
+      description: `Вы увидите Шанхай как город контрастов: от безумных светодиодных джунглей до тихих улочек Французской концессии с ароматом свежей выпечки и кофе. А затем мы перенесемся в мир, вдохновивший Джеймса Кэмерона. Горы Чжанцзяцзе — это место, где облака проплывают ниже ваших ног, а время будто замирает среди гигантских каменных столбов.`,
+      icon: <Map size={20} />,
     },
   ];
 
   return (
-    <section className="py-24 md:py-56 bg-main-bg">
-      <div className="container mx-auto px-6 md:px-12 lg:px-16">
+    <section
+      id="about"
+      className="py-24 md:py-64 bg-main-bg relative overflow-hidden"
+    >
+      {/* Background Decorative Text */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 select-none pointer-events-none opacity-[0.03] whitespace-nowrap z-0">
+        <span className="text-[25vw] font-black leading-none tracking-tighter text-dark-section">
+          EXPLORE CHINA
+        </span>
+      </div>
+
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         {/* Header */}
-        <div className="mb-16 md:mb-20">
-          <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">
-            О нас
-          </p>
+        <div className="mb-20 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-black uppercase tracking-[0.4em] text-accent-cta mb-6">
+              Эксклюзивный подход
+            </p>
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-dark-section leading-[0.9] tracking-tighter">
+              Больше, чем <br />
+              <span className="text-accent-cta italic font-serif pr-4">
+                просто
+              </span>{" "}
+              тур.
+            </h2>
+          </div>
+          <div className="md:max-w-xs pb-4">
+            <p className="text-sm text-dark-section/40 font-medium leading-relaxed">
+              Мы создаем путешествия, которые меняют восприятие мира. Никаких
+              шаблонов — только глубокое погружение.
+            </p>
+          </div>
         </div>
 
         {/* Main Content - Two Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Left Column - Titles */}
-          <div className="space-y-0">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+          {/* Left Column - Titles & Short Info */}
+          <div className="lg:col-span-7 space-y-4">
             {features.map((feature, index) => (
               <div
                 key={index}
                 onMouseEnter={() => setActiveFeature(index)}
-                className="group cursor-pointer border-t border-gray-200 first:border-t-0"
+                className={`group cursor-pointer rounded-3xl p-8 transition-all duration-500 border ${
+                  activeFeature === index
+                    ? "bg-dark-section border-dark-section shadow-2xl translate-x-2"
+                    : "bg-transparent border-dark-section/10 hover:border-accent-cta/30"
+                }`}
               >
-                <div className="flex items-center justify-between py-8 md:py-10 transition-all duration-300">
-                  <h3
-                    className={`text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight transition-all duration-300 ${
-                      activeFeature === index
-                        ? "text-gray-900"
-                        : "text-gray-600 group-hover:text-gray-800"
-                    }`}
-                  >
-                    {feature.title}
-                  </h3>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-6">
+                    <div
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-500 ${
+                        activeFeature === index
+                          ? "bg-accent-cta text-white"
+                          : "bg-dark-section/5 text-dark-section/40 group-hover:text-accent-cta"
+                      }`}
+                    >
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3
+                        className={`text-xl md:text-3xl font-bold tracking-tight transition-all duration-300 ${
+                          activeFeature === index
+                            ? "text-white"
+                            : "text-dark-section/60"
+                        }`}
+                      >
+                        {feature.title}
+                      </h3>
+                      <p
+                        className={`text-sm mt-1 transition-all duration-300 ${
+                          activeFeature === index
+                            ? "text-white/40"
+                            : "text-dark-section/20 opacity-0 group-hover:opacity-100"
+                        }`}
+                      >
+                        {feature.short}
+                      </p>
+                    </div>
+                  </div>
                   <ArrowUpRight
-                    className={`w-6 h-6 md:w-8 md:h-8 transition-all duration-300 ${
+                    className={`transition-all duration-500 ${
                       activeFeature === index
-                        ? "text-primary-scarlet-500 opacity-100 translate-x-0 translate-y-0"
-                        : "text-gray-400 opacity-0 group-hover:opacity-100 -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0"
+                        ? "text-accent-cta opacity-100 scale-125"
+                        : "text-dark-section/20 opacity-0 group-hover:opacity-100 -translate-x-4 translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0"
                     }`}
                   />
                 </div>
@@ -72,82 +127,82 @@ export default function Features() {
             ))}
           </div>
 
-          {/* Right Column - Description */}
-          <div className="relative lg:sticky lg:top-32 h-fit">
-            <div className="relative">
+          {/* Right Column - Elaborated Description */}
+          <div className="lg:col-span-5 relative h-full min-h-[500px]">
+            <div className="sticky top-40">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className={`transition-all duration-500 ${
+                  className={`transition-all duration-700 absolute inset-0 ${
                     activeFeature === index
-                      ? "opacity-100 translate-y-0 relative"
-                      : "opacity-0 translate-y-4 absolute inset-0 pointer-events-none"
+                      ? "opacity-100 translate-y-0 translate-x-0 visible"
+                      : "opacity-0 translate-y-10 translate-x-10 invisible"
                   }`}
                 >
                   <div
-                    className={`backdrop-blur-sm border rounded-2xl p-8 md:p-10 shadow-lg relative overflow-hidden transition-colors duration-500 ${
+                    className={`backdrop-blur-xl border rounded-[3rem] p-10 md:p-14 shadow-2xl relative overflow-hidden h-fit transition-all duration-500 ${
                       index === 0 || index === 2
-                        ? "bg-transparent border-accent-cta border-2"
-                        : "bg-accent-cta border-gray-200"
+                        ? "  border-accent-cta border-[3px]"
+                        : "bg-accent-cta border-transparent"
                     }`}
                   >
+                    {/* Decorative Image */}
                     {index !== 2 && (
-                      <Image
-                        src={index === 0 ? "/lev.png" : "/torch.png"}
-                        alt={index === 0 ? "Lev" : "Torch"}
-                        width={index === 0 ? 300 : 200}
-                        height={index === 0 ? 300 : 200}
-                        className={`absolute object-contain pointer-events-none transition-all duration-500 ${
-                          index === 0
-                            ? "bottom-0 right-0 opacity-100 translate-x-4 translate-y-4 scale-110"
-                            : "-top-2 right-5 opacity-20"
-                        }`}
-                      />
+                      <div className="absolute top-0 right-0 w-full h-full pointer-events-none">
+                        <Image
+                          src={index === 0 ? "/lev.png" : "/torch.png"}
+                          alt=""
+                          width={index === 0 ? 400 : 250}
+                          height={index === 0 ? 400 : 250}
+                          className={`absolute object-contain transition-all duration-1000 ${
+                            index === 0
+                              ? "bottom-0 right-0 opacity-100 translate-x-8 translate-y-8 scale-110 grayscale hover:grayscale-0"
+                              : "-top-10 -right-10 opacity-10 scale-125 rotate-12"
+                          }`}
+                        />
+                      </div>
                     )}
 
-                    {/* Number */}
-                    <div
-                      className={`text-6xl md:text-7xl font-bold mb-6 relative z-10 ${
-                        index === 0 || index === 2
-                          ? "text-accent-cta/20"
-                          : "text-light-surface"
-                      }`}
-                    >
-                      0{index + 1}
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <div
+                        className={`text-7xl md:text-9xl font-black mb-10 opacity-10 leading-none ${
+                          index === 0 || index === 2
+                            ? "text-accent-cta"
+                            : "text-white"
+                        }`}
+                      >
+                        0{index + 1}
+                      </div>
+
+                      <h4
+                        className={`text-3xl md:text-4xl font-bold mb-8 leading-tight ${
+                          index === 0 || index === 2
+                            ? "text-dark-section"
+                            : "text-white"
+                        }`}
+                      >
+                        {feature.title}
+                      </h4>
+
+                      <p
+                        className={`text-lg md:text-xl font-light leading-relaxed ${
+                          index === 0 || index === 2
+                            ? "text-dark-section/70 max-w-[85%]"
+                            : "text-white"
+                        }`}
+                      >
+                        {feature.description}
+                      </p>
+
+                      <div
+                        className={`mt-12 w-20 h-1.5 rounded-full ${
+                          index === 0 || index === 2
+                            ? "bg-accent-cta"
+                            : "bg-white/30"
+                        }`}
+                      />
                     </div>
-
-                    {/* Title */}
-                    <h4
-                      className={`text-2xl md:text-3xl font-bold mb-6 relative z-10 ${
-                        index === 0 || index === 2
-                          ? "text-dark-section"
-                          : "text-light-surface"
-                      }`}
-                    >
-                      {feature.title}
-                    </h4>
-
-                    {/* Description */}
-                    <p
-                      className={`text-lg leading-relaxed relative z-10 ${
-                        index === 0
-                          ? "text-dark-section/80 max-w-[70%]"
-                          : index === 2
-                          ? "text-dark-section/80"
-                          : "text-light-surface"
-                      }`}
-                    >
-                      {feature.description}
-                    </p>
-
-                    {/* Decorative line */}
-                    <div
-                      className={`mt-8 w-16 h-1 rounded-full relative z-10 ${
-                        index === 0 || index === 2
-                          ? "bg-accent-cta"
-                          : "bg-light-surface"
-                      }`}
-                    />
                   </div>
                 </div>
               ))}
