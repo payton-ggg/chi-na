@@ -10,6 +10,7 @@ import {
   ArrowDown,
 } from "lucide-react";
 import { useState } from "react";
+import { sendBookingToTelegram } from "../../actions/bookingAction";
 
 export default function BookingForm() {
   const [formData, setFormData] = useState({
@@ -20,11 +21,58 @@ export default function BookingForm() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Booking Data:", formData);
-    // Add submission logic here
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const result = await sendBookingToTelegram(formData);
+      if (result.success) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+        setErrorMessage(result.error || "Произошла ошибка при отправке");
+      }
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage("Сетевая ошибка");
+    }
   };
+
+  if (status === "success") {
+    return (
+      <section className="py-24 relative overflow-hidden">
+        <div className="container mx-auto px-6 text-center">
+          <div className="max-w-2xl mx-auto p-12 rounded-[3.5rem] bg-white/5 border border-accent-cta/30 backdrop-blur-xl space-y-8 animate-in zoom-in duration-500">
+            <div className="w-24 h-24 bg-accent-cta rounded-full flex items-center justify-center mx-auto shadow-2xl shadow-accent-cta/50">
+              <Sparkles className="text-white" size={48} />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter">
+              Заявка принята!
+            </h2>
+            <p className="text-xl text-white/50 font-light leading-relaxed">
+              Спасибо за ваш интерес! Лев или наш менеджер свяжется с вами в
+              Telegram или по Email в течение ближайшего времени.
+            </p>
+            <div className="pt-6">
+              <button
+                onClick={() => setStatus("idle")}
+                className="text-accent-cta font-bold uppercase tracking-widest text-xs hover:underline"
+              >
+                Отправить еще одну заявку
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 relative overflow-hidden">
@@ -129,16 +177,33 @@ export default function BookingForm() {
                 <div className="relative group">
                   <button
                     type="submit"
-                    className="relative w-48 h-48 md:w-56 md:h-56 rounded-full border-2 border-light-surface/10 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-700 z-20 hover:scale-110 hover:border-accent-cta/30 shadow-2xl"
+                    disabled={status === "loading"}
+                    className={`relative w-48 h-48 md:w-56 md:h-56 rounded-full border-2 border-light-surface/10 flex items-center justify-center backdrop-blur-sm animate-float-slow group transition-all duration-700 z-20 shadow-2xl ${
+                      status === "loading"
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer hover:scale-110 hover:border-accent-cta/30"
+                    }`}
                   >
                     <div className="absolute inset-3 rounded-full border border-light-surface/10 group-hover:border-accent-cta/30 transition-all duration-700" />
                     <div className="absolute inset-0 rounded-full bg-linear-to-br from-accent-cta/0 via-accent-cta/0 to-transparent group-hover:from-accent-cta/20 group-hover:via-accent-cta/30 group-hover:to-transparent transition-all duration-700" />
                     <div className="absolute inset-0 rounded-full shadow-[0_0_30px_rgba(194,56,28,0.0)] group-hover:shadow-[0_0_100px_rgba(194,56,28,0.3)] transition-all duration-700" />
 
                     <span className="text-sm md:text-base uppercase tracking-widest text-light-surface/70 group-hover:text-light-surface text-center relative z-10 font-black transition-all duration-500 leading-tight">
-                      Отправить <br /> заявку
+                      {status === "loading" ? (
+                        "Отправляем..."
+                      ) : (
+                        <>
+                          Отправить <br /> заявку
+                        </>
+                      )}
                     </span>
                   </button>
+
+                  {status === "error" && (
+                    <p className="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-red-500 text-xs font-bold uppercase tracking-widest whitespace-nowrap">
+                      {errorMessage}
+                    </p>
+                  )}
                 </div>
               </div>
             </form>
@@ -158,7 +223,7 @@ export default function BookingForm() {
               <ul className="space-y-6 relative z-10">
                 {[
                   "Авторские маршруты Льва Логачева",
-                  "Мини-группы до 12 человек",
+                  "Мини-группы до 5 человек",
                   "Премиальные отели 5*",
                   "Полное сопровождение 24/7",
                 ].map((item, i) => (
