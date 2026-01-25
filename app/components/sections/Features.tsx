@@ -38,7 +38,7 @@ export default function Features() {
         {/* Header */}
         <div className="mb-16 md:mb-20">
           <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">
-            НАШИ ПРЕИМУЩЕСТВА
+            О нас
           </p>
         </div>
 

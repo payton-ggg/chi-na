@@ -43,12 +43,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Программа тура", href: "#tours" },
-    { name: "О нас", href: "#about" },
-    { name: "Отзывы", href: "#reviews" },
-    { name: "Контакты", href: "#contact" },
-  ];
+  const navLinks = [{ name: "Программа тура", href: "#tours" }];
 
   // Determine navbar style based on scroll and section
   const getNavbarBg = () => {
