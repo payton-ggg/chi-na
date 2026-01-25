@@ -25,7 +25,7 @@ export default function Navbar() {
 
       const heroSection = document.getElementById("hero");
       const toursSection = document.getElementById("tours");
-      const aboutSection = document.getElementById("about");
+      const summarySection = document.getElementById("summary");
       const accSection = document.getElementById("accommodation");
       const contactSection = document.getElementById("contact");
 
@@ -43,7 +43,7 @@ export default function Navbar() {
       const darkInView =
         checkInView(heroSection) ||
         checkInView(toursSection) ||
-        checkInView(aboutSection) ||
+        checkInView(summarySection) ||
         checkInView(contactSection);
 
       setIsDarkSection(darkInView);

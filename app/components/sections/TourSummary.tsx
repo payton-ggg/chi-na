@@ -83,7 +83,7 @@ export default function TourSummary() {
   return (
     <section
       ref={sectionRef}
-      id="about"
+      id="summary"
       className="py-32 md:py-48 bg-dark-section relative overflow-hidden selection:bg-accent-cta selection:text-white"
     >
       {/* Background Decorative Text */}
