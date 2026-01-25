@@ -130,8 +130,10 @@ export default function Features() {
                     {/* Description */}
                     <p
                       className={`text-lg leading-relaxed relative z-10 ${
-                        index === 0 || index === 2
+                        index === 0
                           ? "text-dark-section/80 max-w-[70%]"
+                          : index === 2
+                          ? "text-dark-section/80"
                           : "text-light-surface"
                       }`}
                     >
