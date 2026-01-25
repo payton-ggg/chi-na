@@ -9,7 +9,13 @@ function HotelCard({
   isVisible,
   index,
 }: {
-  hotel: any;
+  hotel: {
+    title: string;
+    location: string;
+    description: string;
+    amenities: string[];
+    gallery: string[];
+  };
   isVisible: boolean;
   index: number;
 }) {
@@ -143,7 +149,13 @@ export default function Accommodation() {
     return () => observer.disconnect();
   }, []);
 
-  const hotels = [
+  const hotels: {
+    title: string;
+    location: string;
+    description: string;
+    amenities: string[];
+    gallery: string[];
+  }[] = [
     {
       title: "Radisson Blu New World",
       location: "Центр Шанхая",

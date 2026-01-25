@@ -19,7 +19,6 @@ export default function Home() {
       <TourSummary />
       <Accommodation />
       <FinalCTA />
-      {/* <Footer /> */}
     </main>
   );
 }
