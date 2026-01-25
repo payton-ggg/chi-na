@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function TourSummary() {
   const [isVisible, setIsVisible] = useState(false);
@@ -49,6 +50,8 @@ export default function TourSummary() {
       window.removeEventListener("resize", checkMobile);
     };
   }, []);
+
+  const router = useRouter();
 
   const details = [
     {
@@ -223,7 +226,10 @@ export default function TourSummary() {
                       мы.
                     </p>
                   </div>
-                  <button className="flex items-center gap-3 bg-white text-dark-section font-black px-6 py-4 rounded-full hover:bg-accent-cta hover:text-white transition-all duration-500 whitespace-nowrap group-hover:translate-x-2">
+                  <button
+                    className="flex items-center gap-3 bg-white text-dark-section font-black cursor-pointer px-6 py-4 rounded-full hover:bg-accent-cta hover:text-white transition-all duration-500 whitespace-nowrap group-hover:translate-x-2"
+                    onClick={() => router.push("/booking")}
+                  >
                     ЗАБРОНИРОВАТЬ <ArrowRight size={20} />
                   </button>
                 </div>
