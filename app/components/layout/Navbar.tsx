@@ -321,7 +321,7 @@ export default function Navbar() {
                 className={`text-sm font-light mt-auto ${themeClasses.textMuted}`}
               >
                 © {new Date().getFullYear()} Tsunami Travel. <br />
-                Авторские туры по всему миру.
+                Авторские туры по Китаю.
               </div>
             </div>
           </div>

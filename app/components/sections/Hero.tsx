@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Hero() {
@@ -28,6 +29,8 @@ export default function Hero() {
 
   // Disable parallax on mobile for better performance
   const parallaxOffset = isMobile ? 0 : Math.min(scrollY * 0.3, 100);
+
+  const router = useRouter();
 
   return (
     <section
@@ -92,7 +95,10 @@ export default function Hero() {
         </h1>
 
         {/* Bubble 1 - Adaptive positioning and sizing */}
-        <button className="absolute top-[8%] right-[5%] sm:top-[10%] sm:right-[10%] md:top-[12%] md:right-[15%] w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full border-2 border-white/30 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-500 z-20 hover:scale-110 hover:border-primary-scarlet-500/50 shadow-lg">
+        <button
+          className="absolute top-[8%] right-[5%] sm:top-[10%] sm:right-[10%] md:top-[12%] md:right-[15%] w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full border-2 border-white/30 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-500 z-20 hover:scale-110 hover:border-primary-scarlet-500/50 shadow-lg"
+          onClick={() => router.push("/booking")}
+        >
           <div className="absolute inset-2 rounded-full border border-white/20 group-hover:border-primary-scarlet-400/40 transition-all duration-500" />
 
           <div className="absolute inset-0 rounded-full bg-linear-to-br from-primary-scarlet-600/0 via-primary-scarlet-500/0 to-primary-scarlet-700/0 group-hover:from-primary-scarlet-600/70 group-hover:via-primary-scarlet-500/80 group-hover:to-primary-scarlet-700/90 transition-all duration-500" />

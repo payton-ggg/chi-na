@@ -132,25 +132,6 @@ function TourCard({ tour, index }: { tour: (typeof tours)[0]; index: number }) {
                   style={{ opacity: scrollProgress * 0.5 }}
                 />
 
-                {/* Premium Duration Badge */}
-                <div
-                  className="absolute top-8 left-8 transition-all duration-700"
-                  style={{
-                    opacity: scrollProgress,
-                    transform: `translateY(${(1 - scrollProgress) * 20}px)`,
-                  }}
-                >
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-white/20 backdrop-blur-md rounded-full blur-sm" />
-                    <div className="relative flex items-center gap-2 px-5 py-3 bg-light-surface/90 backdrop-blur-md rounded-full shadow-lg">
-                      <Calendar size={16} className="text-accent-cta" />
-                      <span className="text-sm font-bold text-gray-900">
-                        {tour.duration}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Tour number */}
                 <div className="absolute bottom-8 left-8">
                   <div
