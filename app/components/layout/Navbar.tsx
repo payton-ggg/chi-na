@@ -44,7 +44,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Туры", href: "#tours" },
+    { name: "Программа тура", href: "#tours" },
     { name: "О нас", href: "#about" },
     { name: "Отзывы", href: "#reviews" },
     { name: "Контакты", href: "#contact" },
@@ -57,7 +57,7 @@ export default function Navbar() {
     }
     return isDarkSection
       ? "bg-dark-section/90 backdrop-blur-md border-b border-light-surface/10"
-      : "bg-light-surface/70 backdrop-blur-md border-b border-dark-section/10";
+      : "bg-light-surface/90 backdrop-blur-md border-b border-dark-section/10";
   };
 
   const getTextColor = () => {
