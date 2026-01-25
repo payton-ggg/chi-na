@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     "Премиальные туры в Китай. Откройте для себя Поднебесную с экспертами.",
 };
 
+import Preloader from "./components/common/Preloader";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={`${robotoSlab.variable} antialiased`}>
+        <Preloader />
         <SmoothScroll />
         {children}
       </body>
