@@ -11,7 +11,7 @@ export default function Features() {
     {
       title: "Кто организатор тура",
       short: "Лев Логачев — исследователь и ваш проводник.",
-      description: `Лев Логачев — не просто гид, а исследователь и вдохновитель. Прожив в Китае 10 лет, он изучил его изнутри: от футуристичных небоскребов до затерянных в облаках деревень. Сняв более 10 документальных фильмов, Лев научился видеть красоту в деталях, которые ускользают от обычного туриста. В этом путешествии он станет вашим проводником в настоящий, непарадный Китай.`,
+      description: `Лев Логачев — блогер и знаток Китая, живет там несколько лет, снял 10+ фильмов и теперь лично ведёт вас в своё любимое место.`,
       icon: <Compass size={20} />,
     },
     {
@@ -37,7 +37,7 @@ export default function Features() {
   return (
     <section
       id="about"
-      className="py-24 md:py-64 bg-main-bg relative overflow-hidden"
+      className="py-24 md:py-34 bg-main-bg relative overflow-hidden"
     >
       {/* Background Decorative Text */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 select-none pointer-events-none opacity-[0.03] whitespace-nowrap z-0">
@@ -53,7 +53,7 @@ export default function Features() {
             <p className="text-xs font-black uppercase tracking-[0.4em] text-accent-cta mb-6">
               Эксклюзивный подход
             </p>
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-dark-section leading-[0.9] tracking-tighter">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-dark-section leading-[0.9] tracking-tighter">
               Больше, чем <br />
               <span className="text-accent-cta italic font-serif pr-4">
                 просто
@@ -70,9 +70,9 @@ export default function Features() {
         </div>
 
         {/* Main Content - Two Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           {/* Left Column - Titles & Short Info */}
-          <div className="lg:col-span-7 space-y-4">
+          <div className="lg:col-span-6 space-y-4">
             {features.map((feature, index) => (
               <div
                 key={index}
@@ -128,7 +128,7 @@ export default function Features() {
           </div>
 
           {/* Right Column - Elaborated Description */}
-          <div className="lg:col-span-5 relative h-full min-h-[500px]">
+          <div className="lg:col-span-6 relative h-full min-h-[400px]">
             <div className="sticky top-40">
               {features.map((feature, index) => (
                 <div
@@ -140,7 +140,7 @@ export default function Features() {
                   }`}
                 >
                   <div
-                    className={`backdrop-blur-xl border rounded-[3rem] p-10 md:p-14 shadow-2xl relative overflow-hidden h-fit transition-all duration-500 ${
+                    className={`backdrop-blur-xl border rounded-[3rem] p-8 md:p-10 shadow-2xl relative overflow-hidden h-fit transition-all duration-500 ${
                       index === 0 || index === 2
                         ? "  border-accent-cta border-[3px]"
                         : "bg-accent-cta border-transparent"
