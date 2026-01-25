@@ -111,6 +111,30 @@ export default function Navbar() {
     }
   };
 
+  const themeClasses = isDarkSection
+    ? {
+        overlay: "bg-dark-section",
+        card: "bg-white/5 border-white/10 hover:bg-white/10",
+        textTitle: "text-white",
+        textSubtitle: "text-white/50",
+        textMuted: "text-white/30",
+        textDecorative: "text-white",
+        border: "border-white/10",
+        socialBg: "bg-white/5 border-white/10",
+        linkText: "text-white/70 hover:text-white",
+      }
+    : {
+        overlay: "bg-light-surface",
+        card: "bg-dark-section/5 border-dark-section/10 hover:bg-dark-section/10",
+        textTitle: "text-dark-section",
+        textSubtitle: "text-dark-section/50",
+        textMuted: "text-dark-section/30",
+        textDecorative: "text-dark-section",
+        border: "border-dark-section/10",
+        socialBg: "bg-dark-section/5 border-dark-section/10",
+        linkText: "text-dark-section/70 hover:text-dark-section",
+      };
+
   return (
     <>
       <nav
@@ -180,7 +204,9 @@ export default function Navbar() {
 
       {/* Fullscreen Overlay Menu */}
       <div
-        className={`fixed inset-0 z-90 bg-dark-section transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] ${
+        className={`fixed inset-0 z-90 transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] ${
+          themeClasses.overlay
+        } ${
           isMenuOpen
             ? "translate-y-0 opacity-100 visible"
             : "-translate-y-full opacity-0 invisible"
@@ -188,7 +214,9 @@ export default function Navbar() {
       >
         {/* Background Decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-white whitespace-nowrap leading-none select-none">
+          <div
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black whitespace-nowrap leading-none select-none ${themeClasses.textDecorative}`}
+          >
             CHINA
           </div>
         </div>
@@ -205,7 +233,7 @@ export default function Navbar() {
                   <Link
                     key={page.name}
                     href={page.href}
-                    className="group block relative overflow-hidden rounded-3xl bg-white/5 border border-white/10 p-8 transition-all hover:bg-white/10 hover:border-accent-cta/50"
+                    className={`group block relative overflow-hidden rounded-3xl border p-8 transition-all hover:border-accent-cta/50 ${themeClasses.card}`}
                     style={{ transitionDelay: `${idx * 100}ms` }}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -215,12 +243,16 @@ export default function Navbar() {
                           {page.icon}
                         </div>
                         <div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-white mb-1 group-hover:text-accent-cta transition-colors">
+                          <h3
+                            className={`text-2xl md:text-3xl font-bold mb-1 group-hover:text-accent-cta transition-colors ${themeClasses.textTitle}`}
+                          >
                             {page.name}
                           </h3>
                         </div>
                       </div>
-                      <ArrowRight className="text-white/20 group-hover:text-accent-cta group-hover:translate-x-2 transition-all" />
+                      <ArrowRight
+                        className={`group-hover:text-accent-cta group-hover:translate-x-2 transition-all opacity-20 group-hover:opacity-100 ${themeClasses.textTitle}`}
+                      />
                     </div>
                   </Link>
                 ))}
@@ -228,9 +260,13 @@ export default function Navbar() {
             </div>
 
             {/* Right Column: Sections & Socials */}
-            <div className="lg:col-span-6 flex flex-col justify-center space-y-12 lg:border-l lg:border-white/10 lg:pl-24">
+            <div
+              className={`lg:col-span-6 flex flex-col justify-center space-y-12 lg:border-l lg:pl-24 ${themeClasses.border}`}
+            >
               <div>
-                <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.4em] mb-10">
+                <p
+                  className={`text-[10px] font-black uppercase tracking-[0.4em] mb-10 ${themeClasses.textMuted}`}
+                >
                   Быстрые ссылки
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12">
@@ -239,7 +275,7 @@ export default function Navbar() {
                       key={section.name}
                       href={section.href}
                       onClick={(e) => handleLinkClick(e, section.href)}
-                      className="group flex items-center gap-4 text-2xl font-bold text-white/70 hover:text-white transition-colors"
+                      className={`group flex items-center gap-4 text-2xl font-bold transition-colors ${themeClasses.linkText}`}
                       style={{ transitionDelay: `${(idx + 3) * 50}ms` }}
                     >
                       <span className="text-xs font-serif italic text-accent-cta">
@@ -251,8 +287,10 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <div className="pt-12 border-t border-white/10">
-                <p className="text-white/30 text-[10px] font-black uppercase tracking-[0.4em] mb-8">
+              <div className={`pt-12 border-t ${themeClasses.border}`}>
+                <p
+                  className={`text-[10px] font-black uppercase tracking-[0.4em] mb-8 ${themeClasses.textMuted}`}
+                >
                   Следите за нами
                 </p>
                 <div className="flex gap-4">
@@ -271,7 +309,7 @@ export default function Navbar() {
                       key={i}
                       href={social.href}
                       target="_blank"
-                      className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-accent-cta hover:border-accent-cta transition-all"
+                      className={`w-16 h-16 rounded-2xl flex items-center justify-center hover:bg-accent-cta hover:border-accent-cta transition-all ${themeClasses.socialBg} ${themeClasses.textTitle}`}
                     >
                       {social.icon}
                     </a>
@@ -279,7 +317,9 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <div className="text-white/20 text-sm font-light mt-auto">
+              <div
+                className={`text-sm font-light mt-auto ${themeClasses.textMuted}`}
+              >
                 © {new Date().getFullYear()} Tsunami Travel. <br />
                 Авторские туры по всему миру.
               </div>
