@@ -14,7 +14,7 @@ import {
   Send,
   MessageCircle,
 } from "lucide-react";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function FinalCTA() {
@@ -82,6 +82,8 @@ export default function FinalCTA() {
   const [formData, setFormData] = useState({
     email: "",
   });
+
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -178,7 +180,10 @@ export default function FinalCTA() {
 
             {/* Big Action Button Side */}
             <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-              <button className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-light-surface/10 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-700 z-20 hover:scale-105 hover:border-accent-cta/30 shadow-2xl" onClick={handleSubmit}>
+              <button
+                className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-light-surface/10 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-700 z-20 hover:scale-105 hover:border-accent-cta/30 shadow-2xl"
+                onClick={handleSubmit}
+              >
                 <div className="absolute inset-4 rounded-full border border-light-surface/10 group-hover:border-accent-cta/30 transition-all duration-700" />
                 <div className="absolute inset-0 rounded-full bg-linear-to-br from-accent-cta/0 via-accent-cta/0 to-transparent group-hover:from-accent-cta/20 group-hover:via-accent-cta/30 group-hover:to-transparent transition-all duration-700" />
 

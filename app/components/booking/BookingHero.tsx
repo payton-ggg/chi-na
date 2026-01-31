@@ -1,5 +1,3 @@
-"use client";
-
 import { Sparkles, ArrowDown } from "lucide-react";
 
 export default function BookingHero() {
