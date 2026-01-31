@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   Menu,
@@ -15,6 +16,7 @@ import {
 } from "lucide-react";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkSection, setIsDarkSection] = useState(true);
@@ -22,6 +24,11 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      if (pathname === "/booking") {
+        setIsDarkSection(true);
+        return;
+      }
 
       const heroSection = document.getElementById("hero");
       const toursSection = document.getElementById("tours");
@@ -52,7 +59,7 @@ export default function Navbar() {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (isMenuOpen) {
