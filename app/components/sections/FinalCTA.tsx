@@ -1,5 +1,6 @@
 "use client";
 
+import { useEmailStore } from "@/app/actions/store/email";
 import {
   ArrowUpRight,
   Smartphone,
@@ -13,6 +14,8 @@ import {
   Send,
   MessageCircle,
 } from "lucide-react";
+import router from "next/router";
+import { useState } from "react";
 
 export default function FinalCTA() {
   const preparationItems = [
@@ -76,6 +79,18 @@ export default function FinalCTA() {
     },
   ];
 
+  const [formData, setFormData] = useState({
+    email: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    useEmailStore.getState().setEmail(formData.email);
+
+    router.push("/booking");
+  };
+
   return (
     <section
       id="contact"
@@ -133,26 +148,11 @@ export default function FinalCTA() {
                     type="email"
                     placeholder="Ваш email адрес"
                     className="w-full bg-transparent border-b border-light-surface/10 py-4 text-xl md:text-2xl text-light-surface placeholder:text-gray-600 focus:outline-none focus:border-accent-cta transition-all duration-300"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                   />
-                </div>
-
-                <div className="flex items-center justify-between gap-6">
-                  <div className="flex items-center gap-4 cursor-pointer group">
-                    <div className="w-5 h-5 rounded-full border border-gray-600 shrink-0 group-hover:border-accent-cta transition-colors" />
-                    <p className="text-sm text-gray-500 max-w-xs leading-relaxed group-hover:text-gray-400 transition-colors">
-                      Нажимая кнопку, вы соглашаетесь с{" "}
-                      <span className="underline decoration-gray-600 underline-offset-4">
-                        политикой конфиденциальности
-                      </span>
-                    </p>
-                  </div>
-
-                  <button className="w-16 h-16 rounded-full border border-light-surface/20 flex items-center justify-center hover:bg-light-surface hover:text-dark-section transition-all duration-300 group shrink-0">
-                    <ArrowUpRight
-                      size={28}
-                      className="group-hover:rotate-45 transition-transform duration-300"
-                    />
-                  </button>
                 </div>
               </div>
 
@@ -178,7 +178,7 @@ export default function FinalCTA() {
 
             {/* Big Action Button Side */}
             <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-              <button className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-light-surface/10 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-700 z-20 hover:scale-105 hover:border-accent-cta/30 shadow-2xl">
+              <button className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-light-surface/10 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-700 z-20 hover:scale-105 hover:border-accent-cta/30 shadow-2xl" onClick={handleSubmit}>
                 <div className="absolute inset-4 rounded-full border border-light-surface/10 group-hover:border-accent-cta/30 transition-all duration-700" />
                 <div className="absolute inset-0 rounded-full bg-linear-to-br from-accent-cta/0 via-accent-cta/0 to-transparent group-hover:from-accent-cta/20 group-hover:via-accent-cta/30 group-hover:to-transparent transition-all duration-700" />
 
