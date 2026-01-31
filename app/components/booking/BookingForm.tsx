@@ -9,17 +9,25 @@ import {
   Sparkles,
   ArrowDown,
 } from "lucide-react";
-import { useState } from "react";
-import { sendBookingToTelegram } from "../../actions/bookingAction";
+import { useState, useEffect } from "react";
+import { useEmailStore } from "@/app/actions/store/email";
+import { sendBookingToTelegram } from "@/app/actions/bookingAction";
 
 export default function BookingForm() {
+  const { email } = useEmailStore();
   const [formData, setFormData] = useState({
     date: "",
     people: "1",
-    email: "",
+    email: email,
     telegram: "",
     message: "",
   });
+
+  useEffect(() => {
+    if (email) {
+      setFormData((prev) => ({ ...prev, email }));
+    }
+  }, [email]);
 
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -128,6 +136,7 @@ export default function BookingForm() {
                     type="email"
                     required
                     placeholder="example@mail.com"
+                    value={formData.email}
                     className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-xl focus:border-accent-cta outline-none transition-all text-white placeholder:text-white/10"
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
