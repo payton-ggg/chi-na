@@ -70,7 +70,7 @@ export default function Features() {
         </div>
 
         {/* Main Content - Two Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start scale-90  ">
           {/* Left Column - Titles & Short Info */}
           <div className="lg:col-span-6 space-y-4">
             {features.map((feature, index) => (
