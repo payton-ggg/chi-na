@@ -192,9 +192,9 @@ export default function Accommodation() {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row items-end justify-between mb-24 md:mb-32 gap-12">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/10 border border-accent-cta/20 mb-8">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-16 md:mb-32 gap-8 md:gap-12">
+          <div className="w-full lg:max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/10 border border-accent-cta/20 mb-6 md:mb-8">
               <Home size={16} className="text-accent-cta" />
               <span className="text-sm font-semibold text-accent-cta tracking-wide uppercase">
                 Премиальное проживание
@@ -209,7 +209,7 @@ export default function Accommodation() {
             </h2>
           </div>
 
-          <div className="lg:max-w-sm text-right lg:pb-4">
+          <div className="lg:max-w-sm text-left lg:text-right lg:pb-4">
             <p className="text-lg text-dark-section/60 leading-relaxed font-light">
               Мы отобрали отели, которые сами по себе являются частью
               путешествия. Комфорт высшего класса в самых знаковых локациях.
