@@ -171,7 +171,7 @@ export default function Navbar() {
           {/* Universal Hamburger Menu */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`relative z-110 p-4 rounded-full transition-all duration-500 group ${
+            className={`relative cursor-pointer z-110 p-4 rounded-full transition-all duration-500 group ${
               isMenuOpen
                 ? "bg-accent-cta text-light-surface"
                 : isDarkSection || !isScrolled
