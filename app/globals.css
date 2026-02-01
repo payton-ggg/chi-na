@@ -7,7 +7,7 @@
   /* User Defined Palette */
   --main-bg: #ebe9da; /* Основной фон */
   --accent-cta: #c2381c; /* Акцентные блоки / CTA */
-  --light-surface: #fff9ed; /* Светлые поверхности / карточки */
+  --light-surface: #ebe9da; /* Светлые поверхности / карточки */
   --dark-section: #28231f; /* Темный фон для некоторых секций */
 }
 
