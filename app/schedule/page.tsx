@@ -5,6 +5,7 @@ import ScheduleHero from "../components/schedule/ScheduleHero";
 import DaySchedule, {
   ScheduleDayData,
 } from "../components/schedule/DaySchedule";
+import FinalCTA from "../components/sections/FinalCTA";
 
 const scheduleData: ScheduleDayData[] = [
   {
@@ -133,7 +134,7 @@ export default function SchedulePage() {
         </div>
       </div>
 
-      <Footer />
+      <FinalCTA />
     </main>
   );
 }
