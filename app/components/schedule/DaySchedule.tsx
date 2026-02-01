@@ -22,8 +22,8 @@ export default function DaySchedule({ data }: { data: ScheduleDayData }) {
         <div className="hidden md:flex flex-col items-center col-span-2 lg:col-span-3 relative">
           <div className="sticky top-40 flex flex-col items-center">
             <span className="text-sm font-black text-accent-cta uppercase tracking-widest mb-4 transform -rotate-90 origin-center absolute -left-12 top-8 w-24"></span>
-            <div className="w-16 h-16 rounded-2xl bg-accent-cta flex items-center justify-center text-3xl font-black text-white shadow-[0_0_30px_rgba(194,56,28,0.4)] z-10 relative">
-              {data.day}
+            <div className="w-16 h-16 rounded-2xl bg-accent-cta flex items-center justify-center text-xl leading-none text-center font-black text-white shadow-[0_0_30px_rgba(194,56,28,0.4)] z-10 relative">
+              {data.day} день
               {/* Pulse effect */}
               <div className="absolute inset-0 bg-accent-cta rounded-2xl animate-ping opacity-20" />
             </div>
@@ -74,16 +74,21 @@ export default function DaySchedule({ data }: { data: ScheduleDayData }) {
                 title="Утро"
                 text={data.morning}
               />
-              <TimeSection
-                icon={<Sun size={20} />}
-                title="День"
-                text={data.dayPart}
-              />
-              <TimeSection
-                icon={<Moon size={20} />}
-                title="Вечер"
-                text={data.evening}
-              />
+              
+              {data.day !== 7 && (
+                <>
+                  <TimeSection
+                    icon={<Sun size={20} />}
+                    title="День"
+                    text={data.dayPart}
+                  />
+                  <TimeSection
+                    icon={<Moon size={20} />}
+                    title="Вечер"
+                    text={data.evening}
+                  />
+                </>
+              )}
             </div>
 
             {/* Optional Side Image */}
