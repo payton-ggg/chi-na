@@ -83,7 +83,7 @@ export default function BookingForm() {
   }
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="form" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-20 items-stretch">
           {/* Form Side */}

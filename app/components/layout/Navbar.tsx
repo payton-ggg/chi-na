@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Menu,
   X,
@@ -13,6 +13,7 @@ import {
   Calendar,
   BookOpen,
   UserPlus,
+  Home,
 } from "lucide-react";
 
 export default function Navbar() {
@@ -25,7 +26,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      if (pathname === "/booking") {
+      if (pathname === "/booking" || pathname === "/schedule") {
         setIsDarkSection(true);
         return;
       }
@@ -83,38 +84,66 @@ export default function Navbar() {
     { name: "Гайды", href: "/guides", icon: <BookOpen size={20} /> },
   ];
 
-  const sections = [
-    { name: "Программа", href: "/#tours" },
-    { name: "О туре", href: "/#about" },
-    { name: "Проживание", href: "/#accommodation" },
-    { name: "Контакты", href: "/#contact" },
-  ];
+  const sections = useMemo(() => {
+    const pageSections: Record<string, { name: string; href: string }[]> = {
+      "/": [
+        { name: "Программа", href: "/#tours" },
+        { name: "О туре", href: "/#about" },
+        { name: "Проживание", href: "/#accommodation" },
+        { name: "Контакты", href: "/#contact" },
+      ],
+      "/schedule": [
+        { name: "День 1: Шанхай", href: "/schedule#day-1" },
+        { name: "День 4: Аватар", href: "/schedule#day-4" },
+        { name: "День 6: Дисней", href: "/schedule#day-6" },
+        { name: "На главную", href: "/" },
+      ],
+      "/booking": [
+        { name: "Форма заявки", href: "/booking#form" },
+        { name: "На главную", href: "/" },
+        { name: "Контакты", href: "/#contact" },
+      ],
+      "/guides": [
+        { name: "Все гайды", href: "/guides" },
+        { name: "На главную", href: "/" },
+      ],
+    };
+
+    return pageSections[pathname] || pageSections["/"];
+  }, [pathname]);
 
   const handleLinkClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
-    if (href.startsWith("/#")) {
-      e.preventDefault();
-      setIsMenuOpen(false);
+    setIsMenuOpen(false);
 
-      const targetId = href.replace("/#", "");
-      const element = document.getElementById(targetId);
+    // Only prevent default and scroll if we are on the same page as the anchor
+    if (href.includes("#")) {
+      const [targetPath, targetHash] = href.split("#");
+      const currentPath = pathname;
 
-      if (element) {
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
+      // Normalize paths for comparison
+      const normalizedCurrent = currentPath === "/" ? "" : currentPath;
+      const normalizedTarget = targetPath === "/" ? "" : targetPath;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
+      if (normalizedCurrent === normalizedTarget && targetHash) {
+        e.preventDefault();
+        const element = document.getElementById(targetHash);
+
+        if (element) {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
       }
-    } else {
-      setIsMenuOpen(false);
     }
   };
 

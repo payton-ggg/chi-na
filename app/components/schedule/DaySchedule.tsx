@@ -13,7 +13,10 @@ export interface ScheduleDayData {
 
 export default function DaySchedule({ data }: { data: ScheduleDayData }) {
   return (
-    <article className="group relative pl-8 md:pl-0 border-l border-white/10 md:border-none pb-32 last:pb-0">
+    <article
+      id={`day-${data.day}`}
+      className="group relative pl-8 md:pl-0 border-l border-white/10 md:border-none pb-32 last:pb-0"
+    >
       <div className="md:grid md:grid-cols-12 md:gap-10">
         {/* Sticky Day Number & Line */}
         <div className="hidden md:flex flex-col items-center col-span-2 lg:col-span-3 relative">
