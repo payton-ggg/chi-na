@@ -11,7 +11,7 @@ export default function BookingHero() {
           </span>
         </div>
 
-        <h1 className="text-6xl md:text-[9vw] lg:text-[8vw] font-black tracking-tighter uppercase leading-[0.85] text-white select-none animate-slide-up">
+        <h1 className="text-5xl md:text-[9vw] lg:text-[8vw] font-black tracking-tighter uppercase leading-[0.85] text-white select-none animate-slide-up">
           Записаться <br />
           <span className="text-accent-cta italic font-serif lowercase font-medium">
             на тур

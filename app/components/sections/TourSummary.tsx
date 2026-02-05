@@ -159,7 +159,7 @@ export default function TourSummary() {
           </div>
 
           {/* RIGHT: Staggered Info Grid */}
-          <div className="w-full lg:w-1/2 max-md:mt-10 flex flex-col gap-8 md:gap-12">
+          <div className="w-full lg:w-1/2 max-md:mt-30 flex flex-col gap-8 md:gap-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
               {/* Vertical Decorative Bar */}
               <div className="absolute -left-6 top-1/4 bottom-1/4 w-px bg-linear-to-b from-transparent via-accent-cta/50 to-transparent hidden md:block" />
