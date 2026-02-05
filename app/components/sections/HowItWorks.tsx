@@ -1,40 +1,34 @@
 "use client";
 
-import {
-  FileText,
-  Plane,
-  Compass,
-  MessageSquare,
-  ClipboardCheck,
-} from "lucide-react";
+import { Mail, MessageCircle, FileCheck, Plane, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function HowItWorks() {
   const steps = [
     {
-      icon: <MessageSquare size={28} />,
-      title: "Заявка",
-      desc: "Вы оставляете заявку на сайте или пишете нам в мессенджеры. Мы связываемся в течение 10 минут.",
+      icon: <Mail size={28} />,
+      title: "Оставьте заявку",
+      desc: "Заполните форму на сайте или напишите нам в Telegram. Укажите желаемые даты и количество человек.",
     },
     {
-      icon: <Compass size={28} />,
-      title: "Подбор тура",
-      desc: "Наш эксперт предлагает идеальный маршрут, учитывая ваши даты, бюджет и пожелания.",
+      icon: <MessageCircle size={28} />,
+      title: "Консультация",
+      desc: "Лев или наш менеджер свяжется с вами в течение 24 часов. Обсудим детали маршрута и ответим на все вопросы.",
     },
     {
-      icon: <ClipboardCheck size={28} />,
-      title: "Оформление",
-      desc: "Подписываем договор, помогаем с визой и страховкой. Берем на себя всю бюрократию.",
+      icon: <FileCheck size={28} />,
+      title: "Бронирование",
+      desc: "Подтверждаем наличие мест, подписываем договор и высылаем инструкции по подготовке к поездке.",
     },
     {
       icon: <Plane size={28} />,
       title: "Путешествие",
-      desc: "Вы летите в Китай. Мы встречаем вас в аэропорту и сопровождаем на каждом этапе.",
+      desc: "Встречаем вас в аэропорту Шанхая и начинаем незабываемое приключение по Китаю.",
     },
     {
-      icon: <FileText size={28} />,
+      icon: <Sparkles size={28} />,
       title: "Поддержка 24/7",
-      desc: "Мы всегда на связи во время вашей поездки, чтобы решить любой вопрос мгновенно.",
+      desc: "Мы всегда на связи во время тура, чтобы каждый день прошел идеально и без забот.",
     },
   ];
 
@@ -47,11 +41,11 @@ export default function HowItWorks() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-32">
           <h2 className="text-5xl md:text-7xl font-bold text-dark-section mb-8 tracking-tight">
-            Как мы работаем
+            Как забронировать тур
           </h2>
           <p className="text-dark-section/70 text-xl max-w-2xl mx-auto font-light leading-relaxed">
-            Прозрачный процесс от первого сообщения до возвращения домой. Мы
-            заботимся о каждой детали вашего путешествия.
+            Простой и прозрачный процесс от заявки до старта путешествия. Мы
+            берем на себя всю организацию.
           </p>
         </div>
 
@@ -103,7 +97,7 @@ function StepItem({
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 } // Trigger slightly earlier
+      { threshold: 0.2 }
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -130,28 +124,28 @@ function StepItem({
         </div>
       </div>
 
-      {/* Content Side */}
+      {/* Content Side - Fixed mobile overflow */}
       <div
-        className={`ml-24 md:ml-0 md:w-1/2 flex ${
+        className={`ml-20 md:ml-0 flex w-[calc(100%-5rem)] md:w-1/2 ${
           isEven
             ? "md:justify-end md:pr-24"
             : "md:justify-start md:pl-24 md:order-last"
         }`}
       >
-        <div className="bg-transparent backdrop-blur-sm border border-dark-section/10 p-10 rounded-3xl shadow-none hover:shadow-[0_20px_60px_rgba(194,56,28,0.1)] hover:borer-accent-cta/30 transition-all duration-500 group w-full md:max-w-lg cursor-default relative overflow-hidden">
+        <div className="bg-transparent backdrop-blur-sm border border-dark-section/10 p-6 md:p-10 rounded-3xl shadow-none hover:shadow-[0_20px_60px_rgba(194,56,28,0.1)] hover:border-accent-cta/30 transition-all duration-500 group w-full md:max-w-lg cursor-default relative overflow-hidden">
           {/* Subtle gradient background on hover */}
           <div className="absolute inset-0 bg-linear-to-br from-accent-cta/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="flex items-baseline gap-4 mb-4 border-b border-dark-section/10 pb-4 group-hover:border-accent-cta/20 transition-colors duration-500">
-              <span className="text-5xl font-black text-dark-section/10 group-hover:text-accent-cta/20 transition-colors duration-500">
+            <div className="flex items-baseline gap-3 md:gap-4 mb-4 border-b border-dark-section/10 pb-4 group-hover:border-accent-cta/20 transition-colors duration-500">
+              <span className="text-4xl md:text-5xl font-black text-dark-section/10 group-hover:text-accent-cta/20 transition-colors duration-500">
                 0{index + 1}
               </span>
-              <h3 className="text-2xl font-bold text-dark-section group-hover:text-accent-cta transition-colors tracking-tight">
+              <h3 className="text-xl md:text-2xl font-bold text-dark-section group-hover:text-accent-cta transition-colors tracking-tight">
                 {step.title}
               </h3>
             </div>
-            <p className="text-dark-section/70 text-lg group-hover:text-dark-section transition-colors leading-relaxed">
+            <p className="text-dark-section/70 text-base md:text-lg group-hover:text-dark-section transition-colors leading-relaxed">
               {step.desc}
             </p>
           </div>
