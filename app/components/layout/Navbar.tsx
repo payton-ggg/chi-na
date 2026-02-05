@@ -64,9 +64,22 @@ export default function Navbar() {
 
   useEffect(() => {
     if (isMenuOpen) {
+      // Store current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
     }
   }, [isMenuOpen]);
 
@@ -240,13 +253,17 @@ export default function Navbar() {
 
       {/* Fullscreen Overlay Menu */}
       <div
-        className={`fixed inset-0 z-90 transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] ${
+        className={`fixed inset-0 z-90 transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] overflow-y-auto overscroll-contain ${
           themeClasses.overlay
         } ${
           isMenuOpen
             ? "translate-y-0 opacity-100 visible"
             : "-translate-y-full opacity-0 invisible"
         }`}
+        onTouchMove={(e) => {
+          // Prevent background scroll on mobile
+          e.stopPropagation();
+        }}
       >
         {/* Background Decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
