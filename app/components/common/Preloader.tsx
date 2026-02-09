@@ -13,10 +13,14 @@ export default function Preloader() {
     setIsLoading(true);
     setIsExiting(false);
 
+    // Force scroll to top immediately to prevent "black" areas
+    window.scrollTo(0, 0);
+
+    // Give browser time to paint the new page
     const timer = setTimeout(() => {
       setIsExiting(true);
       setTimeout(() => setIsLoading(false), 800);
-    }, 1000); // reduced timeout for smoother navigation
+    }, 1500); // Increased to 1.5s to ensure full loading/painting
 
     return () => clearTimeout(timer);
   }, [pathname]);
@@ -25,11 +29,17 @@ export default function Preloader() {
   useEffect(() => {
     if (!isExiting) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.scrollBehavior = "auto"; // Prevent native smooth scroll conflict
     } else {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.scrollBehavior = "";
     }
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.scrollBehavior = "";
     };
   }, [isExiting]);
 
