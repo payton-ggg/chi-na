@@ -94,7 +94,6 @@ export default function Navbar() {
       href: "/schedule",
       icon: <Calendar size={20} />,
     },
-    { name: "Гайды", href: "/guides", icon: <BookOpen size={20} /> },
   ];
 
   const sections = useMemo(() => {
