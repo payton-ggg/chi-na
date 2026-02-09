@@ -1,53 +1,44 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    // 1. Wait for all images and window to load
-    const handleLoad = () => {
-      // Small artificial delay for the "premium" feel
-      setTimeout(() => {
-        setIsExiting(true);
-        setTimeout(() => setIsLoading(false), 800); // Wait for exit animation
-      }, 1500);
-    };
+    // Reset state on path change
+    setIsLoading(true);
+    setIsExiting(false);
 
-    if (document.readyState === "complete") {
-      handleLoad();
-    } else {
-      window.addEventListener("load", handleLoad);
-    }
+    const timer = setTimeout(() => {
+      setIsExiting(true);
+      setTimeout(() => setIsLoading(false), 800);
+    }, 1000); // reduced timeout for smoother navigation
 
-    return () => window.removeEventListener("load", handleLoad);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
-  if (!isLoading) return null;
+  if (isExiting && !isLoading) return null;
 
   return (
     <div
-      className={`fixed inset-0 z-9999 flex items-center justify-center bg-dark-section transition-all duration-800 ease-in-out ${
-        isExiting
-          ? "opacity-0 invisible pointer-events-none -translate-y-full"
-          : "opacity-100"
+      className={`fixed inset-0 z-99999 flex items-center justify-center bg-dark-section transition-opacity duration-500 ease-in-out ${
+        isExiting ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
       <div className="relative flex flex-col items-center">
-        {/* Animated Hieroglyph: 旅 (Travel) */}
         <div className="relative">
           <div className="text-[12rem] md:text-[18rem] font-serif text-accent-cta leading-none select-none animate-hieroglyph-glow">
             旅
           </div>
 
-          {/* Subtle circles under the hieroglyph */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-accent-cta/10 rounded-full animate-ping-slow" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] border border-accent-cta/5 rounded-full animate-ping-slower" />
         </div>
 
-        {/* Loading Text */}
         <div className="mt-8 flex flex-col items-center gap-4">
           <div className="w-48 h-px bg-white/10 relative overflow-hidden">
             <div className="absolute inset-0 bg-accent-cta animate-loading-bar" />
