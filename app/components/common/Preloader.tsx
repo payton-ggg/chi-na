@@ -21,6 +21,18 @@ export default function Preloader() {
     return () => clearTimeout(timer);
   }, [pathname]);
 
+  // Lock scroll when loading
+  useEffect(() => {
+    if (!isExiting) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isExiting]);
+
   if (isExiting && !isLoading) return null;
 
   return (
