@@ -53,30 +53,7 @@ export default function TourDescription({ tour }: { tour: Tour }) {
             <h3 className="text-3xl font-bold text-white mb-8">Локации тура</h3>
             <ChinaMap tour={tour} />
           </div>
-          {tour.schedule && (
-            <div className="relative border-l-2 border-white/10 ml-4 md:ml-10 space-y-16 pl-12 md:pl-16">
-              {tour.schedule.map((day, index) => (
-                <div key={index} className="relative group">
-                  {/* Timeline Dot */}
-                  <div className="absolute -left-[59px] md:-left-[75px] top-0 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-dark-section border-2 border-white/20 flex items-center justify-center text-white/50 font-bold text-sm group-hover:border-accent-cta group-hover:text-accent-cta transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.5)] z-10">
-                      {day.day}
-                    </div>
-                  </div>
 
-                  {/* Content Card */}
-                  <div className="bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl hover:bg-white/[0.07] hover:border-accent-cta/30 transition-all duration-300 group-hover:translate-x-2">
-                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-accent-cta transition-colors">
-                      {day.title}
-                    </h3>
-                    <p className="text-lg text-white/60 font-light leading-relaxed">
-                      {day.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
           {/* CTA Button */}
           <div className="flex justify-center pt-12">
             <Link href="/booking">
