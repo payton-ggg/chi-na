@@ -2,16 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import PrimaryButton from "@/app/components/ui/PrimaryButton";
-
-export interface Tour {
-  id: number;
-  title: string;
-  description: string;
-  duration: string;
-  image: string;
-  highlights: string[];
-}
+import { Tour } from "@/app/data/tours";
 
 interface TourCardProps {
   tour: Tour;
@@ -196,7 +189,10 @@ export default function TourCard({ tour, index }: TourCardProps) {
                       transform: `translateX(${(1 - priceProgress) * 50}px)`,
                     }}
                   >
-                    <PrimaryButton className="w-full sm:w-auto">
+                    <PrimaryButton
+                      href={`/tours/${tour.id}`}
+                      className="w-full sm:w-auto"
+                    >
                       Подробнее об этапе
                     </PrimaryButton>
                   </div>

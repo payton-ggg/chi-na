@@ -1,36 +1,7 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import TourCard, { Tour } from "./tours/TourCard";
+import TourCard from "./tours/TourCard";
 import ParallaxBackground from "./tours/ParallaxBackground";
-
-const tours: Tour[] = [
-  {
-    id: 1,
-    title: "Шанхай",
-    description:
-      "Футуристический мегаполис, Диснейленд и водные города. Контраст будущего и прошлого.",
-    duration: "День 1-4",
-    image: "/shangai.png",
-    highlights: ["Shanghai Tower", "Bund", "Водные города"],
-  },
-  {
-    id: 2,
-    title: "Горы Аватара",
-    description:
-      "Аватар-парк Чжанцзяцзе, горы Хуаншань и стеклянные мосты. Для любителей природы.",
-    duration: "День 5-8",
-    image: "/avatar.png",
-    highlights: ["Парк Чжанцзяцзе", "Стеклянный мост", "Желтые горы"],
-  },
-  {
-    id: 3,
-    title: "Восточная Венеция",
-    description:
-      "Сучжоу и Ханчжоу — города садов, шелка и чая. Классика Китая.",
-    duration: "День 9-12",
-    image: "/venice.png",
-    highlights: ["Сучжоу", "Ханчжоу", "Шелк", "Чай"],
-  },
-];
+import { tours } from "@/app/data/tours";
 
 export default function PopularTours() {
   return (
