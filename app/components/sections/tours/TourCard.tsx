@@ -128,14 +128,8 @@ export default function TourCard({ tour, index }: TourCardProps) {
                 />
 
                 <div className="relative space-y-6">
-                  {/* Title - appears first */}
-                  <div
-                    className="transition-all duration-1000 ease-out"
-                    style={{
-                      opacity: titleProgress,
-                      transform: `translateX(${(1 - titleProgress) * 50}px)`,
-                    }}
-                  >
+                  {/* Title */}
+                  <div>
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-12 h-[2px] bg-linear-to-r from-accent-cta to-transparent rounded-full" />
                       <span className="text-sm font-bold text-accent-cta tracking-widest uppercase">
@@ -148,29 +142,15 @@ export default function TourCard({ tour, index }: TourCardProps) {
                     </h3>
                   </div>
 
-                  {/* Description - appears second */}
-                  <div
-                    className="transition-all duration-1000 ease-out delay-100"
-                    style={{
-                      opacity: descProgress,
-                      transform: `translateX(${(1 - descProgress) * 50}px)`,
-                    }}
-                  >
+                  {/* Description */}
+                  <div>
                     <p className="text-gray-400 text-lg lg:text-xl leading-relaxed">
                       {tour.description}
                     </p>
                   </div>
 
-                  {/* Highlights - appears third */}
-                  <div
-                    className="flex flex-wrap gap-2 transition-all duration-1000 ease-out delay-200"
-                    style={{
-                      opacity: highlightsProgress,
-                      transform: `translateX(${
-                        (1 - highlightsProgress) * 50
-                      }px)`,
-                    }}
-                  >
+                  {/* Highlights */}
+                  <div className="flex flex-wrap gap-2">
                     {tour.highlights.map((highlight, i) => (
                       <div
                         key={i}
@@ -181,19 +161,13 @@ export default function TourCard({ tour, index }: TourCardProps) {
                     ))}
                   </div>
 
-                  {/* Price and CTA - appears last */}
-                  <div
-                    className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-light-surface/10 transition-all duration-1000 ease-out delay-300"
-                    style={{
-                      opacity: priceProgress,
-                      transform: `translateX(${(1 - priceProgress) * 50}px)`,
-                    }}
-                  >
+                  {/* Price and CTA */}
+                  <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-light-surface/10">
                     <PrimaryButton
-                      href={`/tours/${tour.slug}`}
+                      href={`/tours/${tour.id}`}
                       className="w-full sm:w-auto"
                     >
-                      Подробнее
+                      Подробнее об этапе
                     </PrimaryButton>
                   </div>
                 </div>
