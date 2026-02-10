@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect, useMemo } from "react";
 import {
   Menu,
@@ -128,38 +128,40 @@ export default function Navbar() {
     return pageSections[pathname] || pageSections["/"];
   }, [pathname]);
 
-  const handleLinkClick = (
+  const { push } = useRouter();
+
+  const handleLinkClick = async (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
+    e.preventDefault();
     setIsMenuOpen(false);
 
-    // Only prevent default and scroll if we are on the same page as the anchor
-    if (href.includes("#")) {
-      const [targetPath, targetHash] = href.split("#");
-      const currentPath = pathname;
+    // If it's just a hash link or same page link
+    if (
+      href.startsWith("#") ||
+      (href.includes("#") && href.split("#")[0] === pathname)
+    ) {
+      const hash = href.includes("#") ? href.split("#")[1] : href.substring(1);
+      const element = document.getElementById(hash);
 
-      // Normalize paths for comparison
-      const normalizedCurrent = currentPath === "/" ? "" : currentPath;
-      const normalizedTarget = targetPath === "/" ? "" : targetPath;
+      if (element) {
+        const offset = 80;
+        const elementPosition =
+          element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - offset;
 
-      if (normalizedCurrent === normalizedTarget && targetHash) {
-        e.preventDefault();
-        const element = document.getElementById(targetHash);
-
-        if (element) {
-          const offset = 80;
-          const bodyRect = document.body.getBoundingClientRect().top;
-          const elementRect = element.getBoundingClientRect().top;
-          const elementPosition = elementRect - bodyRect;
-          const offsetPosition = elementPosition - offset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth",
-          });
-        }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
       }
+    } else if (href === pathname) {
+      // Just scroll to top if clicking current page link without hash
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // Navigate to new page
+      window.location.href = href;
     }
   };
 
@@ -327,10 +329,10 @@ export default function Navbar() {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12">
                   {sections.map((section, idx) => (
-                    <a
+                    <Link
                       key={section.name}
                       href={section.href}
-                      onClick={(e) => handleLinkClick(e, section.href)}
+                      onClick={() => setIsMenuOpen(false)}
                       className={`group flex items-center gap-4 text-2xl font-bold transition-colors ${themeClasses.linkText}`}
                       style={{ transitionDelay: `${(idx + 3) * 50}ms` }}
                     >
@@ -338,7 +340,7 @@ export default function Navbar() {
                         0{idx + 1}
                       </span>
                       <span>{section.name}</span>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
