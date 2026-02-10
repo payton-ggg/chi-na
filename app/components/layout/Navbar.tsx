@@ -103,8 +103,8 @@ export default function Navbar() {
   const sections = useMemo(() => {
     const pageSections: Record<string, { name: string; href: string }[]> = {
       "/": [
-        { name: "Программа", href: "/#tours" },
         { name: "О туре", href: "/#about" },
+        { name: "Программа", href: "/#tours" },
         { name: "Проживание", href: "/#accommodation" },
         { name: "Контакты", href: "/#contact" },
       ],
@@ -116,8 +116,8 @@ export default function Navbar() {
       ],
       "/booking": [
         { name: "Форма заявки", href: "/booking#form" },
-        { name: "На главную", href: "/" },
         { name: "Контакты", href: "/#contact" },
+        { name: "На главную", href: "/" },
       ],
       "/guides": [
         { name: "Все гайды", href: "/guides" },
@@ -212,9 +212,7 @@ export default function Navbar() {
           >
             <span
               className={`transition-colors duration-500 ${
-                isMenuOpen || isDarkSection || !isScrolled
-                  ? "text-light-surface"
-                  : "text-dark-section"
+                isDarkSection ? "text-light-surface" : "text-dark-section"
               }`}
             >
               TSUNAMI
