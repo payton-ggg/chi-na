@@ -3,10 +3,11 @@ import Navbar from "@/app/components/layout/Navbar";
 import Footer from "@/app/components/layout/Footer";
 import TourHero from "@/app/components/tours/TourHero";
 import TourDescription from "@/app/components/tours/TourDescription";
+import React from "react";
 
 export function generateStaticParams() {
   return tours.map((tour) => ({
-    id: tour.id.toString(),
+    slug: tour.slug,
   }));
 }
 
@@ -16,7 +17,7 @@ export default async function TourPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const tour = tours.find((t) => t.id === parseInt(id));
+  const tour = tours.find((t) => t.slug === id);
 
   if (!tour) {
     return (

@@ -1,5 +1,6 @@
 export interface Tour {
   id: number;
+  slug: string;
   title: string;
   description: string;
   duration: string;
@@ -12,6 +13,7 @@ export interface Tour {
 export const tours: Tour[] = [
   {
     id: 1,
+    slug: "shanghai",
     title: "Шанхай",
     description:
       "Футуристический мегаполис, Диснейленд и водные города. Контраст будущего и прошлого.",
@@ -45,6 +47,7 @@ export const tours: Tour[] = [
   },
   {
     id: 2,
+    slug: "mountains-avatar",
     title: "Горы Аватара",
     description:
       "Аватар-парк Чжанцзяцзе, горы Хуаншань и стеклянные мосты. Для любителей природы.",
@@ -78,6 +81,7 @@ export const tours: Tour[] = [
   },
   {
     id: 3,
+    slug: "eastern-venice",
     title: "Восточная Венеция",
     description:
       "Сучжоу и Ханчжоу — города садов, шелка и чая. Классика Китая.",

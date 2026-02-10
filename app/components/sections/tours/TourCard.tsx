@@ -190,7 +190,7 @@ export default function TourCard({ tour, index }: TourCardProps) {
                     }}
                   >
                     <PrimaryButton
-                      href={`/tours/${tour.id}`}
+                      href={`/tours/${tour.slug}`}
                       className="w-full sm:w-auto"
                     >
                       Подробнее об этапе
