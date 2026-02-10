@@ -14,7 +14,7 @@ import {
   Send,
   MessageCircle,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function FinalCTA() {
@@ -85,6 +85,8 @@ export default function FinalCTA() {
 
   const router = useRouter();
 
+  const isHomePage = usePathname() === "/";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -105,39 +107,45 @@ export default function FinalCTA() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col gap-24">
           {/* Top: Important Info */}
-          <div>
-            <div className="max-w-3xl mb-16">
-              <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">
-                Важная информация <br />
-                <span className="text-accent-cta">перед поездкой</span>
-              </h2>
-              <p className="text-xl text-light-surface/60 font-light leading-relaxed">
-                Чтобы ваше путешествие в Китай прошло максимально комфортно,
-                подготовьтесь заранее. Всё это сделает поездку проще, а вы
-                сможете сосредоточиться только на впечатлениях.
-              </p>
-            </div>
+          {isHomePage && (
+            <div>
+              <div className="max-w-3xl mb-16">
+                <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">
+                  Важная информация <br />
+                  <span className="text-accent-cta">перед поездкой</span>
+                </h2>
+                <p className="text-xl text-light-surface/60 font-light leading-relaxed">
+                  Чтобы ваше путешествие в Китай прошло максимально комфортно,
+                  подготовьтесь заранее. Всё это сделает поездку проще, а вы
+                  сможете сосредоточиться только на впечатлениях.
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {preparationItems.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-8 rounded-4xl bg-white/5 border border-white/10 hover:border-accent-cta/30 transition-all duration-500 group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-accent-cta/10 flex items-center justify-center text-accent-cta mb-6 group-hover:scale-110 transition-transform">
-                    {item.icon}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {preparationItems.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-8 rounded-4xl bg-white/5 border border-white/10 hover:border-accent-cta/30 transition-all duration-500 group"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-accent-cta/10 flex items-center justify-center text-accent-cta mb-6 group-hover:scale-110 transition-transform">
+                      {item.icon}
+                    </div>
+                    <h4 className="text-xl font-bold mb-3">{item.title}</h4>
+                    <p className="text-sm text-light-surface/50 leading-relaxed font-light">
+                      {item.text}
+                    </p>
                   </div>
-                  <h4 className="text-xl font-bold mb-3">{item.title}</h4>
-                  <p className="text-sm text-light-surface/50 leading-relaxed font-light">
-                    {item.text}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Middle: Contacts and Main CTA */}
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-20 pt-24 border-t border-white/10">
+          <div
+            className={`flex flex-col lg:flex-row items-start justify-between gap-20 pt-24 ${
+              isHomePage ? "border-t border-white/10" : ""
+            }`}
+          >
             {/* Form Side */}
             <div className="w-full lg:w-1/2 max-w-xl">
               <h3 className="text-4xl md:text-5xl font-bold mb-12 tracking-tight">
