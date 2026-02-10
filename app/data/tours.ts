@@ -8,6 +8,7 @@ export interface Tour {
   highlights: string[];
   fullDescription?: string;
   schedule?: { day: string; title: string; desc: string }[];
+  video?: string;
 }
 
 export const tours: Tour[] = [
@@ -44,6 +45,7 @@ export const tours: Tour[] = [
         desc: "Свободный день или посещение Шанхайского Диснейленда.",
       },
     ],
+    video: "https://www.youtube.com/embed/F5McqwPNnME?si=Fqrj_71GID0Dx1IS",
   },
   {
     id: 2,

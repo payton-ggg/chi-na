@@ -21,6 +21,33 @@ export default function TourDescription({ tour }: { tour: Tour }) {
             </p>
           </div>
 
+          {/* Video Section */}
+          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-video group">
+            <div className="absolute inset-0 bg-accent-cta/5 group-hover:bg-accent-cta/10 transition-colors pointer-events-none z-10" />
+
+            {tour.video ? (
+              <iframe
+                src={tour.video}
+                title={`${tour.title} video`}
+                className="w-full h-full object-cover"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-white/5 backdrop-blur-sm">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 rounded-full border-2 border-white/20 flex items-center justify-center mx-auto opacity-50">
+                    <div className="w-0 h-0 border-t-10 border-t-transparent border-l-18 border-l-white/50 border-b-10 border-b-transparent ml-1" />
+                  </div>
+                  <p className="text-white/30 uppercase tracking-widest text-sm font-medium">
+                    Видео скоро появится
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Schedule Timeline */}
           {tour.schedule && (
             <div className="relative border-l-2 border-white/10 ml-4 md:ml-10 space-y-16 pl-12 md:pl-16">
