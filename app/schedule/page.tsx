@@ -5,7 +5,7 @@ import ScheduleHero from "../components/schedule/ScheduleHero";
 import DaySchedule, {
   ScheduleDayData,
 } from "../components/schedule/DaySchedule";
-import FinalCTA from "../components/sections/FinalCTA";
+import FinalCTA from "../components/layout/Footer";
 
 const scheduleData: ScheduleDayData[] = [
   {

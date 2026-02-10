@@ -26,7 +26,11 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      if (pathname === "/booking" || pathname === "/schedule") {
+      if (
+        pathname === "/booking" ||
+        pathname === "/schedule" ||
+        pathname.includes("/tours")
+      ) {
         setIsDarkSection(true);
         return;
       }
