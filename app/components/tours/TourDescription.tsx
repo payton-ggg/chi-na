@@ -1,6 +1,7 @@
 import { Tour } from "@/app/data/tours";
 import Link from "next/link";
 import PrimaryButton from "@/app/components/ui/PrimaryButton";
+import ChinaMap from "./ChinaMap";
 
 export default function TourDescription({ tour }: { tour: Tour }) {
   return (
@@ -20,7 +21,6 @@ export default function TourDescription({ tour }: { tour: Tour }) {
               {tour.fullDescription || tour.description}
             </p>
           </div>
-
           {/* Video Section */}
           <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-video group">
             <div className="absolute inset-0 bg-accent-cta/5 group-hover:bg-accent-cta/10 transition-colors pointer-events-none z-10" />
@@ -48,7 +48,11 @@ export default function TourDescription({ tour }: { tour: Tour }) {
             )}
           </div>
 
-          {/* Schedule Timeline */}
+          {/* Map Section */}
+          <div className="space-y-8">
+            <h3 className="text-3xl font-bold text-white mb-8">Локации тура</h3>
+            <ChinaMap tour={tour} />
+          </div>
           {tour.schedule && (
             <div className="relative border-l-2 border-white/10 ml-4 md:ml-10 space-y-16 pl-12 md:pl-16">
               {tour.schedule.map((day, index) => (
@@ -73,7 +77,6 @@ export default function TourDescription({ tour }: { tour: Tour }) {
               ))}
             </div>
           )}
-
           {/* CTA Button */}
           <div className="flex justify-center pt-12">
             <Link href="/booking">

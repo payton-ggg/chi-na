@@ -193,7 +193,7 @@ export default function TourCard({ tour, index }: TourCardProps) {
                       href={`/tours/${tour.slug}`}
                       className="w-full sm:w-auto"
                     >
-                      Подробнее об этапе
+                      Подробнее
                     </PrimaryButton>
                   </div>
                 </div>
