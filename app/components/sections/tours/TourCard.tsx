@@ -164,7 +164,7 @@ export default function TourCard({ tour, index }: TourCardProps) {
                   {/* Price and CTA */}
                   <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 pt-8 border-t border-light-surface/10">
                     <PrimaryButton
-                      href={`/tours/${tour.id}`}
+                      href={`/tours/${tour.slug}`}
                       className="w-full sm:w-auto"
                     >
                       Подробнее об этапе
