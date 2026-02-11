@@ -36,10 +36,6 @@ export default function TourHero({ tour }: { tour: Tour }) {
         </h1>
 
         <div className="flex flex-wrap justify-center gap-6 text-white/90 max-w-4xl mx-auto">
-          <div className="flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 hover:border-accent-cta/50 transition-colors duration-300">
-            <Calendar size={20} className="text-accent-cta" />
-            <span className="font-medium tracking-wide">{tour.duration}</span>
-          </div>
           {tour.highlights.slice(0, 3).map((highlight, index) => (
             <div
               key={index}
