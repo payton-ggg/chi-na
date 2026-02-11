@@ -21,7 +21,8 @@ export default function ChinaMap({ tour }: { tour: Tour }) {
   };
 
   return (
-    <div className="relative w-full aspect-4/3 md:aspect-video bg-[#0B0C10] rounded-3xl border border-white/10 overflow-hidden group shadow-2xl">
+    <div className="relative w-full pb-48 md:pb-64">
+      <div className="relative w-full aspect-4/3 md:aspect-video bg-[#0B0C10] rounded-3xl border border-white/10 overflow-visible group shadow-2xl">
       {/* Map Background Image */}
       <div className="absolute inset-0">
         <Image
@@ -77,23 +78,38 @@ export default function ChinaMap({ tour }: { tour: Tour }) {
 
               {/* Tooltip Card */}
               <div
-                className={`absolute top-full mt-6 left-1/2 -translate-x-1/2 w-64 md:w-80 bg-dark-section/95 backdrop-blur-xl border border-accent-cta/30 p-5 rounded-2xl shadow-2xl transition-all duration-300 origin-top z-50 pointer-events-none ${
+                className={`absolute top-full mt-6 left-1/2 -translate-x-1/2 w-72 md:w-96 transition-all duration-500 origin-top z-50 pointer-events-none ${
                   activeLocation === index
                     ? "opacity-100 scale-100 translate-y-0 visible"
-                    : "opacity-0 scale-90 -translate-y-4 invisible"
+                    : "opacity-0 scale-95 -translate-y-2 invisible"
                 }`}
               >
-                {/* Arrow */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-12 border-l-transparent border-r-12 border-r-transparent border-b-12 border-b-accent-cta/30" />
-
-                <h4 className="relative text-lg font-black text-accent-cta mb-2 uppercase tracking-wide">
-                  {loc.name}
-                </h4>
-                <p className="relative text-sm text-white/80 leading-relaxed font-light">
-                  {loc.description.length > 120
-                    ? loc.description.substring(0, 120) + "..."
-                    : loc.description}
-                </p>
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-accent-cta/20 blur-2xl rounded-3xl" />
+                
+                {/* Main card */}
+                <div className="relative bg-linear-to-br from-accent-cta/95 via-accent-cta/90 to-accent-cta/80 backdrop-blur-xl border-2 border-white/20 p-6 rounded-3xl shadow-[0_20px_60px_rgba(194,56,28,0.6)]">
+                  {/* Arrow */}
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-14 border-l-transparent border-r-14 border-r-transparent border-b-14 border-b-accent-cta/95" />
+                  
+                  {/* Decorative corner accent */}
+                  <div className="absolute top-3 right-3 w-12 h-12 border-t-2 border-r-2 border-white/30 rounded-tr-2xl" />
+                  
+                  {/* Content */}
+                  <div className="relative">
+                    <h4 className="text-xl md:text-2xl font-black text-white mb-3 uppercase tracking-wider drop-shadow-lg">
+                      {loc.name}
+                    </h4>
+                    <p className="text-sm md:text-base text-white/95 leading-relaxed font-normal">
+                      {loc.description.length > 150
+                        ? loc.description.substring(0, 150) + "..."
+                        : loc.description}
+                    </p>
+                  </div>
+                  
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-white/40 to-transparent rounded-b-3xl" />
+                </div>
               </div>
             </div>
           );
@@ -128,6 +144,7 @@ export default function ChinaMap({ tour }: { tour: Tour }) {
           animation: scan 6s linear infinite;
         }
       `}</style>
+      </div>
     </div>
   );
 }
