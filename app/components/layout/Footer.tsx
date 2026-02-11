@@ -68,12 +68,12 @@ export default function FinalCTA() {
       icon: <Send size={18} />,
     },
     {
-      name: "Instagram турагентства",
+      name: "Instagram (турагентства)",
       href: "https://www.instagram.com/tsunami_travel",
       icon: <Instagram size={18} />,
     },
     {
-      name: "Личный Telegram для связи",
+      name: "Telegram (личный, для связи)",
       href: "https://t.me/Lihach57",
       icon: <MessageCircle size={18} />,
     },
