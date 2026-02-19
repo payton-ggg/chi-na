@@ -10,9 +10,9 @@ const robotoSlab = Roboto_Slab({
 });
 
 export const metadata: Metadata = {
-  title: "TSUNAMI TRAVEL | Авторские туры в Китай",
+  title: "TSUNAMI TRAVEL | Авторские экскурсии в Китай",
   description:
-    "Премиальные туры в Китай. Откройте для себя Поднебесную с экспертами.",
+    "Премиальные экскурсии в Китай. Откройте для себя Поднебесную с экспертами.",
 };
 
 import Preloader from "./components/common/Preloader";
