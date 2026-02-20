@@ -111,13 +111,13 @@ export default function FinalCTA() {
             <div>
               <div className="max-w-3xl mb-16">
                 <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">
-                  Важная информация <br />
-                  <span className="text-accent-cta">перед поездкой</span>
+                  Стандарты <br />
+                  <span className="text-accent-cta">вашего комфорта</span>
                 </h2>
                 <p className="text-xl text-light-surface/60 font-light leading-relaxed">
-                  Чтобы ваше путешествие в Китай прошло максимально комфортно,
-                  подготовьтесь заранее. Всё это сделает поездку проще, а вы
-                  сможете сосредоточиться только на впечатлениях.
+                  Мы создали систему подготовки, которая гарантирует вам
+                  спокойствие. Весь наш опыт сосредоточен на том, чтобы вы могли
+                  полностью погрузиться в атмосферу Китая.
                 </p>
               </div>
 
@@ -149,7 +149,7 @@ export default function FinalCTA() {
             {/* Form Side */}
             <div className="w-full lg:w-1/2 max-w-xl">
               <h3 className="text-4xl md:text-5xl font-bold mb-12 tracking-tight">
-                Напишите нам
+                Связаться с TsunamiTravel
               </h3>
 
               <div className="space-y-12">
@@ -169,7 +169,7 @@ export default function FinalCTA() {
               {/* Social Links */}
               <div className="mt-20">
                 <p className="text-xs font-bold text-accent-cta uppercase tracking-widest mb-8">
-                  Наши соцсети и контакты
+                  Следите за экспедициями
                 </p>
                 <div className="flex flex-wrap gap-4">
                   {socialLinks.map((link, idx) => (

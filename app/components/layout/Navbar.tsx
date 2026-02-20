@@ -89,12 +89,12 @@ export default function Navbar() {
 
   const mainPages = [
     {
-      name: "Записаться на тур",
+      name: "Присоединиться к нам",
       href: "/booking",
       icon: <UserPlus size={20} />,
     },
     {
-      name: "Расписание по дням",
+      name: "Календарь экспедиций",
       href: "/schedule",
       icon: <Calendar size={20} />,
     },
@@ -103,8 +103,8 @@ export default function Navbar() {
   const sections = useMemo(() => {
     const pageSections: Record<string, { name: string; href: string }[]> = {
       "/": [
-        { name: "О туре", href: "/#about" },
-        { name: "Программа", href: "/#tours" },
+        { name: "О компании", href: "/#about" },
+        { name: "Концепты", href: "/#tours" },
         { name: "Проживание", href: "/#accommodation" },
         { name: "Контакты", href: "/#contact" },
       ],
@@ -376,8 +376,8 @@ export default function Navbar() {
               <div
                 className={`text-sm font-light mt-auto ${themeClasses.textMuted}`}
               >
-                © {new Date().getFullYear()} Tsunami Travel. <br />
-                Авторские туры по Китаю.
+                © {new Date().getFullYear()} CHI-NA TEAM. <br />
+                Экспедиционный клуб по Китаю.
               </div>
             </div>
           </div>

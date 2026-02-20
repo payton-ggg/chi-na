@@ -12,16 +12,16 @@ export default function BookingHero() {
         </div>
 
         <h1 className="text-5xl md:text-[9vw] lg:text-[8vw] font-black tracking-tighter uppercase leading-[0.85] text-white select-none animate-slide-up">
-          Записаться <br />
+          Стать <br />
           <span className="text-accent-cta italic font-serif lowercase font-medium">
-            на тур
+            участником
           </span>
         </h1>
 
         <p className="mt-12 text-xl md:text-2xl text-white/50 max-w-2xl mx-auto font-light leading-relaxed animate-fade-in delay-200">
-          Заполните форму ниже, и мы забронируем ваше место в{" "}
-          <br className="hidden md:block" />
-          самом запоминающемся путешествии по Китаю.
+          Заполните заявку, и мы свяжемся с вами для подтверждения участия{" "}
+          <br className="hidden md:block" /> в нашей следующей экспедиции по
+          Китаю.
         </p>
 
         <div className="mt-16 flex justify-center animate-bounce">

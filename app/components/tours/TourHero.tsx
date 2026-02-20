@@ -27,7 +27,7 @@ export default function TourHero({ tour }: { tour: Tour }) {
             className="group-hover:text-accent-cta transition-colors"
           />
           <span className="uppercase tracking-widest text-xs font-bold">
-            Назад к турам
+            Все экспедиции
           </span>
         </Link>
 

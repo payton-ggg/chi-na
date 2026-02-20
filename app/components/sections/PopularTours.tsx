@@ -18,14 +18,15 @@ export default function PopularTours() {
               </span>
             </div>
             <h2 className="text-5xl md:text-7xl font-bold text-light-surface mb-6 leading-[1.1]">
-              Программа{" "}
+              Наши{" "}
               <span className="bg-linear-to-r from-accent-cta via-brand-gold to-accent-cta bg-clip-text text-transparent">
-                Тура
+                Концепты
               </span>
             </h2>
             <p className="text-light-surface/70 text-xl leading-relaxed">
-              Три уникальные локации за одно путешествие. Шанхай, Горы Аватара и
-              Восточная Венеция в одной поездке.
+              Мы разработали уникальные маршруты, объединяющие в себе лучшее от
+              Китая. Шанхай, Горы Аватара или Восточная Венеция — выберите своё
+              направление.
             </p>
           </div>
           <button className="hidden md:flex items-center gap-2 text-light-surface/80 hover:text-light-surface font-semibold transition-all group px-6 py-3 rounded-full border border-light-surface/10 hover:border-accent-cta/50 hover:bg-light-surface/5">
