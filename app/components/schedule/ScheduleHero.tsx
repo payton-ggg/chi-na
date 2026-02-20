@@ -7,20 +7,19 @@ export default function ScheduleHero() {
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/10 border border-accent-cta/20 mb-10">
           <Sparkles size={16} className="text-accent-cta" />
           <span className="text-sm font-semibold text-accent-cta tracking-wide uppercase">
-            План путешествия
+            7 дней · Групповой тур
           </span>
         </div>
 
         <h1 className="text-5xl md:text-[9vw] lg:text-[8vw] font-black tracking-tighter uppercase leading-[0.85] text-white select-none">
-          Программа <br />
+          Большой <br />
           <span className="text-accent-cta italic font-serif lowercase font-medium">
-            по дням
+            тур по Китаю
           </span>
         </h1>
 
         <p className="mt-12 text-xl md:text-2xl text-white/50 max-w-2xl mx-auto font-light leading-relaxed">
-          Каждый день — это новая глава. От неоновых огней Шанхая до мистических
-          вершин Аватара.
+          7 дней, 3 города, бесконечные впечатления. Шанхай, горы Аватара и Диснейленд — всё включено.
         </p>
 
         <div className="mt-16 flex justify-center animate-bounce">

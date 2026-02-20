@@ -94,7 +94,7 @@ export default function Navbar() {
       icon: <UserPlus size={20} />,
     },
     {
-      name: "Календарь экспедиций",
+      name: "Большой тур по Китаю",
       href: "/schedule",
       icon: <Calendar size={20} />,
     },
@@ -109,7 +109,8 @@ export default function Navbar() {
         { name: "Контакты", href: "/#contact" },
       ],
       "/schedule": [
-        { name: "День 1: Шанхай", href: "/schedule#day-1" },
+        { name: "День 1: Прибытие", href: "/schedule#day-1" },
+        { name: "День 3: Венеция", href: "/schedule#day-3" },
         { name: "День 4: Аватар", href: "/schedule#day-4" },
         { name: "День 6: Дисней", href: "/schedule#day-6" },
         { name: "На главную", href: "/" },
