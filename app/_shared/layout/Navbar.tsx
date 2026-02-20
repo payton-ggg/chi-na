@@ -89,7 +89,7 @@ export default function Navbar() {
 
   const mainPages = [
     {
-      name: "Присоединиться к нам",
+      name: "Написать нам",
       href: "/booking",
       icon: <UserPlus size={20} />,
     },
@@ -377,7 +377,7 @@ export default function Navbar() {
               <div
                 className={`text-sm font-light mt-auto ${themeClasses.textMuted}`}
               >
-                © {new Date().getFullYear()} CHI-NA TEAM. <br />
+                © {new Date().getFullYear()} TsunamiTravel team <br />
                 Экспедиционный клуб по Китаю.
               </div>
             </div>

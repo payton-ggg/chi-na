@@ -42,7 +42,7 @@ export default function Features() {
       {/* Background Decorative Text */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 select-none pointer-events-none opacity-[0.03] whitespace-nowrap z-0">
         <span className="text-[25vw] font-black leading-none tracking-tighter text-dark-section">
-          CHI-NA TEAM
+          TsunamiTravel Team
         </span>
       </div>
 
