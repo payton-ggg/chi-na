@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "./components/common/SmoothScroll";
+import SmoothScroll from "./_shared/common/SmoothScroll";
 
 const robotoSlab = Roboto_Slab({
   variable: "--font-roboto-slab",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "Премиальные экскурсии в Китай. Откройте для себя Поднебесную с экспертами.",
 };
 
-import Preloader from "./components/common/Preloader";
+import Preloader from "./_shared/common/Preloader";
 
 export default function RootLayout({
   children,

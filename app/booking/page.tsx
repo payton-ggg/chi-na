@@ -1,8 +1,8 @@
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
-import BookingHero from "../components/booking/BookingHero";
-import BookingForm from "../components/booking/BookingForm";
-import SmoothScroll from "../components/common/SmoothScroll";
+import Navbar from "../_shared/layout/Navbar";
+import Footer from "../_shared/layout/Footer";
+import BookingHero from "../_modules/booking/BookingHero";
+import BookingForm from "../_modules/booking/BookingForm";
+import SmoothScroll from "../_shared/common/SmoothScroll";
 
 export default function BookingPage() {
   return (

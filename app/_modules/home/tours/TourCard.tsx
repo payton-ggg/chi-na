@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import PrimaryButton from "@/app/components/ui/PrimaryButton";
+import PrimaryButton from "@/app/_shared/ui/PrimaryButton";
 import { Tour } from "@/app/data/tours";
 
 interface TourCardProps {

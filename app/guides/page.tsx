@@ -1,4 +1,4 @@
-import Navbar from "../components/layout/Navbar";
+import Navbar from "../_shared/layout/Navbar";
 
 export default function GuidesPage() {
   return (

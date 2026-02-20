@@ -1,12 +1,11 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import TourCard from "./tours/TourCard";
-import ParallaxBackground from "./tours/ParallaxBackground";
 import { tours } from "@/app/data/tours";
 
 export default function PopularTours() {
   return (
     <section id="tours" className="relative bg-dark-section overflow-hidden">
-      <ParallaxBackground />
+
 
       <div className="container mx-auto px-6 pt-32 pb-12 relative z-20">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">

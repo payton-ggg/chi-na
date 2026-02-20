@@ -1,8 +1,8 @@
 import { tours } from "@/app/data/tours";
-import Navbar from "@/app/components/layout/Navbar";
-import Footer from "@/app/components/layout/Footer";
-import TourHero from "@/app/components/tours/TourHero";
-import TourDescription from "@/app/components/tours/TourDescription";
+import Navbar from "@/app/_shared/layout/Navbar";
+import Footer from "@/app/_shared/layout/Footer";
+import TourHero from "@/app/_modules/tour-detail/TourHero";
+import TourDescription from "@/app/_modules/tour-detail/TourDescription";
 import React from "react";
 
 export function generateStaticParams() {

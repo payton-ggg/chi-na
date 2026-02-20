@@ -1,11 +1,11 @@
-import Navbar from "./components/layout/Navbar";
-import Hero from "./components/sections/Hero";
-import Features from "./components/sections/Features";
-import PopularTours from "./components/sections/PopularTours";
-import TourSummary from "./components/sections/TourSummary";
-import HowItWorks from "./components/sections/HowItWorks";
-import Accommodation from "./components/sections/Accommodation";
-import Footer from "./components/layout/Footer";
+import Navbar from "./_shared/layout/Navbar";
+import Hero from "./_modules/home/Hero";
+import Features from "./_modules/home/Features";
+import PopularTours from "./_modules/home/PopularTours";
+import TourSummary from "./_modules/home/TourSummary";
+import HowItWorks from "./_modules/home/HowItWorks";
+import Accommodation from "./_modules/home/Accommodation";
+import Footer from "./_shared/layout/Footer";
 
 export default function Home() {
   return (

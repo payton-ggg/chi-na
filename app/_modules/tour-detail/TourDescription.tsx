@@ -1,6 +1,6 @@
 import { Tour } from "@/app/data/tours";
 import Link from "next/link";
-import PrimaryButton from "@/app/components/ui/PrimaryButton";
+import PrimaryButton from "@/app/_shared/ui/PrimaryButton";
 import ChinaMap from "./ChinaMap";
 
 export default function TourDescription({ tour }: { tour: Tour }) {
