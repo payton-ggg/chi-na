@@ -149,7 +149,7 @@ export default function FinalCTA() {
             {/* Form Side */}
             <div className="w-full lg:w-1/2 max-w-xl">
               <h3 className="text-4xl md:text-5xl font-bold mb-12 tracking-tight">
-                Связаться с TsunamiTravel
+                Связаться с нами
               </h3>
 
               <div className="space-y-12">
