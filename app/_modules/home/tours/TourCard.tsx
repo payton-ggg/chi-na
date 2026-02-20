@@ -130,13 +130,6 @@ export default function TourCard({ tour, index }: TourCardProps) {
                 <div className="relative space-y-6">
                   {/* Title */}
                   <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-[2px] bg-linear-to-r from-accent-cta to-transparent rounded-full" />
-                      <span className="text-sm font-bold text-accent-cta tracking-widest uppercase">
-                        Этап #{tour.id}
-                      </span>
-                    </div>
-
                     <h3 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
                       {tour.title}
                     </h3>
