@@ -41,7 +41,7 @@ export default function HowItWorks() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-32">
           <h2 className="text-5xl md:text-7xl font-bold text-dark-section mb-8 tracking-tight">
-            Стать частью команды
+            Записаться на путешествие
           </h2>
           <p className="text-dark-section/70 text-xl max-w-2xl mx-auto font-light leading-relaxed">
             Простой процесс подготовки к вашему следующему большому приключению.
