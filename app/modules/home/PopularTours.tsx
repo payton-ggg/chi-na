@@ -6,8 +6,6 @@ import Link from "next/link";
 export default function PopularTours() {
   return (
     <section id="tours" className="relative bg-dark-section overflow-hidden">
-
-
       <div className="container mx-auto px-6 pt-32 pb-12 relative z-20">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div className="max-w-2xl">

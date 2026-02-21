@@ -94,6 +94,11 @@ export default function Navbar() {
       icon: <UserPlus size={20} />,
     },
     {
+      name: "Все туры",
+      href: "/tours",
+      icon: <BookOpen size={20} />,
+    },
+    {
       name: "Большой тур по Китаю",
       href: "/schedule",
       icon: <Calendar size={20} />,
@@ -107,6 +112,12 @@ export default function Navbar() {
         { name: "Концепты", href: "/#tours" },
         { name: "Проживание", href: "/#accommodation" },
         { name: "Контакты", href: "/#contact" },
+      ],
+      "/tours": [
+        { name: "Шанхай", href: "/tours/shanghai" },
+        { name: "Восточная Венеция", href: "/tours/eastern-venice" },
+        { name: "Ханчжоу", href: "/tours/hangzhou" },
+        { name: "На главную", href: "/" },
       ],
       "/schedule": [
         { name: "День 1: Прибытие", href: "/schedule#day-1" },

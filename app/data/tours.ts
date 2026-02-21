@@ -1,3 +1,10 @@
+export interface Guide {
+  name: string;
+  role: string;
+  avatar?: string; // path to avatar image
+  telegram?: string;
+}
+
 export interface LocationInfo {
   name: string;
   description: string;
@@ -14,6 +21,7 @@ export interface Tour {
   fullDescription?: string;
   video?: string;
   locations: LocationInfo[];
+  guide: Guide;
 }
 
 export const tours: Tour[] = [
@@ -36,6 +44,11 @@ export const tours: Tour[] = [
         coordinates: { x: 67, y: 58 },
       },
     ],
+    guide: {
+      name: "Лев Логачев",
+      role: "Авторский гид · Шанхай",
+      telegram: "https://t.me/Lihach57",
+    },
   },
   {
     id: 2,
@@ -56,6 +69,11 @@ export const tours: Tour[] = [
         coordinates: { x: 83, y: 55 },
       },
     ],
+    guide: {
+      name: "Лев Логачев",
+      role: "Авторский гид · Шанхай",
+      telegram: "https://t.me/Lihach57",
+    },
   },
   {
     id: 3,
@@ -75,5 +93,10 @@ export const tours: Tour[] = [
         coordinates: { x: 82, y: 60 },
       },
     ],
+    guide: {
+      name: "Лев Логачев",
+      role: "Авторский гид · Шанхай",
+      telegram: "https://t.me/Lihach57",
+    },
   },
 ];
