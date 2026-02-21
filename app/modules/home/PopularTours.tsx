@@ -1,6 +1,7 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import TourCard from "./tours/TourCard";
 import { tours } from "@/app/data/tours";
+import Link from "next/link";
 
 export default function PopularTours() {
   return (
@@ -28,13 +29,15 @@ export default function PopularTours() {
               направление.
             </p>
           </div>
-          <button className="hidden md:flex items-center gap-2 text-light-surface/80 hover:text-light-surface font-semibold transition-all group px-6 py-3 rounded-full border border-light-surface/10 hover:border-accent-cta/50 hover:bg-light-surface/5">
-            <span>Полная программа</span>
-            <ArrowUpRight
-              size={20}
-              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-            />
-          </button>
+          <Link href="/tours">
+            <div className="hidden md:flex items-center gap-2 text-light-surface/80 hover:text-light-surface font-semibold transition-all group px-6 py-3 rounded-full border border-light-surface/10 hover:border-accent-cta/50 hover:bg-light-surface/5 cursor-pointer">
+              <span>Полная программа</span>
+              <ArrowUpRight
+                size={20}
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                />
+            </div>
+          </Link>
         </div>
       </div>
 
