@@ -1,8 +1,8 @@
 import Navbar from "@/app/_shared/layout/Navbar";
 import Footer from "@/app/_shared/layout/Footer";
 import SmoothScroll from "@/app/_shared/common/SmoothScroll";
-import ToursHero from "@/app/_modules/tours-list/ToursHero";
-import TourListCard from "@/app/_modules/tours-list/TourListCard";
+import ToursHero from "@/app/modules/tours-list/ToursHero";
+import TourListCard from "@/app/modules/tours-list/TourListCard";
 import { tours } from "@/app/data/tours";
 
 export const metadata = {
@@ -35,7 +35,9 @@ export default function ToursPage() {
 
           {/* Bottom CTA */}
           <div className="mt-24 text-center p-12 rounded-3xl border border-white/10 bg-white/3">
-            <p className="text-white/50 text-lg mb-2">Не нашли подходящий тур?</p>
+            <p className="text-white/50 text-lg mb-2">
+              Не нашли подходящий тур?
+            </p>
             <p className="text-white font-bold text-2xl mb-8">
               Напишите нам — составим маршрут под вас
             </p>
