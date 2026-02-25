@@ -160,15 +160,15 @@ export default function Accommodation() {
       title: "Radisson Blu New World",
       location: "Центр Шанхая",
       description:
-        "Пятизвездочный отель с панорамным видом на город и легендарной вращающейся крышей.",
-      amenities: ["5 звезд", "Центр города", "Панорама"],
+        "Пятизвёздочный отель с панорамным видом и легендарной вращающейся крышей. Хорошая база для тех, кто хочет жить в центре и быстро добираться до любой точки маршрута.",
+      amenities: ["5 звёзд", "Центр города", "Панорама"],
       gallery: ["/hotel/1.png", "/hotel/2.png", "/hotel/3.png", "/hotel/4.png"],
     },
     {
       title: "Mountain Resort Zhangjiajie",
       location: "Горы Аватара",
       description:
-        "Эко-отель с потрясающим видом на песчаниковые столбы прямо из окна вашего номера.",
+        "Эко-отель в Чжанцзяцзе — если решите остаться ночевать и встретить закат над песчаниковыми столбами. Потрясающий вид прямо из окна.",
       amenities: ["Nature", "Eco-luxury", "Quiet"],
       gallery: ["/hotel/5.png", "/hotel/6.png", "/hotel/7.png", "/hotel/8.png"],
     },
@@ -202,17 +202,18 @@ export default function Accommodation() {
             </div>
 
             <h2 className="text-5xl md:text-[5.5rem] font-bold text-dark-section mb-0 leading-[0.9] tracking-tight">
-              Где мы <br /> будем
-              <span className="text-accent-cta italic font-serif pr-4">
-                {} жить?
+              Где
+              <span className="text-accent-cta italic font-serif px-4">
+                {} остановиться
               </span>
+              <br /> в Китае?
             </h2>
           </div>
 
           <div className="lg:max-w-sm text-left lg:text-right lg:pb-4">
             <p className="text-lg text-dark-section/60 leading-relaxed font-light">
-              Мы отобрали отели, которые сами по себе являются частью
-              путешествия. Комфорт высшего класса в самых знаковых локациях.
+              Если нужна помощь с жильём — поможем подобрать. Вот отели,
+              с которыми мы работаем и которые рекомендуем лично.
             </p>
           </div>
         </div>
@@ -234,14 +235,14 @@ export default function Accommodation() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
             <div>
               <p className="text-xs font-black text-accent-cta uppercase tracking-[0.3em] mb-4">
-                Условия
+                Уже в Шанхае?
               </p>
               <h4 className="text-xl font-bold text-dark-section mb-2">
-                Двухместное проживание
+                Живёте в Китае?
               </h4>
               <p className="text-sm text-dark-section/50 font-light">
-                Размещение по 2 человека в номере. Мы подберем вам отличного
-                соседа!
+                Многие наши гости уже живут в Китае — присоединяйтесь
+                к экскурсии прямо из вашей точки.
               </p>
             </div>
             <div>
@@ -249,20 +250,20 @@ export default function Accommodation() {
                 Премиум
               </p>
               <h4 className="text-xl font-bold text-dark-section mb-2">
-                Высокий сервис
+                Только проверенные
               </h4>
               <p className="text-sm text-dark-section/50 font-light">
-                Только проверенные отели с высокими рейтингами и лучшим
-                расположением.
+                Если помощь с жильём нужна — подберём вариант
+                с высоким рейтингом и лучшим расположением.
               </p>
             </div>
             <div className="flex flex-col justify-end">
               <div className="bg-dark-section text-white p-6 rounded-3xl flex items-center justify-between group cursor-pointer hover:bg-accent-cta transition-colors">
                 <div>
                   <p className="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-1">
-                    Нужeн Single?
+                    Запросите стоимость
                   </p>
-                  <p className="font-bold">Доплата за отдельный номер</p>
+                  <p className="font-bold">Поможем с бронированием</p>
                 </div>
                 <Star className="group-hover:rotate-45 transition-transform" />
               </div>
