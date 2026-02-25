@@ -1,8 +1,5 @@
-// Server Component — no 'use client' at route level.
-// All interactivity lives inside the imported client subtrees.
-
-import AdminHeader from "./components/AdminHeader";
-import TourForm from "./components/TourForm";
+import AdminHeader from "@/app/modules/admin/AdminHeader";
+import TourForm from "@/app/modules/admin/TourForm";
 
 export const metadata = {
   title: "Admin — Tsunami Travel",

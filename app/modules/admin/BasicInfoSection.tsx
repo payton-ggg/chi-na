@@ -1,11 +1,11 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
-import type { TourFormData } from "../../lib/types";
-import { inputClass, textareaClass } from "../../lib/constants";
-import SectionCard from "../ui/SectionCard";
-import FormField from "../ui/FormField";
 import { FileText } from "lucide-react";
+import type { TourFormData } from "./constants/types";
+import { inputClass, textareaClass } from "./constants/constants";
+import SectionCard from "@/app/shared/ui/SectionCard";
+import FormField from "@/app/shared/ui/FormField";
 
 export default function BasicInfoSection() {
   const {
@@ -18,7 +18,6 @@ export default function BasicInfoSection() {
   const titleValue = watch("title");
   const slugValue = watch("slug");
 
-  /** Auto-generate slug from title if the slug hasn't been manually edited. */
   const autoSlug = (raw: string) =>
     raw
       .toLowerCase()
@@ -28,7 +27,7 @@ export default function BasicInfoSection() {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = e.target.value;
     setValue("title", next, { shouldValidate: true });
-    // Only auto-update slug while it still matches the previous auto-value
+    // Only mirror slug while it still matches the last auto-generated value
     if (!slugValue || slugValue === autoSlug(titleValue)) {
       setValue("slug", autoSlug(next));
     }
@@ -68,7 +67,7 @@ export default function BasicInfoSection() {
       >
         <textarea
           className={textareaClass}
-          placeholder="Запретный город, Великая стена и утиная грудка по-пекински. Культурная столица Китая за один день."
+          placeholder="Запретный город, Великая стена и утиная грудка по-пекински. Культурная столица за один день."
           rows={2}
           {...register("description", { required: "Обязательное поле" })}
         />
@@ -81,7 +80,7 @@ export default function BasicInfoSection() {
       >
         <textarea
           className={textareaClass}
-          placeholder="Развёрнутое описание — что увидит участник, история места, что сделает этот тур особенным..."
+          placeholder="Развёрнутое описание — что увидит участник, история места, что сделает этот концепт особенным..."
           rows={4}
           {...register("fullDescription")}
         />

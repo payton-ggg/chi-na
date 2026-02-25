@@ -1,6 +1,6 @@
 import type { TourFormData } from "./types";
 
-/** Generates a TypeScript object literal ready to paste into tours.ts */
+/** Generates a ready-to-paste TypeScript object literal for tours.ts */
 export function generateTsCode(data: TourFormData, nextId: number): string {
   const slug =
     data.slug ||

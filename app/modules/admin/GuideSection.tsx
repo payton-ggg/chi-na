@@ -1,11 +1,9 @@
-"use client";
-
 import { useFormContext } from "react-hook-form";
 import { User } from "lucide-react";
-import type { TourFormData } from "../../lib/types";
-import { inputClass } from "../../lib/constants";
-import SectionCard from "../ui/SectionCard";
-import FormField from "../ui/FormField";
+import type { TourFormData } from "./constants/types";
+import { inputClass } from "./constants/constants";
+import SectionCard from "@/app/shared/ui/SectionCard";
+import FormField from "@/app/shared/ui/FormField";
 
 export default function GuideSection() {
   const {

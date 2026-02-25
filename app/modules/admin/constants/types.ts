@@ -12,7 +12,7 @@ export interface TourFormData {
   fullDescription: string;
   image: string;
   video: string;
-  /** useFieldArray requires objects, not primitives */
+  /** useFieldArray requires objects, not bare primitives */
   highlights: { value: string }[];
   locations: LocationDraft[];
   guideName: string;

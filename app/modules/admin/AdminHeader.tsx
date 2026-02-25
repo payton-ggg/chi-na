@@ -1,4 +1,4 @@
-// Server Component — static branding + back link, no interactivity needed.
+// Server Component — static branding + back link, no state needed.
 import Link from "next/link";
 import { ArrowLeft, Sparkles } from "lucide-react";
 

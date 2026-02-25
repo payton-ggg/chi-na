@@ -2,10 +2,10 @@
 
 import { useFormContext, useFieldArray } from "react-hook-form";
 import { Plus, Trash2, MapPin } from "lucide-react";
-import type { TourFormData } from "../../lib/types";
-import { inputClass, textareaClass } from "../../lib/constants";
-import SectionCard from "../ui/SectionCard";
-import FormField from "../ui/FormField";
+import type { TourFormData } from "./constants/types";
+import { inputClass, textareaClass } from "./constants/constants";
+import SectionCard from "@/app/shared/ui/SectionCard";
+import FormField from "@/app/shared/ui/FormField";
 
 export default function LocationsSection() {
   const {
@@ -31,7 +31,6 @@ export default function LocationsSection() {
             key={field.id}
             className="p-5 rounded-2xl bg-white/5 border border-white/8 space-y-4"
           >
-            {/* Header row */}
             <div className="flex items-center justify-between">
               <span className="text-xs font-black uppercase tracking-widest text-accent-cta/70">
                 Локация {i + 1}
@@ -83,7 +82,7 @@ export default function LocationsSection() {
               </div>
             </div>
 
-            <FormField label="Описание">
+            <FormField label="Описание (тултип на карте)">
               <textarea
                 className={textareaClass}
                 placeholder="Краткое описание, которое появится в тултипе на карте..."

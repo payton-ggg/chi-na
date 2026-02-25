@@ -2,9 +2,9 @@
 
 import { useWatch, useFormContext } from "react-hook-form";
 import { Image as ImageIcon, Copy, Check } from "lucide-react";
-import type { TourFormData } from "../../lib/types";
-import { generateTsCode } from "../../lib/codeGenerator";
-import { NEXT_TOUR_ID } from "../../lib/constants";
+import type { TourFormData } from "./constants/types";
+import { generateTsCode } from "./constants/codeGenerator";
+import { NEXT_TOUR_ID } from "./constants/constants";
 
 interface PreviewPanelProps {
   copied: boolean;
@@ -14,9 +14,8 @@ interface PreviewPanelProps {
 export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
   const { control } = useFormContext<TourFormData>();
 
-  // Reactively watch all form values for live preview
+  // Reactively subscribe to all values for live preview
   const data = useWatch({ control }) as TourFormData;
-
   const highlights = data.highlights?.map((h) => h.value).filter(Boolean) ?? [];
 
   return (
@@ -26,12 +25,11 @@ export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
           Предпросмотр
         </p>
 
-        {/* Tour Card Preview */}
+        {/* Card preview */}
         <div className="rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-2xl">
-          {/* Image */}
           <div className="aspect-video relative bg-white/5 overflow-hidden">
             {data.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
+              /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={data.image}
                 alt=""
@@ -55,7 +53,6 @@ export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
             </div>
           </div>
 
-          {/* Body */}
           <div className="p-6 space-y-4">
             <p className="text-white/60 text-sm leading-relaxed">
               {data.description || (
@@ -87,14 +84,14 @@ export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
                   {data.guideName || "Имя гида"}
                 </p>
                 <p className="text-white/30 text-xs">
-                  {data.guideRole || "Роль гида"}
+                  {data.guideRole || "Роль"}
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Generated Code */}
+        {/* Generated code */}
         <div className="rounded-3xl border border-white/8 overflow-hidden">
           <div className="flex items-center gap-3 px-5 py-3 bg-white/5 border-b border-white/8">
             <div className="flex gap-1.5">

@@ -4,17 +4,17 @@ import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { Eye, EyeOff, Copy, Check } from "lucide-react";
 
-import type { TourFormData } from "../lib/types";
-import { defaultValues } from "../lib/types";
-import { generateTsCode } from "../lib/codeGenerator";
-import { NEXT_TOUR_ID } from "../lib/constants";
+import type { TourFormData } from "./constants/types";
+import { defaultValues } from "./constants/types";
+import { generateTsCode } from "./constants/codeGenerator";
+import { NEXT_TOUR_ID } from "./constants/constants";
 
-import BasicInfoSection from "./sections/BasicInfoSection";
-import MediaSection from "./sections/MediaSection";
-import HighlightsSection from "./sections/HighlightsSection";
-import LocationsSection from "./sections/LocationsSection";
-import GuideSection from "./sections/GuideSection";
-import PreviewPanel from "./preview/PreviewPanel";
+import BasicInfoSection from "./BasicInfoSection";
+import MediaSection from "./MediaSection";
+import HighlightsSection from "./HighlightsSection";
+import LocationsSection from "./LocationsSection";
+import GuideSection from "./GuideSection";
+import PreviewPanel from "./PreviewPanel";
 
 export default function TourForm() {
   const [preview, setPreview] = useState(false);
@@ -42,9 +42,9 @@ export default function TourForm() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={(e) => e.preventDefault()} className="pb-24" noValidate>
-        {/* Action bar */}
-        <div className="flex items-center justify-between mb-10">
+      <form onSubmit={(e) => e.preventDefault()} noValidate className="pb-24">
+        {/* Page header + action bar */}
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 mb-10">
           <div>
             <p className="text-accent-cta text-xs font-black uppercase tracking-[0.4em] mb-2">
               Панель управления
@@ -92,7 +92,7 @@ export default function TourForm() {
           </div>
         </div>
 
-        {/* Layout */}
+        {/* Main layout */}
         <div
           className={`grid gap-10 ${
             preview
@@ -100,7 +100,7 @@ export default function TourForm() {
               : "grid-cols-1 max-w-3xl mx-auto"
           }`}
         >
-          {/* Form sections column */}
+          {/* Sections column */}
           <div className={`space-y-6 ${preview ? "lg:col-span-7" : ""}`}>
             <BasicInfoSection />
             <MediaSection />
@@ -109,7 +109,7 @@ export default function TourForm() {
             <GuideSection />
           </div>
 
-          {/* Sticky preview column */}
+          {/* Preview column */}
           {preview && <PreviewPanel copied={copied} onCopy={handleCopy} />}
         </div>
       </form>

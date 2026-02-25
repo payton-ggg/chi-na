@@ -1,5 +1,4 @@
-// Server Component — no 'use client' needed (pure presenter)
-
+// Server Component — pure presenter, no interactivity.
 export default function FormField({
   label,
   hint,
@@ -24,8 +23,7 @@ export default function FormField({
       {children}
       {error && (
         <p className="text-xs text-red-400/80 pt-0.5 flex items-center gap-1">
-          <span className="text-red-400">✕</span>
-          {error}
+          <span className="text-red-400">✕</span> {error}
         </p>
       )}
     </div>
