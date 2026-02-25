@@ -1,6 +1,6 @@
-import Navbar from "@/app/_shared/layout/Navbar";
-import Footer from "@/app/_shared/layout/Footer";
-import SmoothScroll from "@/app/_shared/common/SmoothScroll";
+import Navbar from "@/app/shared/layout/Navbar";
+import Footer from "@/app/shared/layout/Footer";
+import SmoothScroll from "@/app/shared/common/SmoothScroll";
 import ToursHero from "@/app/modules/tours-list/ToursHero";
 import TourListCard from "@/app/modules/tours-list/TourListCard";
 import { tours } from "@/app/data/tours";

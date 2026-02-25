@@ -1,6 +1,6 @@
 import { tours } from "@/app/data/tours";
-import Navbar from "@/app/_shared/layout/Navbar";
-import Footer from "@/app/_shared/layout/Footer";
+import Navbar from "@/app/shared/layout/Navbar";
+import Footer from "@/app/shared/layout/Footer";
 import TourHero from "@/app/modules/tour-detail/TourHero";
 import TourDescription from "@/app/modules/tour-detail/TourDescription";
 import React from "react";

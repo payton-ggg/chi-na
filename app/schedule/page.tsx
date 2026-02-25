@@ -1,11 +1,9 @@
-import Navbar from "../_shared/layout/Navbar";
-import Footer from "../_shared/layout/Footer";
-import SmoothScroll from "../_shared/common/SmoothScroll";
+import Navbar from "../shared/layout/Navbar";
+import Footer from "../shared/layout/Footer";
+import SmoothScroll from "../shared/common/SmoothScroll";
 import ScheduleHero from "../modules/schedule/ScheduleHero";
-import DaySchedule, {
-  ScheduleDayData,
-} from "../modules/schedule/DaySchedule";
-import FinalCTA from "../_shared/layout/Footer";
+import DaySchedule, { ScheduleDayData } from "../modules/schedule/DaySchedule";
+import FinalCTA from "../shared/layout/Footer";
 
 const scheduleData: ScheduleDayData[] = [
   {
