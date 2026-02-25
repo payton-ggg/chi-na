@@ -56,9 +56,9 @@ export default function TourSummary() {
   const details = [
     {
       icon: <MapPin size={24} />,
-      label: "Локация",
-      value: "Аэропорт Шанхая",
-      sub: "Старт и финиш",
+      label: "Группа",
+      value: "До 5 человек",
+      sub: "Максимум внимания каждому",
       rotate: "0",
       translate: "-20px, 0",
     },
@@ -66,7 +66,7 @@ export default function TourSummary() {
       icon: <ShieldCheck size={24} />,
       label: "Формат",
       value: "Все включено",
-      sub: "Кроме перелета",
+      sub: "Кроме перелёта",
       rotate: "2deg",
       translate: "10px, -10px",
     },
@@ -123,23 +123,23 @@ export default function TourSummary() {
               </div>
 
               <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-[1.05]">
-                Шанхай <br />
+                Экспедиция, <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-accent-cta via-white to-accent-cta/40">
-                  & Горы Аватара
+                  а не тур
                 </span>
               </h2>
 
               <div className="space-y-6 text-lg md:text-xl text-white/70 leading-relaxed max-w-lg">
                 <p className="border-l-2 border-accent-cta pl-6 py-2">
-                  Мы отправляемся в путешествие, где инновации Шанхая
-                  встречаются с вечностью гор Чжанцзяцзе.
+                  Мы работаем только в мини-группах до 5 человек — чтобы каждый
+                  получил живой контакт со страной, а не вид из окна автобуса.
                 </p>
                 <p className="font-light italic">
-                  Познакомьтесь с Шанхайской Венецией, освойте каллиграфию и
-                  найдите свой дзен над облаками.
+                  Лев Логачев или другой гид ведёт каждую экспедицию: инсайдерские точки,
+                  аутентичная кухня, нулевой массовый туризм.
                 </p>
                 <p className="text-accent-cta font-bold tracking-tight">
-                  А напоследок — сказка Диснея. Будет легендарно!
+                  Китай — не для галочки. Для тех, кто хочет понять.
                 </p>
               </div>
             </div>
@@ -219,11 +219,11 @@ export default function TourSummary() {
                 <div className="relative bg-dark-section rounded-[1.9rem] p-8 flex flex-col md:flex-row items-center justify-between gap-6 group hover:cursor-pointer">
                   <div>
                     <h3 className="text-2xl font-black text-white italic tracking-tighter mb-1">
-                      ВСЕ ВКЛЮЧЕНО?
+                      ЕДЕМ ВМЕСТЕ?
                     </h3>
                     <p className="text-sm text-white/50">
-                      Да, кроме билета до Шанхая. Обо всем остальном позаботимся
-                      мы.
+                      Оставьте заявку — мы свяжемся и подберём
+                      подходящий формат.
                     </p>
                   </div>
                   <button
