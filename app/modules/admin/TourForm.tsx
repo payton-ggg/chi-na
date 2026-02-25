@@ -49,12 +49,12 @@ export default function TourForm() {
             <p className="text-accent-cta text-xs font-black uppercase tracking-[0.4em] mb-2">
               Панель управления
             </p>
-            <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-white">
+            <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-light-surface">
               Новый концепт
             </h1>
-            <p className="text-white/40 mt-2 text-sm">
+            <p className="text-light-surface/40 mt-2 text-sm">
               Заполните форму — скопируйте код и вставьте в{" "}
-              <code className="text-accent-cta/80 bg-white/5 px-1.5 py-0.5 rounded text-xs">
+              <code className="text-accent-cta/80 bg-light-surface/5 px-1.5 py-0.5 rounded text-xs">
                 app/data/tours.ts
               </code>
             </p>
@@ -66,8 +66,8 @@ export default function TourForm() {
               onClick={() => setPreview(!preview)}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl border text-sm font-semibold transition-all ${
                 preview
-                  ? "bg-white/10 border-white/20 text-white"
-                  : "border-white/10 text-white/50 hover:text-white hover:border-white/20"
+                  ? "bg-light-surface/10 border-light-surface/20 text-light-surface"
+                  : "border-light-surface/10 text-light-surface/50 hover:text-light-surface hover:border-light-surface/20"
               }`}
             >
               {preview ? <EyeOff size={15} /> : <Eye size={15} />}
@@ -82,8 +82,8 @@ export default function TourForm() {
                 isValid
                   ? copied
                     ? "bg-green-500/20 border border-green-500/40 text-green-400"
-                    : "bg-accent-cta hover:bg-accent-cta/80 text-white shadow-[0_0_20px_rgba(194,56,28,0.35)]"
-                  : "bg-white/5 border border-white/5 text-white/20 cursor-not-allowed"
+                    : "bg-accent-cta hover:bg-accent-cta/80 text-light-surface shadow-[0_0_20px_rgba(194,56,28,0.35)]"
+                  : "bg-light-surface/5 border border-light-surface/5 text-light-surface/20 cursor-not-allowed"
               }`}
             >
               {copied ? <Check size={15} /> : <Copy size={15} />}

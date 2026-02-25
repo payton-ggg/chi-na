@@ -4,7 +4,7 @@ import { ArrowLeft, Sparkles } from "lucide-react";
 
 export default function AdminHeader() {
   return (
-    <header className="sticky top-0 z-50 bg-[#0B0C10]/90 backdrop-blur-xl border-b border-white/8">
+    <header className="sticky top-0 z-50 bg-dark-section/85 backdrop-blur-xl border-b border-light-surface/8">
       <div className="container mx-auto px-6 flex items-center h-16 gap-5">
         <Link
           href="/"
