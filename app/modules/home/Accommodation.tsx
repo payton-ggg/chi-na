@@ -212,8 +212,9 @@ export default function Accommodation() {
 
           <div className="lg:max-w-sm text-left lg:text-right lg:pb-4">
             <p className="text-lg text-dark-section/60 leading-relaxed font-light">
-              Если нужна помощь с жильём — поможем подобрать. Вот отели,
-              с которыми мы работаем и которые рекомендуем лично.
+              Если нужна помощь с жильём — поможем подобрать. Вот отели, с
+              которыми мы работаем и которые рекомендуем лично. В большом туре
+              стоимость отеля включена в оплату
             </p>
           </div>
         </div>
@@ -241,8 +242,8 @@ export default function Accommodation() {
                 Живёте в Китае?
               </h4>
               <p className="text-sm text-dark-section/50 font-light">
-                Многие наши гости уже живут в Китае — присоединяйтесь
-                к экскурсии прямо из вашей точки.
+                Многие наши гости уже живут в Китае — присоединяйтесь к
+                экскурсии прямо из вашей точки.
               </p>
             </div>
             <div>
@@ -253,8 +254,8 @@ export default function Accommodation() {
                 Только проверенные
               </h4>
               <p className="text-sm text-dark-section/50 font-light">
-                Если помощь с жильём нужна — подберём вариант
-                с высоким рейтингом и лучшим расположением.
+                Если помощь с жильём нужна — подберём вариант с высоким
+                рейтингом и лучшим расположением.
               </p>
             </div>
             <div className="flex flex-col justify-end">
