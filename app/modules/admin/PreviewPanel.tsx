@@ -1,25 +1,35 @@
-"use client";
-
 import { useWatch, useFormContext } from "react-hook-form";
-import { Image as ImageIcon } from "lucide-react";
+import { Image as ImageIcon, Map } from "lucide-react";
 import type { TourFormData } from "./constants/types";
+import type { LocationInfo } from "@/app/data/tours";
+import ChinaMap from "@/app/modules/tour-detail/ChinaMap";
 
 export default function PreviewPanel() {
   const { control } = useFormContext<TourFormData>();
 
-  // Reactively subscribe to all values for live preview
+  // Reactively subscribe to all values for instant live preview
   const data = useWatch({ control }) as TourFormData;
   const highlights = data.highlights?.map((h) => h.value).filter(Boolean) ?? [];
+
+  // Convert form locations → LocationInfo[] (what ChinaMap expects)
+  const mapLocations: LocationInfo[] = (data.locations ?? [])
+    .filter((l) => l.name?.trim())
+    .map((l) => ({
+      name: l.name,
+      description: l.description ?? "",
+      coordinates: { x: l.x ?? 70, y: l.y ?? 50 },
+    }));
 
   return (
     <div className="lg:col-span-5">
       <div className="sticky top-24 space-y-6">
         <p className="text-xs font-black uppercase tracking-[0.3em] text-light-surface/30">
-          Предпросмотр карточки
+          Предпросмотр
         </p>
 
-        {/* Card preview */}
+        {/* ── Tour Card ───────────────────────────────────────── */}
         <div className="rounded-3xl overflow-hidden border border-light-surface/10 bg-light-surface/5 shadow-2xl">
+          {/* Image */}
           <div className="aspect-video relative bg-light-surface/5 overflow-hidden">
             {data.image ? (
               /* eslint-disable-next-line @next/next/no-img-element */
@@ -46,6 +56,7 @@ export default function PreviewPanel() {
             </div>
           </div>
 
+          {/* Body */}
           <div className="p-6 space-y-4">
             <p className="text-light-surface/60 text-sm leading-relaxed">
               {data.description || (
@@ -84,27 +95,23 @@ export default function PreviewPanel() {
           </div>
         </div>
 
-        {/* Locations list */}
-        {data.locations?.filter((l) => l.name).length > 0 && (
-          <div className="rounded-2xl border border-light-surface/8 p-5 space-y-3">
-            <p className="text-xs font-black uppercase tracking-widest text-light-surface/30">
-              Локации на карте
+        {/* ── Interactive Map Preview ─────────────────────────── */}
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <Map size={14} className="text-light-surface/30" />
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-light-surface/30">
+              Карта маршрута
             </p>
-            {data.locations
-              .filter((l) => l.name)
-              .map((loc, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-accent-cta shrink-0" />
-                  <span className="text-light-surface/70 text-sm">
-                    {loc.name}
-                  </span>
-                  <span className="text-light-surface/30 text-xs ml-auto">
-                    x:{loc.x} y:{loc.y}
-                  </span>
-                </div>
-              ))}
           </div>
-        )}
+
+          {mapLocations.length > 0 ? (
+            <ChinaMap locations={mapLocations} compact />
+          ) : (
+            <div className="rounded-2xl border border-dashed border-light-surface/10 p-8 flex items-center justify-center text-light-surface/20 text-sm">
+              Добавьте локацию с названием — карта появится здесь
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

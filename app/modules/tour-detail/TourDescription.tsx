@@ -53,7 +53,7 @@ export default function TourDescription({ tour }: { tour: Tour }) {
             <h3 className="text-3xl font-bold text-white mb-8">
               Ключевые точки
             </h3>
-            <ChinaMap tour={tour} />
+            <ChinaMap locations={tour.locations} />
           </div>
 
           {/* CTA Button */}
