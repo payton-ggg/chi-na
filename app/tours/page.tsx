@@ -3,7 +3,7 @@ import Footer from "@/app/shared/layout/Footer";
 import SmoothScroll from "@/app/shared/common/SmoothScroll";
 import ToursHero from "@/app/modules/tours-list/ToursHero";
 import TourListCard from "@/app/modules/tours-list/TourListCard";
-import { tours } from "@/app/data/tours";
+import { getAllTours } from "@/lib/tours-repository";
 
 export const metadata = {
   title: "Все туры | TSUNAMI TRAVEL",
@@ -11,7 +11,9 @@ export const metadata = {
     "Авторские экскурсии по Шанхаю и окрестностям с русскоязычным гидом Львом Логачевым.",
 };
 
-export default function ToursPage() {
+export default async function ToursPage() {
+  const tours = await getAllTours();
+
   return (
     <main className="min-h-screen bg-dark-section text-light-surface relative">
       <SmoothScroll />

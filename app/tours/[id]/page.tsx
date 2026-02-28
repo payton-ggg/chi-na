@@ -1,14 +1,13 @@
-import { tours } from "@/app/data/tours";
+import { getAllSlugs, getTourBySlug } from "@/lib/tours-repository";
 import Navbar from "@/app/shared/layout/Navbar";
 import Footer from "@/app/shared/layout/Footer";
 import TourHero from "@/app/modules/tour-detail/TourHero";
 import TourDescription from "@/app/modules/tour-detail/TourDescription";
 import React from "react";
 
-export function generateStaticParams() {
-  return tours.map((tour) => ({
-    slug: tour.slug,
-  }));
+export async function generateStaticParams() {
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({ id: slug }));
 }
 
 export default async function TourPage({
@@ -17,7 +16,7 @@ export default async function TourPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const tour = tours.find((t) => t.slug === id);
+  const tour = await getTourBySlug(id);
 
   if (!tour) {
     return (

@@ -2,12 +2,18 @@
 
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { Eye, EyeOff, Copy, Check } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Save,
+  CheckCircle,
+  AlertCircle,
+  Loader,
+} from "lucide-react";
 
 import type { TourFormData } from "./constants/types";
 import { defaultValues } from "./constants/types";
-import { generateTsCode } from "./constants/codeGenerator";
-import { NEXT_TOUR_ID } from "./constants/constants";
+import { saveTourAction } from "@/app/actions/toursAction";
 
 import BasicInfoSection from "./BasicInfoSection";
 import MediaSection from "./MediaSection";
@@ -16,28 +22,71 @@ import LocationsSection from "./LocationsSection";
 import GuideSection from "./GuideSection";
 import PreviewPanel from "./PreviewPanel";
 
+type SaveState =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; slug: string }
+  | { status: "error"; message: string };
+
 export default function TourForm() {
   const [preview, setPreview] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [saveState, setSaveState] = useState<SaveState>({ status: "idle" });
 
   const methods = useForm<TourFormData>({
     defaultValues,
     mode: "onChange",
   });
 
-  const { watch } = methods;
+  const {
+    watch,
+    reset,
+    formState: { isValid: rhfValid },
+  } = methods;
   const values = watch();
 
-  const isValid = !!(
+  const canSave = !!(
     values.title?.trim() &&
     values.description?.trim() &&
     values.image?.trim()
   );
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(generateTsCode(values, NEXT_TOUR_ID));
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const handleSave = async () => {
+    if (!canSave) return;
+    setSaveState({ status: "loading" });
+
+    const result = await saveTourAction({
+      slug:
+        values.slug ||
+        values.title
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9-]/g, ""),
+      title: values.title,
+      description: values.description,
+      fullDescription: values.fullDescription || undefined,
+      image: values.image,
+      video: values.video || undefined,
+      highlights: values.highlights.map((h) => h.value).filter(Boolean),
+      locations: values.locations
+        .filter((l) => l.name.trim())
+        .map((l) => ({
+          name: l.name,
+          description: l.description,
+          coordinates: { x: l.x, y: l.y },
+        })),
+      guide: {
+        name: values.guideName,
+        role: values.guideRole,
+        telegram: values.guideTelegram,
+      },
+    });
+
+    if (result.success) {
+      setSaveState({ status: "success", slug: result.slug! });
+      reset(defaultValues); // clear form for next tour
+    } else {
+      setSaveState({ status: "error", message: result.error! });
+    }
   };
 
   return (
@@ -53,14 +102,12 @@ export default function TourForm() {
               Новый концепт
             </h1>
             <p className="text-light-surface/40 mt-2 text-sm">
-              Заполните форму — скопируйте код и вставьте в{" "}
-              <code className="text-accent-cta/80 bg-light-surface/5 px-1.5 py-0.5 rounded text-xs">
-                app/data/tours.ts
-              </code>
+              Заполните форму и сохраните — концепт мгновенно появится на сайте
             </p>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
+            {/* Preview toggle */}
             <button
               type="button"
               onClick={() => setPreview(!preview)}
@@ -74,23 +121,77 @@ export default function TourForm() {
               {preview ? "Скрыть" : "Превью"}
             </button>
 
+            {/* Save button */}
             <button
               type="button"
-              onClick={handleCopy}
-              disabled={!isValid}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
-                isValid
-                  ? copied
-                    ? "bg-green-500/20 border border-green-500/40 text-green-400"
-                    : "bg-accent-cta hover:bg-accent-cta/80 text-light-surface shadow-[0_0_20px_rgba(194,56,28,0.35)]"
-                  : "bg-light-surface/5 border border-light-surface/5 text-light-surface/20 cursor-not-allowed"
+              onClick={handleSave}
+              disabled={!canSave || saveState.status === "loading"}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                !canSave || saveState.status === "loading"
+                  ? "bg-light-surface/5 border border-light-surface/5 text-light-surface/20 cursor-not-allowed"
+                  : saveState.status === "success"
+                  ? "bg-green-500/20 border border-green-500/40 text-green-400"
+                  : saveState.status === "error"
+                  ? "bg-red-500/20 border border-red-500/40 text-red-400"
+                  : "bg-accent-cta hover:bg-accent-cta/80 text-light-surface shadow-[0_0_20px_rgba(194,56,28,0.35)]"
               }`}
             >
-              {copied ? <Check size={15} /> : <Copy size={15} />}
-              {copied ? "Скопировано!" : "Копировать код"}
+              {saveState.status === "loading" ? (
+                <Loader size={15} className="animate-spin" />
+              ) : saveState.status === "success" ? (
+                <CheckCircle size={15} />
+              ) : saveState.status === "error" ? (
+                <AlertCircle size={15} />
+              ) : (
+                <Save size={15} />
+              )}
+              {saveState.status === "loading"
+                ? "Сохранение..."
+                : saveState.status === "success"
+                ? "Сохранено!"
+                : saveState.status === "error"
+                ? "Ошибка"
+                : "Сохранить в БД"}
             </button>
           </div>
         </div>
+
+        {/* Status banner */}
+        {saveState.status === "success" && (
+          <div className="mb-8 p-4 rounded-2xl bg-green-500/10 border border-green-500/30 flex items-start gap-3">
+            <CheckCircle size={18} className="text-green-400 mt-0.5 shrink-0" />
+            <div>
+              <p className="text-green-400 font-semibold text-sm">
+                Концепт успешно добавлен!
+              </p>
+              <p className="text-green-400/60 text-xs mt-1">
+                Доступен по адресу{" "}
+                <a
+                  href={`/tours/${saveState.slug}`}
+                  className="underline hover:text-green-300"
+                  target="_blank"
+                >
+                  /tours/{saveState.slug}
+                </a>{" "}
+                · Форма очищена для нового концепта
+              </p>
+            </div>
+          </div>
+        )}
+
+        {saveState.status === "error" && (
+          <div className="mb-8 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-start gap-3">
+            <AlertCircle size={18} className="text-red-400 mt-0.5 shrink-0" />
+            <div>
+              <p className="text-red-400 font-semibold text-sm">
+                Не удалось сохранить
+              </p>
+              <p className="text-red-400/60 text-xs mt-1">
+                {saveState.message}
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Main layout */}
         <div
@@ -110,7 +211,7 @@ export default function TourForm() {
           </div>
 
           {/* Preview column */}
-          {preview && <PreviewPanel copied={copied} onCopy={handleCopy} />}
+          {preview && <PreviewPanel />}
         </div>
       </form>
     </FormProvider>

@@ -1,17 +1,10 @@
 "use client";
 
 import { useWatch, useFormContext } from "react-hook-form";
-import { Image as ImageIcon, Copy, Check } from "lucide-react";
+import { Image as ImageIcon } from "lucide-react";
 import type { TourFormData } from "./constants/types";
-import { generateTsCode } from "./constants/codeGenerator";
-import { NEXT_TOUR_ID } from "./constants/constants";
 
-interface PreviewPanelProps {
-  copied: boolean;
-  onCopy: () => void;
-}
-
-export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
+export default function PreviewPanel() {
   const { control } = useFormContext<TourFormData>();
 
   // Reactively subscribe to all values for live preview
@@ -21,13 +14,13 @@ export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
   return (
     <div className="lg:col-span-5">
       <div className="sticky top-24 space-y-6">
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-white/30">
-          Предпросмотр
+        <p className="text-xs font-black uppercase tracking-[0.3em] text-light-surface/30">
+          Предпросмотр карточки
         </p>
 
         {/* Card preview */}
-        <div className="rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-2xl">
-          <div className="aspect-video relative bg-white/5 overflow-hidden">
+        <div className="rounded-3xl overflow-hidden border border-light-surface/10 bg-light-surface/5 shadow-2xl">
+          <div className="aspect-video relative bg-light-surface/5 overflow-hidden">
             {data.image ? (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
@@ -37,15 +30,15 @@ export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
                 onError={(e) => (e.currentTarget.style.opacity = "0")}
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-white/10">
+              <div className="absolute inset-0 flex items-center justify-center text-light-surface/10">
                 <ImageIcon size={48} />
               </div>
             )}
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
             <div className="absolute bottom-5 left-5">
-              <h2 className="text-3xl font-black text-white tracking-tight">
+              <h2 className="text-3xl font-black text-light-surface tracking-tight">
                 {data.title || (
-                  <span className="text-white/20 font-normal italic">
+                  <span className="text-light-surface/20 font-normal italic">
                     Название...
                   </span>
                 )}
@@ -54,9 +47,9 @@ export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
           </div>
 
           <div className="p-6 space-y-4">
-            <p className="text-white/60 text-sm leading-relaxed">
+            <p className="text-light-surface/60 text-sm leading-relaxed">
               {data.description || (
-                <span className="italic text-white/20">
+                <span className="italic text-light-surface/20">
                   Короткое описание...
                 </span>
               )}
@@ -75,15 +68,15 @@ export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
               </div>
             )}
 
-            <div className="pt-4 border-t border-white/8 flex items-center gap-3">
+            <div className="pt-4 border-t border-light-surface/8 flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-accent-cta/20 flex items-center justify-center text-accent-cta text-xs font-black">
                 {data.guideName?.charAt(0) || "Г"}
               </div>
               <div>
-                <p className="text-white text-sm font-semibold">
+                <p className="text-light-surface text-sm font-semibold">
                   {data.guideName || "Имя гида"}
                 </p>
-                <p className="text-white/30 text-xs">
+                <p className="text-light-surface/30 text-xs">
                   {data.guideRole || "Роль"}
                 </p>
               </div>
@@ -91,34 +84,27 @@ export default function PreviewPanel({ copied, onCopy }: PreviewPanelProps) {
           </div>
         </div>
 
-        {/* Generated code */}
-        <div className="rounded-3xl border border-white/8 overflow-hidden">
-          <div className="flex items-center gap-3 px-5 py-3 bg-white/5 border-b border-white/8">
-            <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-red-500/50" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-              <div className="w-3 h-3 rounded-full bg-green-500/50" />
-            </div>
-            <span className="text-white/30 text-xs font-mono flex-1">
-              tours.ts
-            </span>
-            <button
-              type="button"
-              onClick={onCopy}
-              className="text-xs text-white/30 hover:text-accent-cta flex items-center gap-1 transition-colors"
-            >
-              {copied ? (
-                <Check size={11} className="text-green-400" />
-              ) : (
-                <Copy size={11} />
-              )}
-              {copied ? "Скопировано" : "Копировать"}
-            </button>
+        {/* Locations list */}
+        {data.locations?.filter((l) => l.name).length > 0 && (
+          <div className="rounded-2xl border border-light-surface/8 p-5 space-y-3">
+            <p className="text-xs font-black uppercase tracking-widest text-light-surface/30">
+              Локации на карте
+            </p>
+            {data.locations
+              .filter((l) => l.name)
+              .map((loc, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-accent-cta shrink-0" />
+                  <span className="text-light-surface/70 text-sm">
+                    {loc.name}
+                  </span>
+                  <span className="text-light-surface/30 text-xs ml-auto">
+                    x:{loc.x} y:{loc.y}
+                  </span>
+                </div>
+              ))}
           </div>
-          <pre className="p-5 text-xs text-green-400/70 font-mono overflow-x-auto leading-relaxed whitespace-pre-wrap bg-[#0a0c0f] max-h-72 overflow-y-auto">
-            {generateTsCode(data, NEXT_TOUR_ID)}
-          </pre>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import TourCard from "./tours/TourCard";
-import { tours } from "@/app/data/tours";
 import Link from "next/link";
+import { getAllTours } from "@/lib/tours-repository";
 
-export default function PopularTours() {
+export default async function PopularTours() {
+  const tours = await getAllTours();
+
   return (
     <section id="tours" className="relative bg-dark-section overflow-hidden">
       <div className="container mx-auto px-6 pt-32 pb-12 relative z-20">
@@ -33,7 +35,7 @@ export default function PopularTours() {
               <ArrowUpRight
                 size={20}
                 className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                />
+              />
             </div>
           </Link>
         </div>
@@ -46,7 +48,6 @@ export default function PopularTours() {
         ))}
       </div>
 
-      {/* Add spacing at bottom */}
       <div className="h-32" />
     </section>
   );
