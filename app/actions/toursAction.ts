@@ -15,12 +15,9 @@ export async function saveTourAction(
   input: CreateTourInput
 ): Promise<SaveTourResult> {
   try {
-    // Ensure table exists (idempotent)
     await createToursTable();
 
     const tour = await createTour(input);
-
-    // Revalidate pages that show tours
     revalidatePath("/");
     revalidatePath("/tours");
     revalidatePath(`/tours/${tour.slug}`);
@@ -29,7 +26,6 @@ export async function saveTourAction(
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
 
-    // Friendly duplicate-slug message
     if (message.includes("UNIQUE constraint")) {
       return {
         success: false,

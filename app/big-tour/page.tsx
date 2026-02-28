@@ -1,8 +1,8 @@
 import Navbar from "../shared/layout/Navbar";
 import Footer from "../shared/layout/Footer";
 import SmoothScroll from "../shared/common/SmoothScroll";
-import ScheduleHero from "../modules/schedule/ScheduleHero";
-import DaySchedule, { ScheduleDayData } from "../modules/schedule/DaySchedule";
+import ScheduleHero from "../modules/big-tour/ScheduleHero";
+import DaySchedule, { ScheduleDayData } from "../modules/big-tour/DaySchedule";
 import FinalCTA from "../shared/layout/Footer";
 
 const scheduleData: ScheduleDayData[] = [
@@ -105,7 +105,6 @@ export default function SchedulePage() {
       <SmoothScroll />
       <Navbar />
 
-      {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent-cta/10 rounded-full blur-[150px] opacity-20" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[120px] opacity-10" />
@@ -115,7 +114,6 @@ export default function SchedulePage() {
         <ScheduleHero />
 
         <div className="container mx-auto px-6 max-w-6xl pb-32">
-          {/* Intro Text */}
           <div className="mb-24 text-center max-w-3xl mx-auto">
             <p className="text-xl md:text-2xl text-white/70 font-light leading-relaxed">
               Мы продумали каждую минуту, чтобы не было «пустых» переездов.

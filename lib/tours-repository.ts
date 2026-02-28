@@ -1,13 +1,5 @@
-/**
- * tours-repository.ts
- * All DB operations for the `tours` table.
- * JSON columns: highlights (string[]), locations (LocationInfo[]), guide (Guide)
- */
-
 import { db } from "@/lib/db";
 import type { Guide, LocationInfo, Tour } from "@/app/data/tours";
-
-// ─── Row ↔ Domain mapping ───────────────────────────────────────────────────
 
 interface TourRow {
   id: number;
@@ -17,9 +9,9 @@ interface TourRow {
   full_description: string | null;
   image: string;
   video: string | null;
-  highlights: string; // JSON
-  locations: string; // JSON
-  guide: string; // JSON
+  highlights: string;
+  locations: string;
+  guide: string;
 }
 
 function rowToTour(row: TourRow): Tour {
@@ -36,8 +28,6 @@ function rowToTour(row: TourRow): Tour {
     guide: JSON.parse(row.guide) as Guide,
   };
 }
-
-// ─── Schema ─────────────────────────────────────────────────────────────────
 
 export async function createToursTable() {
   await db.execute(`
