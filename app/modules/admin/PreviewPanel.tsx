@@ -1,4 +1,7 @@
+"use client";
+
 import { useWatch, useFormContext } from "react-hook-form";
+import { useState } from "react";
 import { Image as ImageIcon, Map } from "lucide-react";
 import type { TourFormData } from "./constants/types";
 import type { LocationInfo } from "@/app/data/tours";
@@ -6,6 +9,7 @@ import ChinaMap from "@/app/modules/tour-detail/ChinaMap";
 
 export default function PreviewPanel() {
   const { control } = useFormContext<TourFormData>();
+  const [imageError, setImageError] = useState(false);
 
   // Reactively subscribe to all values for instant live preview
   const data = useWatch({ control }) as TourFormData;
@@ -31,19 +35,31 @@ export default function PreviewPanel() {
         <div className="rounded-3xl overflow-hidden border border-light-surface/10 bg-light-surface/5 shadow-2xl">
           {/* Image */}
           <div className="aspect-video relative bg-light-surface/5 overflow-hidden">
-            {data.image ? (
+            {/* Placeholder — shown when no image or image fails to load */}
+            {(!data.image || imageError) && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-light-surface/10">
+                <ImageIcon size={40} />
+                {imageError && (
+                  <span className="text-xs text-red-400/40">
+                    Не удалось загрузить
+                  </span>
+                )}
+              </div>
+            )}
+
+            {/* Image — key forces remount when src changes, clearing the error state */}
+            {data.image && (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
+                key={data.image}
                 src={data.image}
                 alt=""
                 className="w-full h-full object-cover"
-                onError={(e) => (e.currentTarget.style.opacity = "0")}
+                onLoad={() => setImageError(false)}
+                onError={() => setImageError(true)}
               />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-light-surface/10">
-                <ImageIcon size={48} />
-              </div>
             )}
+
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
             <div className="absolute bottom-5 left-5">
               <h2 className="text-3xl font-black text-light-surface tracking-tight">
