@@ -1,5 +1,5 @@
 import AdminHeader from "@/app/modules/admin/AdminHeader";
-import TourForm from "@/app/modules/admin/TourForm";
+import TourForm from "@/app/modules/admin/tour-form/TourForm";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 

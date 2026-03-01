@@ -3,7 +3,7 @@
 import { useWatch, useFormContext } from "react-hook-form";
 import { useState } from "react";
 import { Image as ImageIcon, Map } from "lucide-react";
-import type { TourFormData } from "./constants/types";
+import type { TourFormData } from "../constants/types";
 import type { LocationInfo } from "@/app/data/tours";
 import ChinaMap from "@/app/modules/tour-detail/ChinaMap";
 

@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { FileText } from "lucide-react";
-import type { TourFormData } from "./constants/types";
-import { inputClass, textareaClass } from "./constants/constants";
+import type { TourFormData } from "../constants/types";
+import { inputClass, textareaClass } from "../constants/constants";
 import SectionCard from "@/app/shared/ui/SectionCard";
 import FormField from "@/app/shared/ui/FormField";
 

@@ -1,5 +1,5 @@
 import AdminHeader from "@/app/modules/admin/AdminHeader";
-import AdminToursList from "@/app/modules/admin/AdminToursList";
+import AdminToursList from "@/app/modules/admin/tours-list/AdminToursList";
 import { getAllTours } from "@/lib/tours-repository";
 import { Sparkles } from "lucide-react";
 

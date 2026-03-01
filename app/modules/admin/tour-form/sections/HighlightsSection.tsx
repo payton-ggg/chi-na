@@ -2,8 +2,8 @@
 
 import { useFormContext, useFieldArray } from "react-hook-form";
 import { Plus, Trash2, Tag } from "lucide-react";
-import type { TourFormData } from "./constants/types";
-import { inputClass } from "./constants/constants";
+import type { TourFormData } from "../constants/types";
+import { inputClass } from "../constants/constants";
 import SectionCard from "@/app/shared/ui/SectionCard";
 
 export default function HighlightsSection() {

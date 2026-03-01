@@ -9,8 +9,8 @@ import {
   FolderOpen,
 } from "lucide-react";
 import { useState } from "react";
-import type { TourFormData } from "./constants/types";
-import { inputClass } from "./constants/constants";
+import type { TourFormData } from "../constants/types";
+import { inputClass } from "../constants/constants";
 import SectionCard from "@/app/shared/ui/SectionCard";
 import FormField from "@/app/shared/ui/FormField";
 

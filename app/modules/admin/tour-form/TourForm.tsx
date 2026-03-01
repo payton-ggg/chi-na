@@ -15,12 +15,12 @@ import type { TourFormData } from "./constants/types";
 import { defaultValues } from "./constants/types";
 import { saveTourAction, updateTourAction } from "@/app/actions/toursAction";
 
-import BasicInfoSection from "./BasicInfoSection";
-import MediaSection from "./MediaSection";
-import HighlightsSection from "./HighlightsSection";
-import LocationsSection from "./LocationsSection";
-import GuideSection from "./GuideSection";
-import PreviewPanel from "./PreviewPanel";
+import BasicInfoSection from "./sections/BasicInfoSection";
+import MediaSection from "./sections/MediaSection";
+import HighlightsSection from "./sections/HighlightsSection";
+import LocationsSection from "./sections/LocationsSection";
+import GuideSection from "./sections/GuideSection";
+import PreviewPanel from "./sections/PreviewPanel";
 
 type SaveState =
   | { status: "idle" }
