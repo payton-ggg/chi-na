@@ -62,6 +62,15 @@ export async function getTourBySlug(slug: string): Promise<Tour | null> {
   return rowToTour(result.rows[0] as unknown as TourRow);
 }
 
+export async function getTourById(id: number): Promise<Tour | null> {
+  const result = await db.execute({
+    sql: "SELECT * FROM tours WHERE id = ? LIMIT 1",
+    args: [id],
+  });
+  if (result.rows.length === 0) return null;
+  return rowToTour(result.rows[0] as unknown as TourRow);
+}
+
 export async function getAllSlugs(): Promise<string[]> {
   const result = await db.execute("SELECT slug FROM tours");
   return (result.rows as unknown as { slug: string }[]).map((r) => r.slug);

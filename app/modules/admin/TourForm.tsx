@@ -13,7 +13,7 @@ import {
 
 import type { TourFormData } from "./constants/types";
 import { defaultValues } from "./constants/types";
-import { saveTourAction } from "@/app/actions/toursAction";
+import { saveTourAction, updateTourAction } from "@/app/actions/toursAction";
 
 import BasicInfoSection from "./BasicInfoSection";
 import MediaSection from "./MediaSection";
@@ -28,12 +28,39 @@ type SaveState =
   | { status: "success"; slug: string }
   | { status: "error"; message: string };
 
-export default function TourForm() {
+export default function TourForm({
+  initialData,
+  tourId,
+}: {
+  initialData?: any;
+  tourId?: number;
+}) {
   const [preview, setPreview] = useState(false);
   const [saveState, setSaveState] = useState<SaveState>({ status: "idle" });
 
   const methods = useForm<TourFormData>({
-    defaultValues,
+    defaultValues: initialData
+      ? {
+          slug: initialData.slug || "",
+          title: initialData.title || "",
+          description: initialData.description || "",
+          fullDescription: initialData.fullDescription || "",
+          image: initialData.image || "",
+          video: initialData.video || "",
+          highlights: (Math.random(), initialData.highlights || []).map(
+            (h: string) => ({ id: Math.random().toString(), value: h })
+          ),
+          locations: (initialData.locations || []).map((l: any) => ({
+            name: l.name || "",
+            description: l.description || "",
+            x: l.coordinates?.x || 50,
+            y: l.coordinates?.y || 50,
+          })),
+          guideName: initialData.guide?.name || "",
+          guideRole: initialData.guide?.role || "",
+          guideTelegram: initialData.guide?.telegram || "",
+        }
+      : defaultValues,
     mode: "onChange",
   });
 
@@ -54,7 +81,7 @@ export default function TourForm() {
     if (!canSave) return;
     setSaveState({ status: "loading" });
 
-    const result = await saveTourAction({
+    const inputData = {
       slug:
         values.slug ||
         values.title
@@ -79,11 +106,20 @@ export default function TourForm() {
         role: values.guideRole,
         telegram: values.guideTelegram,
       },
-    });
+    };
+
+    let result;
+    if (tourId) {
+      result = await updateTourAction(tourId, inputData);
+    } else {
+      result = await saveTourAction(inputData);
+    }
 
     if (result.success) {
       setSaveState({ status: "success", slug: result.slug! });
-      reset(defaultValues); // clear form for next tour
+      if (!tourId) {
+        reset(defaultValues); // clear form for next tour only if adding new
+      }
     } else {
       setSaveState({ status: "error", message: result.error! });
     }
@@ -99,10 +135,12 @@ export default function TourForm() {
               Панель управления
             </p>
             <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-light-surface">
-              Новый концепт
+              {tourId ? "Редактировать тур" : "Новый концепт"}
             </h1>
             <p className="text-light-surface/40 mt-2 text-sm">
-              Заполните форму и сохраните — концепт мгновенно появится на сайте
+              {tourId
+                ? "Измените данные и сохраните, чтобы обновить концепт на сайте"
+                : "Заполните форму и сохраните — концепт мгновенно появится на сайте"}
             </p>
           </div>
 
@@ -151,6 +189,8 @@ export default function TourForm() {
                 ? "Сохранено!"
                 : saveState.status === "error"
                 ? "Ошибка"
+                : tourId
+                ? "Сохранить изменения"
                 : "Сохранить в БД"}
             </button>
           </div>
@@ -162,7 +202,7 @@ export default function TourForm() {
             <CheckCircle size={18} className="text-green-400 mt-0.5 shrink-0" />
             <div>
               <p className="text-green-400 font-semibold text-sm">
-                Концепт успешно добавлен!
+                Концепт успешно {tourId ? "обновлен" : "добавлен"}!
               </p>
               <p className="text-green-400/60 text-xs mt-1">
                 Доступен по адресу{" "}
@@ -173,7 +213,9 @@ export default function TourForm() {
                 >
                   /tours/{saveState.slug}
                 </a>{" "}
-                · Форма очищена для нового концепта
+                {tourId
+                  ? "· Данные успешно обновлены"
+                  : "· Форма очищена для нового концепта"}
               </p>
             </div>
           </div>
