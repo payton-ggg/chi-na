@@ -1,5 +1,4 @@
 import Navbar from "../shared/layout/Navbar";
-import Footer from "../shared/layout/Footer";
 import SmoothScroll from "../shared/common/SmoothScroll";
 import ScheduleHero from "../modules/big-tour/ScheduleHero";
 import DaySchedule, { ScheduleDayData } from "../modules/big-tour/DaySchedule";
