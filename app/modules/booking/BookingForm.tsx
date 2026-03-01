@@ -7,15 +7,17 @@ import {
   Send,
   Mail,
   Sparkles,
-  ArrowDown,
+  MapPin, // Added icon for Tour selection
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useEmailStore } from "@/app/actions/store/email";
 import { sendBookingToTelegram } from "@/app/actions/bookingAction";
+import type { Tour } from "@/app/data/tours";
 
-export default function BookingForm() {
+export default function BookingForm({ tours }: { tours: Tour[] }) {
   const { email } = useEmailStore();
   const [formData, setFormData] = useState({
+    tour: "",
     date: "",
     people: "1",
     email: email,
@@ -90,6 +92,45 @@ export default function BookingForm() {
           <div className="w-full lg:w-2/3">
             <form onSubmit={handleSubmit} className="space-y-12">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                {/* Tour Selection */}
+                <div className="space-y-4 md:col-span-2">
+                  <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-accent-cta">
+                    <MapPin size={14} /> Какой тур или экскурсия вас интересует?
+                  </label>
+                  <select
+                    className="w-full bg-white/5 border-b border-white/10 py-4 px-2 text-xl focus:border-accent-cta outline-none transition-all text-white appearance-none cursor-pointer"
+                    onChange={(e) =>
+                      setFormData({ ...formData, tour: e.target.value })
+                    }
+                    value={formData.tour}
+                  >
+                    <option value="" disabled className="bg-dark-section">
+                      Выберите маршрут или экскурсию...
+                    </option>
+                    <option
+                      value="Индивидуальный маршрут"
+                      className="bg-dark-section font-bold text-accent-cta"
+                    >
+                      ✨ Индивидуальный маршрут (составим под вас)
+                    </option>
+                    <option
+                      value="Большой тур"
+                      className="bg-dark-section font-bold text-accent-cta"
+                    >
+                      Большой тур (Шанхай, Горы Аватара, Восточная Венеция)
+                    </option>
+                    {tours.map((tour) => (
+                      <option
+                        key={tour.id}
+                        value={tour.title}
+                        className="bg-dark-section"
+                      >
+                        {tour.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 {/* Date Selection */}
                 <div className="space-y-4">
                   <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-accent-cta">

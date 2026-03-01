@@ -2,8 +2,10 @@ import Navbar from "../shared/layout/Navbar";
 import BookingHero from "../modules/booking/BookingHero";
 import BookingForm from "../modules/booking/BookingForm";
 import SmoothScroll from "../shared/common/SmoothScroll";
+import { getAllTours } from "@/lib/tours-repository";
 
-export default function BookingPage() {
+export default async function BookingPage() {
+  const tours = await getAllTours();
   return (
     <main className="min-h-screen bg-dark-section text-light-surface relative">
       <SmoothScroll />
@@ -16,7 +18,7 @@ export default function BookingPage() {
 
       <div className="relative z-10">
         <BookingHero />
-        <BookingForm />
+        <BookingForm tours={tours} />
       </div>
     </main>
   );

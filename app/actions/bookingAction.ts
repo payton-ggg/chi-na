@@ -1,6 +1,7 @@
 "use server";
 
 export async function sendBookingToTelegram(formData: {
+  tour: string;
   date: string;
   people: string;
   email: string;
@@ -18,6 +19,7 @@ export async function sendBookingToTelegram(formData: {
   const text = `
 🆕 *Новая заявка на тур!*
 
+🗺️ *Маршрут/Тур:* ${formData.tour || "Не выбран"}
 📅 *Дата начала:* ${formData.date}
 👥 *Количество человек:* ${formData.people}
 📧 *Email:* ${formData.email}
