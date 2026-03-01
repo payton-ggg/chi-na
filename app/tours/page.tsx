@@ -8,7 +8,7 @@ import { getAllTours } from "@/lib/tours-repository";
 export const metadata = {
   title: "Все туры | TSUNAMI TRAVEL",
   description:
-    "Авторские экскурсии по Шанхаю и окрестностям с русскоязычным гидом Львом Логачевым.",
+    "Авторские экскурсии по Шанхаю и окрестностям с русскоязычными гидами.",
 };
 
 export default async function ToursPage() {
@@ -19,7 +19,6 @@ export default async function ToursPage() {
       <SmoothScroll />
       <Navbar />
 
-      {/* Background ambience */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent-cta/10 rounded-full blur-[150px] opacity-20" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[120px] opacity-10" />
@@ -35,7 +34,6 @@ export default async function ToursPage() {
             ))}
           </div>
 
-          {/* Bottom CTA */}
           <div className="mt-24 text-center p-12 rounded-3xl border border-white/10 bg-white/3">
             <p className="text-white/50 text-lg mb-2">
               Не нашли подходящий тур?

@@ -5,7 +5,7 @@ import ChinaMap from "./ChinaMap";
 
 export default function TourDescription({ tour }: { tour: Tour }) {
   return (
-    <section className="py-32 bg-dark-section relative overflow-hidden">
+    <section className="pt-32 bg-dark-section relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[100px] pointer-events-none" />
@@ -54,15 +54,6 @@ export default function TourDescription({ tour }: { tour: Tour }) {
               Ключевые точки
             </h3>
             <ChinaMap locations={tour.locations} />
-          </div>
-
-          {/* CTA Button */}
-          <div className="flex justify-center pt-12">
-            <Link href="/booking">
-              <PrimaryButton className="px-12 py-5 text-lg uppercase tracking-widest font-black hover:scale-105 transition-transform shadow-[0_10px_40px_rgba(194,56,28,0.3)] hover:shadow-[0_20px_60px_rgba(194,56,28,0.5)]">
-                Обсудить участие
-              </PrimaryButton>
-            </Link>
           </div>
         </div>
       </div>

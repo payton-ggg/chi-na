@@ -121,22 +121,21 @@ export default function TourSummary() {
                   Tsunami Travel Exclusive
                 </span>
               </div>
-
               <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-[1.05]">
-                Экспедиция, <br />
+                Живой контакт, <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-accent-cta via-white to-accent-cta/40">
-                  а не тур
+                  а не вид из окна
                 </span>
               </h2>
-
               <div className="space-y-6 text-lg md:text-xl text-white/70 leading-relaxed max-w-lg">
                 <p className="border-l-2 border-accent-cta pl-6 py-2">
                   Мы работаем только в мини-группах до 5 человек — чтобы каждый
                   получил живой контакт со страной, а не вид из окна автобуса.
                 </p>
                 <p className="font-light italic">
-                  Лев Логачев или другой гид ведёт каждую экспедицию: инсайдерские точки,
-                  аутентичная кухня, нулевой массовый туризм.
+                  Лев Логачев или другой гид ведёт каждую экспедицию:
+                  инсайдерские точки, аутентичная кухня, нулевой массовый
+                  туризм.
                 </p>
                 <p className="text-accent-cta font-bold tracking-tight">
                   Китай — не для галочки. Для тех, кто хочет понять.
@@ -222,8 +221,8 @@ export default function TourSummary() {
                       ЕДЕМ ВМЕСТЕ?
                     </h3>
                     <p className="text-sm text-white/50">
-                      Оставьте заявку — мы свяжемся и подберём
-                      подходящий формат.
+                      Оставьте заявку — мы свяжемся и подберём подходящий
+                      формат.
                     </p>
                   </div>
                   <button
