@@ -1,6 +1,7 @@
 // Server Component — static branding + back link, no state needed.
 import Link from "next/link";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Sparkles, Settings, LogOut } from "lucide-react";
+import { logoutAction } from "@/app/actions/authAction";
 
 export default function AdminHeader() {
   return (
@@ -20,9 +21,31 @@ export default function AdminHeader() {
           <div className="w-8 h-8 rounded-lg bg-accent-cta flex items-center justify-center">
             <Sparkles size={14} className="text-white" />
           </div>
-          <span className="font-black uppercase tracking-widest text-sm text-white">
+          <span className="font-black uppercase tracking-widest text-sm text-white hidden md:inline">
             TSUNAMI TRAVEL ADMIN
           </span>
+        </div>
+
+        <div className="ml-auto flex items-center gap-4">
+          <Link
+            href="/admin/settings"
+            className="text-white/40 hover:text-white transition-colors text-sm flex items-center gap-2"
+          >
+            <Settings size={16} />
+            <span className="hidden md:inline">Настройки</span>
+          </Link>
+
+          <div className="w-px h-5 bg-white/10" />
+
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="text-white/40 hover:text-red-400 transition-colors text-sm flex items-center gap-2"
+            >
+              <LogOut size={16} />
+              <span className="hidden md:inline">Выйти</span>
+            </button>
+          </form>
         </div>
       </div>
     </header>

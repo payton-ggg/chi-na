@@ -12,6 +12,7 @@
   "dependencies": {
     "@libsql/client": "^0.17.0",
     "@studio-freight/lenis": "^1.0.42",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.3.1",
     "framer-motion": "^12.29.0",
     "lucide-react": "^0.562.0",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

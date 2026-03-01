@@ -7,6 +7,8 @@ interface PrimaryButtonProps {
   className?: string;
   showArrow?: boolean;
   href?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export default function PrimaryButton({
@@ -15,6 +17,8 @@ export default function PrimaryButton({
   className = "",
   showArrow = true,
   href,
+  type = "button",
+  disabled,
 }: PrimaryButtonProps) {
   const content = (
     <>
@@ -40,7 +44,12 @@ export default function PrimaryButton({
   }
 
   return (
-    <button onClick={onClick} className={baseClasses}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={baseClasses}
+      disabled={disabled}
+    >
       {content}
     </button>
   );

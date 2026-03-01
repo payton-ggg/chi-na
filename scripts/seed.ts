@@ -89,6 +89,8 @@ const tours = [
   },
 ];
 
+import * as bcrypt from "bcryptjs";
+
 async function main() {
   console.log("📦 Creating tours table...");
   await db.execute(`
@@ -105,7 +107,33 @@ async function main() {
       guide            TEXT    NOT NULL DEFAULT '{}'
     )
   `);
-  console.log("✅ Table ready.");
+  console.log("✅ Tours table ready.");
+
+  console.log("📦 Creating settings table...");
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS settings (
+      id       INTEGER PRIMARY KEY AUTOINCREMENT CHECK (id = 1),
+      login    TEXT    NOT NULL,
+      password TEXT    NOT NULL
+    )
+  `);
+  console.log("✅ Settings table ready.");
+
+  // Check if settings table is empty, if so, insert default credentials
+  const settingsResult = await db.execute(
+    "SELECT COUNT(*) as count FROM settings"
+  );
+  if (settingsResult.rows[0].count === 0) {
+    console.log("⚙️ Inserting default admin credentials...");
+    const defaultPasswordHash = await bcrypt.hash("admin", 10);
+    await db.execute({
+      sql: "INSERT INTO settings (id, login, password) VALUES (1, ?, ?)",
+      args: ["admin", defaultPasswordHash],
+    });
+    console.log("✅ Default credentials inserted (admin/admin).");
+  } else {
+    console.log("ℹ️ Admin credentials already exist, skipping.");
+  }
 
   for (const tour of tours) {
     try {
