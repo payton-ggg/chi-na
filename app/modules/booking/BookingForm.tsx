@@ -7,7 +7,7 @@ import {
   Send,
   Mail,
   Sparkles,
-  MapPin, // Added icon for Tour selection
+  MapPin,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useEmailStore } from "@/app/actions/store/email";
