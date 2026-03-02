@@ -2,6 +2,7 @@ import { Tour } from "@/app/data/tours";
 import Link from "next/link";
 import PrimaryButton from "@/app/shared/ui/PrimaryButton";
 import ChinaMap from "./ChinaMap";
+import TourPricing from "./TourPricing";
 
 export default function TourDescription({ tour }: { tour: Tour }) {
   return (
@@ -18,6 +19,7 @@ export default function TourDescription({ tour }: { tour: Tour }) {
             <p className="text-xl text-white/70 font-light leading-relaxed">
               {tour.fullDescription || tour.description}
             </p>
+            <TourPricing defaultGuide={tour.guide} />
           </div>
           <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-video group">
             <div className="absolute inset-0 bg-accent-cta/5 group-hover:bg-accent-cta/10 transition-colors pointer-events-none z-10" />
