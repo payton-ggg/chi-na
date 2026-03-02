@@ -86,14 +86,12 @@ export default function TourSummary() {
       id="summary"
       className="py-32 md:py-48 bg-dark-section relative overflow-hidden selection:bg-accent-cta selection:text-white"
     >
-      {/* Background Decorative Text */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none opacity-[0.02] whitespace-nowrap">
         <span className="text-[30vw] font-black leading-none tracking-tighter text-white">
           CHINA DISCOVERY
         </span>
       </div>
 
-      {/* Dynamic Glows sensitive to mouse */}
       <div
         className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
         style={{
@@ -105,9 +103,7 @@ export default function TourSummary() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-20">
-          {/* LEFT: Abstract Visual Layout */}
           <div className="w-full lg:w-1/2 relative h-[500px] md:h-[600px]">
-            {/* Main Narrative Card - Floating & Unusual Shape */}
             <div
               className={`absolute top-0 left-0 w-full md:w-[110%] bg-white/5 backdrop-blur-2xl border border-white/10 p-10 md:p-14 rounded-[3rem] rounded-tr-[10rem] transition-all duration-1000 ease-out z-20 shadow-2xl ${
                 isVisible
@@ -143,7 +139,6 @@ export default function TourSummary() {
               </div>
             </div>
 
-            {/* Decorative Floating Tokens */}
             <div className="absolute -top-10 -right-10 w-32 h-32 md:w-48 md:h-48 z-10 animate-float-slow opacity-20">
               <Image
                 src="/tea.png"
@@ -157,10 +152,8 @@ export default function TourSummary() {
             </div>
           </div>
 
-          {/* RIGHT: Staggered Info Grid */}
           <div className="w-full lg:w-1/2 max-md:mt-30 flex flex-col gap-8 md:gap-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
-              {/* Vertical Decorative Bar */}
               <div className="absolute -left-6 top-1/4 bottom-1/4 w-px bg-linear-to-b from-transparent via-accent-cta/50 to-transparent hidden md:block" />
 
               {details.map((item, idx) => (
@@ -196,12 +189,9 @@ export default function TourSummary() {
                     </div>
                   </div>
 
-                  {/* Hover Accent Glow */}
                   <div className="absolute inset-0 rounded-4xl bg-accent-cta/0 group-hover:bg-accent-cta/5 transition-colors overflow-hidden -z-10" />
                 </div>
               ))}
-
-              {/* Unique Final Step / CTA Mini-Card */}
               <div
                 className={`sm:col-span-2 relative mt-4 overflow-hidden rounded-4xl p-1 
                 ${

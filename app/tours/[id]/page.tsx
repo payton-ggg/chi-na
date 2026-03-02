@@ -3,7 +3,6 @@ import Navbar from "@/app/shared/layout/Navbar";
 import Footer from "@/app/shared/layout/Footer";
 import TourHero from "@/app/modules/tour-detail/TourHero";
 import TourDescription from "@/app/modules/tour-detail/TourDescription";
-import React from "react";
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();

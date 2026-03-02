@@ -128,7 +128,6 @@ export default function TourForm({
   return (
     <FormProvider {...methods}>
       <form onSubmit={(e) => e.preventDefault()} noValidate className="pb-24">
-        {/* Page header + action bar */}
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 mb-10">
           <div>
             <p className="text-accent-cta text-xs font-black uppercase tracking-[0.4em] mb-2">
@@ -145,7 +144,6 @@ export default function TourForm({
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            {/* Preview toggle */}
             <button
               type="button"
               onClick={() => setPreview(!preview)}
@@ -159,7 +157,6 @@ export default function TourForm({
               {preview ? "Скрыть" : "Превью"}
             </button>
 
-            {/* Save button */}
             <button
               type="button"
               onClick={handleSave}
@@ -196,7 +193,6 @@ export default function TourForm({
           </div>
         </div>
 
-        {/* Status banner */}
         {saveState.status === "success" && (
           <div className="mb-8 p-4 rounded-2xl bg-green-500/10 border border-green-500/30 flex items-start gap-3">
             <CheckCircle size={18} className="text-green-400 mt-0.5 shrink-0" />
@@ -235,7 +231,6 @@ export default function TourForm({
           </div>
         )}
 
-        {/* Main layout */}
         <div
           className={`grid gap-10 ${
             preview
@@ -243,7 +238,6 @@ export default function TourForm({
               : "grid-cols-1 max-w-3xl mx-auto"
           }`}
         >
-          {/* Sections column */}
           <div className={`space-y-6 ${preview ? "lg:col-span-7" : ""}`}>
             <BasicInfoSection />
             <MediaSection />
@@ -252,7 +246,6 @@ export default function TourForm({
             <GuideSection />
           </div>
 
-          {/* Preview column */}
           {preview && <PreviewPanel />}
         </div>
       </form>

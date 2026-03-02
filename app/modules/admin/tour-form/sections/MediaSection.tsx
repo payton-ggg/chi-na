@@ -14,12 +14,9 @@ import { inputClass } from "../constants/constants";
 import SectionCard from "@/app/shared/ui/SectionCard";
 import FormField from "@/app/shared/ui/FormField";
 
-/** Converts any YouTube URL variant to an embed URL.
- *  Handles: watch?v=, youtu.be/, shorts/, and already-embed URLs. */
 function toYoutubeEmbed(raw: string): string {
   if (!raw) return raw;
 
-  // Already an embed link — return as is
   if (raw.includes("youtube.com/embed/")) return raw;
 
   // Regex to extract video ID from all known YouTube URL patterns
@@ -52,7 +49,6 @@ export default function MediaSection() {
   const imageSrc = watch("image");
   const videoSrc = watch("video");
 
-  // When user leaves the video field — auto-convert to embed URL
   const handleVideoBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const converted = toYoutubeEmbed(e.target.value.trim());
     if (converted !== e.target.value) {
@@ -64,7 +60,6 @@ export default function MediaSection() {
 
   return (
     <SectionCard title="Медиа" icon={<ImageIcon size={18} />}>
-      {/* Image */}
       <FormField
         label="Изображение"
         hint="локальный путь или внешняя ссылка"
@@ -73,7 +68,6 @@ export default function MediaSection() {
         <div className="flex gap-3 items-start">
           <div className="flex-1 space-y-2">
             <div className="relative">
-              {/* Icon: link or folder depending on content */}
               <div className="absolute left-4 top-1/2 -translate-y-1/2 text-light-surface/25 pointer-events-none">
                 {imageIsExternal ? (
                   <LinkIcon size={15} />
@@ -90,7 +84,6 @@ export default function MediaSection() {
               />
             </div>
 
-            {/* Hint chips */}
             <div className="flex gap-2 flex-wrap">
               <span className="text-[10px] px-2 py-1 rounded-full bg-light-surface/5 border border-light-surface/10 text-light-surface/30">
                 /public/beijing.png
@@ -101,10 +94,8 @@ export default function MediaSection() {
             </div>
           </div>
 
-          {/* Live thumbnail */}
           {imageSrc && (
             <div className="w-16 h-16 shrink-0 rounded-xl overflow-hidden border border-light-surface/10 bg-light-surface/5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageSrc}
                 alt=""
@@ -123,7 +114,6 @@ export default function MediaSection() {
         </div>
       </FormField>
 
-      {/* Video */}
       <FormField
         label="Видео"
         hint="YouTube ссылка любого формата (необязательно)"
@@ -150,7 +140,6 @@ export default function MediaSection() {
                 ? "Embed-ссылка готова"
                 : "Видео добавлено"}
             </p>
-            {/* Mini embed preview */}
             {videoSrc.includes("youtube.com/embed/") && (
               <div className="mt-3 rounded-xl overflow-hidden border border-light-surface/10 aspect-video">
                 <iframe

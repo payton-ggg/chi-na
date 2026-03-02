@@ -27,7 +27,6 @@ export default function Hero() {
     };
   }, []);
 
-  // Disable parallax on mobile for better performance
   const parallaxOffset = isMobile ? 0 : Math.min(scrollY * 0.3, 100);
 
   const router = useRouter();
@@ -37,7 +36,6 @@ export default function Hero() {
       id="hero"
       className="relative h-screen w-full overflow-hidden bg-dark-section flex items-center"
     >
-      {/* Decorative Atmosphere Elements */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div
           className="absolute top-18 right-5 w-32 h-32 md:w-[250px] md:h-[250px] transition-transform opacity-80 duration-500 ease-out "
@@ -50,7 +48,6 @@ export default function Hero() {
           <Image src="/panda.png" alt="Panda" fill className="object-contain" />
         </div>
 
-        {/* Tea - Bottom Left */}
         <div
           className="absolute bottom-10 left-[5%] w-32 h-32 md:w-64 md:h-64 opacity-60   transition-transform duration-300 ease-out"
           style={{
@@ -63,7 +60,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Animated grid background */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -94,7 +90,6 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* Bubble 1 - Adaptive positioning and sizing */}
         <button
           className="absolute top-[8%] right-[5%] sm:top-[10%] sm:right-[10%] md:top-[12%] md:right-[15%] w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full border-2 border-white/30 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-500 z-20 hover:scale-110 hover:border-primary-scarlet-500/50 shadow-lg"
           onClick={() => router.push("/booking")}

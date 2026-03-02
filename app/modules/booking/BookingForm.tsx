@@ -88,11 +88,9 @@ export default function BookingForm({ tours }: { tours: Tour[] }) {
     <section id="form" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-20 items-stretch">
-          {/* Form Side */}
           <div className="w-full lg:w-2/3">
             <form onSubmit={handleSubmit} className="space-y-12">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                {/* Tour Selection */}
                 <div className="space-y-4 md:col-span-2">
                   <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-accent-cta">
                     <MapPin size={14} /> Какой тур или экскурсия вас интересует?
@@ -131,7 +129,6 @@ export default function BookingForm({ tours }: { tours: Tour[] }) {
                   </select>
                 </div>
 
-                {/* Date Selection */}
                 <div className="space-y-4">
                   <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-accent-cta">
                     <Calendar size={14} /> Желаемая дата начала
@@ -146,7 +143,6 @@ export default function BookingForm({ tours }: { tours: Tour[] }) {
                   />
                 </div>
 
-                {/* People Count */}
                 <div className="space-y-4">
                   <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-accent-cta">
                     <Users size={14} /> Количество человек
@@ -168,7 +164,6 @@ export default function BookingForm({ tours }: { tours: Tour[] }) {
                   </select>
                 </div>
 
-                {/* Email */}
                 <div className="space-y-4">
                   <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-accent-cta">
                     <Mail size={14} /> Электронная почта
@@ -185,7 +180,6 @@ export default function BookingForm({ tours }: { tours: Tour[] }) {
                   />
                 </div>
 
-                {/* Telegram */}
                 <div className="space-y-4">
                   <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-accent-cta">
                     <Send size={14} /> Telegram для связи
@@ -202,7 +196,6 @@ export default function BookingForm({ tours }: { tours: Tour[] }) {
                 </div>
               </div>
 
-              {/* Message / Question */}
               <div className="space-y-4">
                 <label className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-accent-cta">
                   <MessageSquare size={14} /> Ваш вопрос или комментарий
@@ -223,7 +216,6 @@ export default function BookingForm({ tours }: { tours: Tour[] }) {
                   персональных данных и политикой конфиденциальности.
                 </p>
 
-                {/* User's requested Button style */}
                 <div className="relative group">
                   <button
                     type="submit"
@@ -259,7 +251,6 @@ export default function BookingForm({ tours }: { tours: Tour[] }) {
             </form>
           </div>
 
-          {/* Sidebar / Info Side */}
           <div className="w-full lg:w-1/3 flex flex-col gap-8">
             <div className="p-10 rounded-[3rem] bg-white/5 border border-white/10 space-y-8 relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">

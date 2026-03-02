@@ -28,7 +28,6 @@ function HotelCard({
       }`}
       style={{ transitionDelay: `${index * 200}ms` }}
     >
-      {/* Hotel Info & Gallery Collage */}
       <div
         className={`lg:col-span-5 ${
           index % 2 === 0 ? "lg:order-1" : "lg:order-2"
@@ -58,7 +57,6 @@ function HotelCard({
             </div>
           </div>
 
-          {/* MINI GALLERY COLLAGE */}
           <div className="relative h-48 md:h-64 grid grid-cols-4 gap-3">
             {hotel.gallery.map((img: string, i: number) => (
               <div
@@ -86,7 +84,6 @@ function HotelCard({
               </div>
             ))}
 
-            {/* Tiny decorative label */}
             <div className="absolute -bottom-6 left-0 flex items-center gap-2 text-[10px] font-bold text-dark-section/30 uppercase tracking-widest">
               <Camera size={12} />
               <span>Наведите, чтобы сменить фото</span>
@@ -95,7 +92,6 @@ function HotelCard({
         </div>
       </div>
 
-      {/* Main Image - Changes on Hover */}
       <div
         className={`lg:col-span-7 ${
           index % 2 === 0 ? "lg:order-2" : "lg:order-1"
@@ -113,13 +109,10 @@ function HotelCard({
             </div>
             <div className="absolute inset-0 bg-linear-to-t from-dark-section/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-            {/* Floating Badge */}
             <div className="absolute top-8 right-8 w-14 h-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
               <Sparkles size={24} className="animate-pulse-slow" />
             </div>
           </div>
-
-          {/* Decorative background element */}
           <div
             className={`absolute -inset-4 bg-accent-cta/5 rounded-[3rem] -z-10 blur-xl transition-all duration-700 group-hover:bg-accent-cta/10 ${
               index % 2 === 0 ? "rotate-2" : "-rotate-2"
@@ -180,7 +173,6 @@ export default function Accommodation() {
       id="accommodation"
       className="py-32 md:py-48 bg-main-bg relative overflow-hidden"
     >
-      {/* Subtle Background Decorative Text */}
       <div className="absolute top-20 left-10 pointer-events-none select-none">
         <span className="text-[15vw] font-black text-dark-section/3 uppercase tracking-tighter block leading-none">
           Stay
@@ -191,7 +183,6 @@ export default function Accommodation() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-16 md:mb-32 gap-8 md:gap-12">
           <div className="w-full lg:max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/10 border border-accent-cta/20 mb-6 md:mb-8">
@@ -219,7 +210,6 @@ export default function Accommodation() {
           </div>
         </div>
 
-        {/* Hotels Display */}
         <div className="space-y-40 md:space-y-64">
           {hotels.map((hotel, hotelIdx) => (
             <HotelCard
@@ -231,7 +221,6 @@ export default function Accommodation() {
           ))}
         </div>
 
-        {/* Global Conditions Footer */}
         <div className="mt-32 md:mt-48 pt-20 border-t border-dark-section/5">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
             <div>

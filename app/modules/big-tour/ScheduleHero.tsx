@@ -19,7 +19,8 @@ export default function ScheduleHero() {
         </h1>
 
         <p className="mt-12 text-xl md:text-2xl text-white/50 max-w-2xl mx-auto font-light leading-relaxed">
-          7 дней, 3 города, бесконечные впечатления. Шанхай, горы Аватара и Диснейленд — всё включено.
+          7 дней, 3 города, бесконечные впечатления. Шанхай, горы Аватара и
+          Диснейленд — всё включено.
         </p>
 
         <div className="mt-16 flex justify-center animate-bounce">
@@ -27,7 +28,6 @@ export default function ScheduleHero() {
         </div>
       </div>
 
-      {/* Background Decorative patterns */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-white/2 select-none pointer-events-none whitespace-nowrap z-0">
         SCHEDULE
       </div>

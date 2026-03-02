@@ -1,4 +1,3 @@
-// Server Component — pure presenter, no interactivity.
 export default function FormField({
   label,
   hint,

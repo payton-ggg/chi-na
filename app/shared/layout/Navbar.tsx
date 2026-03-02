@@ -68,14 +68,12 @@ export default function Navbar() {
 
   useEffect(() => {
     if (isMenuOpen) {
-      // Store current scroll position
       const scrollY = window.scrollY;
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
     } else {
-      // Restore scroll position
       const scrollY = document.body.style.top;
       document.body.style.position = "";
       document.body.style.top = "";
@@ -144,7 +142,6 @@ export default function Navbar() {
     e.preventDefault();
     setIsMenuOpen(false);
 
-    // If it's just a hash link or same page link
     if (
       href.startsWith("#") ||
       (href.includes("#") && href.split("#")[0] === pathname)
@@ -164,10 +161,8 @@ export default function Navbar() {
         });
       }
     } else if (href === pathname) {
-      // Just scroll to top if clicking current page link without hash
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      // Navigate to new page
       window.location.href = href;
     }
   };
@@ -208,7 +203,6 @@ export default function Navbar() {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
           <Link
             href="/"
             className="text-2xl font-black tracking-tighter relative z-110"
@@ -227,7 +221,6 @@ export default function Navbar() {
             <span className="text-accent-cta">TRAVEL</span>
           </Link>
 
-          {/* Universal Hamburger Menu */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`relative cursor-pointer z-110 p-4 rounded-full transition-all duration-500 group ${
@@ -261,7 +254,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Fullscreen Overlay Menu */}
       <div
         className={`fixed inset-0 z-90 transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] overflow-y-auto overscroll-contain ${
           themeClasses.overlay
@@ -271,11 +263,9 @@ export default function Navbar() {
             : "-translate-y-full opacity-0 invisible"
         }`}
         onTouchMove={(e) => {
-          // Prevent background scroll on mobile
           e.stopPropagation();
         }}
       >
-        {/* Background Decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
           <div
             className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black whitespace-nowrap leading-none select-none ${themeClasses.textDecorative}`}
@@ -286,7 +276,6 @@ export default function Navbar() {
 
         <div className="h-full container mx-auto px-6 flex flex-col justify-center pt-24 pb-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 h-full">
-            {/* Left Column: Pages (Three requested items) */}
             <div className="lg:col-span-6 flex flex-col justify-center space-y-8">
               <p className="text-accent-cta text-[10px] font-black uppercase tracking-[0.4em] mb-4">
                 Страницы
@@ -322,7 +311,6 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Right Column: Sections & Socials */}
             <div
               className={`lg:col-span-6 flex flex-col justify-center space-y-12 lg:border-l lg:pl-24 ${themeClasses.border}`}
             >

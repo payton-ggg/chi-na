@@ -29,7 +29,6 @@ export default function BookingHero() {
         </div>
       </div>
 
-      {/* Background Decorative patterns */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-white/2 select-none pointer-events-none whitespace-nowrap z-0">
         RESERVATION
       </div>

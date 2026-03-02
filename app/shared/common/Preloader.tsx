@@ -4,33 +4,32 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function Preloader() {
+  const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
   const [isLoading, setIsLoading] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
-  const pathname = usePathname();
 
-  useEffect(() => {
-    // Reset state on path change
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setIsLoading(true);
     setIsExiting(false);
+  }
 
-    // Force scroll to top immediately to prevent "black" areas
+  useEffect(() => {
     window.scrollTo(0, 0);
 
-    // Give browser time to paint the new page
     const timer = setTimeout(() => {
       setIsExiting(true);
       setTimeout(() => setIsLoading(false), 800);
-    }, 1500); // Increased to 1.5s to ensure full loading/painting
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, [pathname]);
-
-  // Lock scroll when loading
   useEffect(() => {
     if (!isExiting) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
-      document.documentElement.style.scrollBehavior = "auto"; // Prevent native smooth scroll conflict
+      document.documentElement.style.scrollBehavior = "auto";
     } else {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";

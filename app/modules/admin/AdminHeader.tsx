@@ -1,4 +1,3 @@
-// Server Component — static branding + back link, no state needed.
 import Link from "next/link";
 import { ArrowLeft, Sparkles, Settings, LogOut } from "lucide-react";
 import { logoutAction } from "@/app/actions/authAction";

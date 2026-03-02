@@ -6,7 +6,6 @@ export default function ToursHero() {
   return (
     <section className="pt-40 pb-20 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10 text-center">
-        {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/10 border border-accent-cta/20 mb-10">
           <MapPin size={16} className="text-accent-cta" />
           <span className="text-sm font-semibold text-accent-cta tracking-wide uppercase">
@@ -14,7 +13,6 @@ export default function ToursHero() {
           </span>
         </div>
 
-        {/* Heading */}
         <h1 className="text-5xl md:text-[9vw] lg:text-[8vw] font-black tracking-tighter uppercase leading-[0.85] text-white select-none">
           Все <br />
           <span className="text-accent-cta italic font-serif lowercase font-medium">
@@ -22,13 +20,10 @@ export default function ToursHero() {
           </span>
         </h1>
 
-        {/* Subtitle */}
         <p className="mt-12 text-xl md:text-2xl text-white/50 max-w-2xl mx-auto font-light leading-relaxed">
           Авторские экскурсии с русскоязычным гидом. Шанхай и окрестности —
           Восточная Венеция, Ханчжоу и не только.
         </p>
-
-        {/* Stats */}
         <div className="mt-16 flex flex-wrap justify-center gap-8">
           {[
             { value: "3", label: "Маршрута" },
@@ -49,7 +44,6 @@ export default function ToursHero() {
         </div>
       </div>
 
-      {/* Decorative background text */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-black text-white/2 select-none pointer-events-none whitespace-nowrap z-0">
         TOURS
       </div>

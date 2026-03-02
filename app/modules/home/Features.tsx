@@ -39,7 +39,6 @@ export default function Features() {
       id="about"
       className="py-24 md:py-34 bg-main-bg relative overflow-hidden"
     >
-      {/* Background Decorative Text */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 select-none pointer-events-none opacity-[0.03] whitespace-nowrap z-0">
         <span className="text-[25vw] font-black leading-none tracking-tighter text-dark-section">
           TsunamiTravel Team
@@ -47,7 +46,6 @@ export default function Features() {
       </div>
 
       <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
-        {/* Header */}
         <div className="mb-20 md:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="max-w-2xl">
             <p className="text-xs font-black uppercase tracking-[0.4em] text-accent-cta mb-6">
@@ -69,9 +67,7 @@ export default function Features() {
           </div>
         </div>
 
-        {/* Main Content - Two Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start scale-90  ">
-          {/* Left Column - Titles & Short Info */}
           <div className="lg:col-span-6 space-y-4">
             {features.map((feature, index) => (
               <div
@@ -128,7 +124,6 @@ export default function Features() {
             ))}
           </div>
 
-          {/* Right Column - Elaborated Description */}
           <div className="lg:col-span-6 relative lg:min-h-[400px]">
             <div className="lg:sticky lg:top-40">
               {features.map((feature, index) => (
@@ -148,7 +143,6 @@ export default function Features() {
                           : "bg-accent-cta border-transparent text-white"
                       }`}
                     >
-                      {/* Decorative Image */}
                       {index !== 2 && (
                         <div className="absolute top-0 right-0 w-full h-full pointer-events-none">
                           <Image
@@ -165,7 +159,6 @@ export default function Features() {
                         </div>
                       )}
 
-                      {/* Content */}
                       <div className="relative z-10">
                         <div
                           className={`text-6xl md:text-8xl font-black mb-6 md:mb-10 opacity-10 leading-none ${

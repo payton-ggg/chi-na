@@ -29,7 +29,6 @@ export default function HowItWorks() {
 
   return (
     <section className="py-32 bg-main-bg relative overflow-hidden">
-      {/* Background Glows - Adjusted for light theme */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -45,7 +44,6 @@ export default function HowItWorks() {
         </div>
 
         <div className="max-w-5xl mx-auto relative">
-          {/* Vertical Line */}
           <div className="absolute left-[31px] md:left-1/2 top-0 bottom-0 w-0.5 bg-dark-section/10 md:-translate-x-1/2 overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-linear-to-b from-accent-cta/20 via-accent-cta/50 to-accent-cta/20 animate-pulse-slow" />
           </div>

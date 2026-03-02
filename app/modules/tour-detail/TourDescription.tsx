@@ -6,13 +6,11 @@ import ChinaMap from "./ChinaMap";
 export default function TourDescription({ tour }: { tour: Tour }) {
   return (
     <section className="pt-32 bg-dark-section relative overflow-hidden">
-      {/* Background glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-cta/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto space-y-24">
-          {/* Main Description */}
           <div className="text-center md:text-left">
             <h2 className="text-4xl md:text-6xl font-black text-white mb-10 tracking-tight uppercase">
               Детали концепта
@@ -21,7 +19,6 @@ export default function TourDescription({ tour }: { tour: Tour }) {
               {tour.fullDescription || tour.description}
             </p>
           </div>
-          {/* Video Section */}
           <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-video group">
             <div className="absolute inset-0 bg-accent-cta/5 group-hover:bg-accent-cta/10 transition-colors pointer-events-none z-10" />
 
@@ -48,7 +45,6 @@ export default function TourDescription({ tour }: { tour: Tour }) {
             )}
           </div>
 
-          {/* Map Section */}
           <div className="space-y-8">
             <h3 className="text-3xl font-bold text-white mb-8">
               Ключевые точки

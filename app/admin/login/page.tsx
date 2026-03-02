@@ -15,7 +15,6 @@ export default function AdminLoginPage() {
     try {
       const res = await loginAction(formData);
       if (res?.success) {
-        // Force full page reload to clear router cache and apply middleware
         window.location.href = "/admin";
       } else {
         setError(res?.error || "Произошла ошибка");
@@ -29,7 +28,6 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-[#0B0C10] text-light-surface flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Background ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-cta/5 rounded-full blur-[150px]" />
       </div>

@@ -100,13 +100,11 @@ export default function FinalCTA() {
       id="contact"
       className="py-32 bg-dark-section text-light-surface relative overflow-hidden"
     >
-      {/* Background Decorative elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-cta/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-cta/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col gap-24">
-          {/* Top: Important Info */}
           {isHomePage && (
             <div>
               <div className="max-w-3xl mb-16">
@@ -140,13 +138,11 @@ export default function FinalCTA() {
             </div>
           )}
 
-          {/* Middle: Contacts and Main CTA */}
           <div
             className={`flex flex-col lg:flex-row items-start justify-between gap-20 pt-24 ${
               isHomePage ? "border-t border-white/10" : ""
             }`}
           >
-            {/* Form Side */}
             <div className="w-full lg:w-1/2 max-w-xl">
               <h3 className="text-4xl md:text-5xl font-bold mb-12 tracking-tight">
                 Связаться с нами
@@ -166,7 +162,6 @@ export default function FinalCTA() {
                 </div>
               </div>
 
-              {/* Social Links */}
               <div className="mt-20">
                 <p className="text-xs font-bold text-accent-cta uppercase tracking-widest mb-8">
                   Следите за экспедициями
@@ -186,7 +181,6 @@ export default function FinalCTA() {
               </div>
             </div>
 
-            {/* Big Action Button Side */}
             <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
               <button
                 className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-light-surface/10 flex items-center justify-center backdrop-blur-sm animate-float-slow cursor-pointer group transition-all duration-700 z-20 hover:scale-105 hover:border-accent-cta/30 shadow-2xl"

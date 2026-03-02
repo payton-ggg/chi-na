@@ -39,7 +39,6 @@ export default async function PopularTours() {
         </div>
       </div>
 
-      {/* Scroll-driven tour cards */}
       <div className="relative">
         {tours.map((tour, index) => (
           <TourCard key={tour.id} tour={tour} index={index} />

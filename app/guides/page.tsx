@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Navbar from "../shared/layout/Navbar";
 
 export default function GuidesPage() {
@@ -14,12 +15,12 @@ export default function GuidesPage() {
           подготовиться к путешествию и узнать Китай ещё глубже.
         </p>
         <div className="pt-12">
-          <a
+          <Link
             href="/"
             className="px-10 py-5 bg-white text-dark-section font-black uppercase tracking-widest text-sm rounded-full hover:bg-accent-cta hover:text-white transition-all shadow-2xl"
           >
             Вернуться на главную
-          </a>
+          </Link>
         </div>
       </div>
     </main>

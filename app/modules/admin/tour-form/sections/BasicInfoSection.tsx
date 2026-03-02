@@ -8,7 +8,6 @@ import { inputClass, textareaClass } from "../constants/constants";
 import SectionCard from "@/app/shared/ui/SectionCard";
 import FormField from "@/app/shared/ui/FormField";
 
-/** Cyrillic → Latin transliteration map */
 const TRANSLIT: Record<string, string> = {
   а: "a",
   б: "b",
@@ -45,7 +44,6 @@ const TRANSLIT: Record<string, string> = {
   я: "ya",
 };
 
-/** Converts any string (including Cyrillic) into a URL-safe slug */
 function toSlug(raw: string): string {
   return raw
     .toLowerCase()
@@ -69,17 +67,8 @@ export default function BasicInfoSection() {
   const titleValue = watch("title") ?? "";
   const slugValue = watch("slug") ?? "";
 
-  /**
-   * Reactively mirror title → slug.
-   * Only overwrites the slug if it's still "in sync" with the title
-   * (i.e. the user hasn't manually customised it yet).
-   */
   useEffect(() => {
     const generated = toSlug(titleValue);
-
-    // Consider the slug "auto" as long as it equals what we'd generate
-    // from the CURRENT title, OR from any prefix of the title
-    // (covers the case where the user is still typing).
     const isAutoSlug =
       slugValue === "" ||
       slugValue === generated ||
@@ -91,7 +80,6 @@ export default function BasicInfoSection() {
         shouldValidate: false,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [titleValue]);
 
   return (

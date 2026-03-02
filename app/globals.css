@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdfdfd; /* Almost white */
+  --background: #fdfdfd;
   --foreground: #171717;
 
   /* User Defined Palette */
@@ -16,13 +16,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-roboto-slab);
 
-  /* User Defined Colors */
   --color-main-bg: var(--main-bg);
   --color-accent-cta: var(--accent-cta);
   --color-light-surface: var(--light-surface);
   --color-dark-section: var(--dark-section);
-
-  /* Primary Scarlet Palette (Existing) */
   --color-primary-scarlet-50: #fce8e8;
   --color-primary-scarlet-100: #fad1d1;
   --color-primary-scarlet-200: #f4a4a4;
@@ -56,7 +53,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Floating animations for bubbles */
 @keyframes float-slow {
   0%,
   100% {

@@ -18,27 +18,21 @@ export default function DaySchedule({ data }: { data: ScheduleDayData }) {
       className="group relative pl-8 md:pl-0 border-l border-white/10 md:border-none pb-32 last:pb-0"
     >
       <div className="md:grid md:grid-cols-12 md:gap-10">
-        {/* Sticky Day Number & Line */}
         <div className="hidden md:flex flex-col items-center col-span-2 lg:col-span-3 relative">
           <div className="sticky top-40 flex flex-col items-center">
             <span className="text-sm font-black text-accent-cta uppercase tracking-widest mb-4 transform -rotate-90 origin-center absolute -left-12 top-8 w-24"></span>
             <div className="w-16 h-16 rounded-2xl bg-accent-cta flex items-center justify-center text-xl leading-none text-center font-black text-white shadow-[0_0_30px_rgba(194,56,28,0.4)] z-10 relative">
               {data.day} день
-              {/* Pulse effect */}
               <div className="absolute inset-0 bg-accent-cta rounded-2xl animate-ping opacity-20" />
             </div>
             <div className="w-px h-[calc(100%+8rem)] bg-linear-to-b from-accent-cta via-white/10 to-transparent absolute top-16 z-0" />
           </div>
         </div>
 
-        {/* Mobile Day Number */}
         <div className="absolute -left-5 top-0 flex items-center justify-center w-10 h-10 rounded-full bg-accent-cta text-white font-black text-lg md:hidden shadow-[0_0_20px_rgba(194,56,28,0.4)] z-10">
           {data.day}
         </div>
-
-        {/* Content */}
         <div className="col-span-10 lg:col-span-9 space-y-10 relative">
-          {/* Decorative Giant Number Background */}
           <div className="absolute -top-20 -right-10 text-[15rem] font-black text-white/2 select-none pointer-events-none leading-none z-0">
             {data.day}
           </div>
@@ -48,7 +42,6 @@ export default function DaySchedule({ data }: { data: ScheduleDayData }) {
               {data.title}
             </h2>
 
-            {/* Highlights Pills */}
             {data.highlights && (
               <div className="flex flex-wrap gap-3 mb-6">
                 {data.highlights.map((tag, i) => (
@@ -67,14 +60,13 @@ export default function DaySchedule({ data }: { data: ScheduleDayData }) {
           </header>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-            {/* Timeline Sections */}
             <div className="lg:col-span-2 space-y-8 relative z-10">
               <TimeSection
                 icon={<Sunrise size={20} />}
                 title="Утро"
                 text={data.morning}
               />
-              
+
               {data.day !== 7 && (
                 <>
                   <TimeSection
@@ -91,7 +83,6 @@ export default function DaySchedule({ data }: { data: ScheduleDayData }) {
               )}
             </div>
 
-            {/* Optional Side Image */}
             {data.image && (
               <div className="lg:col-span-1 hidden lg:block relative pt-4">
                 <div className="relative aspect-3/4 rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 ease-out group/image shadow-2xl skew-y-2 hover:skew-y-0">
@@ -101,7 +92,6 @@ export default function DaySchedule({ data }: { data: ScheduleDayData }) {
                     fill
                     className="object-cover transition-transform duration-700 group-hover/image:scale-110"
                   />
-                  {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-linear-to-t from-dark-section via-transparent to-transparent opacity-60" />
                 </div>
               </div>

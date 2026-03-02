@@ -16,7 +16,6 @@ export default function AdminSettingsPage() {
     setError(null);
     setSuccess(false);
 
-    // Simple validation
     const password = formData.get("password") as string;
     const passwordConfirm = formData.get("passwordConfirm") as string;
 
