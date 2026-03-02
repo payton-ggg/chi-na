@@ -28,7 +28,7 @@ export default function Navbar() {
 
       if (
         pathname === "/booking" ||
-        pathname === "/schedule" ||
+        pathname === "/big-tour" ||
         pathname.includes("/tours")
       ) {
         setIsDarkSection(true);
@@ -98,7 +98,7 @@ export default function Navbar() {
     },
     {
       name: "Расписание Большого тура",
-      href: "/schedule",
+      href: "/big-tour",
       icon: <Calendar size={20} />,
     },
   ];
@@ -112,11 +112,11 @@ export default function Navbar() {
         { name: "Контакты", href: "/#contact" },
       ],
       "/tours": [{ name: "На главную", href: "/" }],
-      "/schedule": [
-        { name: "День 1: Прибытие", href: "/schedule#day-1" },
-        { name: "День 3: Венеция", href: "/schedule#day-3" },
-        { name: "День 4: Аватар", href: "/schedule#day-4" },
-        { name: "День 6: Дисней", href: "/schedule#day-6" },
+      "/big-tour": [
+        { name: "День 1: Прибытие", href: "/big-tour#day-1" },
+        { name: "День 3: Венеция", href: "/big-tour#day-3" },
+        { name: "День 4: Аватар", href: "/big-tour#day-4" },
+        { name: "День 6: Дисней", href: "/big-tour#day-6" },
         { name: "На главную", href: "/" },
       ],
       "/booking": [
