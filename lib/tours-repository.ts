@@ -133,7 +133,14 @@ export async function getAllSlugs(): Promise<string[]> {
 
 export async function getAllGuides(): Promise<(Guide & { id: number })[]> {
   const result = await db.execute("SELECT * FROM guides ORDER BY id ASC");
-  return result.rows as unknown as (Guide & { id: number })[];
+  return result.rows.map((row) => ({
+    id: row.id as number,
+    name: row.name as string,
+    role: row.role as string,
+    avatar: (row.avatar as string) || undefined,
+    telegram: (row.telegram as string) || undefined,
+    price: (row.price as string) || undefined,
+  }));
 }
 
 export async function getGuideById(
