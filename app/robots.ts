@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunamitravel.ru";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunami-travel.ru";
 
 export default function robots(): MetadataRoute.Robots {
   return {

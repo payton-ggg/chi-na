@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllSlugs } from "@/lib/tours-repository";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunamitravel.ru";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunami-travel.ru";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const slugs = await getAllSlugs();

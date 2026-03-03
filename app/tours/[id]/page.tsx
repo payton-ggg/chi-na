@@ -6,7 +6,7 @@ import TourDescription from "@/app/modules/tour-detail/TourDescription";
 import type { Metadata } from "next";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunamitravel.ru";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunami-travel.ru";
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
@@ -29,7 +29,9 @@ export async function generateMetadata({
     title: `${tour.title} — экскурсия с гидом`,
     description:
       tour.fullDescription?.slice(0, 155) ??
-      `${tour.description} Авторская экскурсия с русскоязычным гидом${guide ? ` ${guide.name}` : ""}. Мини-группа, без визы.`,
+      `${tour.description} Авторская экскурсия с русскоязычным гидом${
+        guide ? ` ${guide.name}` : ""
+      }. Мини-группа, без визы.`,
     keywords: [
       tour.title.toLowerCase(),
       "тур " + tour.title.toLowerCase(),
@@ -96,7 +98,10 @@ export default async function TourPage({
         urlTemplate: `${SITE_URL}/booking`,
         actionPlatform: "https://schema.org/DesktopWebPlatform",
       },
-      result: { "@type": "Reservation", name: `Бронирование тура ${tour.title}` },
+      result: {
+        "@type": "Reservation",
+        name: `Бронирование тура ${tour.title}`,
+      },
     },
   };
 
