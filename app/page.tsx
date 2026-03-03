@@ -12,11 +12,19 @@ export const metadata: Metadata = {
   title: "Туры по Китаю с гидом — Шанхай, Горы Аватара",
   description:
     "Авторские туры по Китаю с русскоязычным гидом Львом Логачевым. Шанхай, Горы Аватара, Восточная Венеция. Мини-группы до 5 человек, без визы для граждан РФ.",
+  keywords: [
+    "туры по китаю",
+    "авторские туры в китай",
+    "экскурсии шанхай",
+    "горы аватара тур",
+    "чжанцзяцзе тур",
+  ],
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunamitravel.ru"}/`,
+    canonical: `${
+      process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunamitravel.ru"
+    }/`,
   },
 };
-
 
 export default function Home() {
   return (

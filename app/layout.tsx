@@ -11,7 +11,7 @@ const robotoSlab = Roboto_Slab({
 });
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunamitravel.ru";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunami-travel.ru";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     "Авторские туры по Китаю с русскоязычным гидом. Шанхай, Горы Аватара, Восточная Венеция. Мини-группы до 5 человек, без визы для граждан РФ.",
   keywords: [
     "туры по китаю",
+    "авторские туры в китай",
     "экскурсии шанхай",
     "горы аватара тур",
     "чжанцзяцзе тур",
@@ -31,9 +32,12 @@ export const metadata: Metadata = {
     "русскоязычный гид шанхай",
     "тур шанхай",
     "восточная венеция тур",
-    "поездка в китай",
+    "поездка в китай 2024",
+    "китай без визы",
     "экспедиция китай",
     "лев логачев гид",
+    "купить тур в китай",
+    "путешествие в китай",
   ],
   authors: [{ name: "Tsunami Travel", url: SITE_URL }],
   creator: "Tsunami Travel",
@@ -51,7 +55,9 @@ export const metadata: Metadata = {
     title: "Tsunami Travel — Авторские туры по Китаю",
     description:
       "Авторские туры по Китаю с русскоязычным гидом. Шанхай, Горы Аватара, Восточная Венеция.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Tsunami Travel" }],
+    images: [
+      { url: "/og-image.png", width: 1200, height: 630, alt: "Tsunami Travel" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -69,11 +75,18 @@ function JsonLd() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
+        "@type": "TravelAgency",
         "@id": `${SITE_URL}/#organization`,
         name: "Tsunami Travel",
         url: SITE_URL,
         logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` },
+        description: "Авторские туры по Китаю с русскоязычным гидом.",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "CN",
+          addressLocality: "Shanghai",
+        },
+        priceRange: "$$$",
         sameAs: [
           "https://instagram.com/tsunami_travel",
           "https://t.me/tsunamisurfer4ever",
@@ -95,7 +108,10 @@ function JsonLd() {
         inLanguage: "ru-RU",
         potentialAction: {
           "@type": "SearchAction",
-          target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/tours?q={search_term_string}` },
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${SITE_URL}/tours?q={search_term_string}`,
+          },
           "query-input": "required name=search_term_string",
         },
       },
