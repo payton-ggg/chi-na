@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   title: "TSUNAMI TRAVEL | Авторские экскурсии в Китай",
   description:
     "Премиальные экскурсии в Китай. Откройте для себя Поднебесную с экспертами.",
-  icons: "/logo.png",
 };
 
 export default function RootLayout({
