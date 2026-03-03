@@ -19,7 +19,9 @@ export default function TourDescription({ tour }: { tour: Tour }) {
             <p className="text-xl text-white/70 font-light leading-relaxed">
               {tour.fullDescription || tour.description}
             </p>
-            <TourPricing defaultGuide={tour.guide} />
+            {tour.guides && tour.guides.length > 0 && (
+              <TourPricing guides={tour.guides} />
+            )}
           </div>
           <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-video group">
             <div className="absolute inset-0 bg-accent-cta/5 group-hover:bg-accent-cta/10 transition-colors pointer-events-none z-10" />

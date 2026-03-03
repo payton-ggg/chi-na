@@ -25,6 +25,21 @@ export default function AdminHeader() {
           </span>
         </div>
 
+        <div className="ml-8 hidden md:flex items-center gap-6">
+          <Link
+            href="/admin"
+            className="text-white/40 hover:text-white transition-colors text-sm font-semibold uppercase tracking-widest"
+          >
+            Туры
+          </Link>
+          <Link
+            href="/admin/guides"
+            className="text-white/40 hover:text-white transition-colors text-sm font-semibold uppercase tracking-widest"
+          >
+            Гиды
+          </Link>
+        </div>
+
         <div className="ml-auto flex items-center gap-4">
           <Link
             href="/admin/settings"

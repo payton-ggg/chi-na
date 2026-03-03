@@ -3,23 +3,16 @@
 import { useState } from "react";
 import { Guide } from "@/app/data/tours";
 
-export default function TourPricing({ defaultGuide }: { defaultGuide: Guide }) {
-  const guides = [
-    {
-      id: "default",
-      name: defaultGuide.name,
-      price: 2500,
-    },
-    {
-      id: "local",
-      name: "Местный гид",
-      price: 1800,
-    },
-  ];
-
-  const [selectedGuideId, setSelectedGuideId] = useState(guides[0].id);
+export default function TourPricing({
+  guides,
+}: {
+  guides: (Guide & { id: number })[];
+}) {
+  const [selectedGuideId, setSelectedGuideId] = useState(guides[0]?.id);
   const selectedGuide =
     guides.find((g) => g.id === selectedGuideId) || guides[0];
+
+  if (!selectedGuide) return null;
 
   return (
     <div className="mt-12 flex flex-col md:flex-row items-start mx-auto md:items-center gap-6 pt-6 border-t border-white/5">
@@ -28,7 +21,7 @@ export default function TourPricing({ defaultGuide }: { defaultGuide: Guide }) {
           Ориентировочная стоимость
         </span>
         <span className="text-xl tracking-tight text-white/80 font-light">
-          ${selectedGuide.price.toLocaleString()}{" "}
+          ${Number(selectedGuide.price || 0).toLocaleString()}{" "}
           <span className="text-md text-white/40">/ чел.</span>
         </span>
       </div>

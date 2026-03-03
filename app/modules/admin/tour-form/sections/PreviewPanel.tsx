@@ -10,10 +10,14 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import type { TourFormData } from "../constants/types";
-import type { LocationInfo } from "@/app/data/tours";
+import type { LocationInfo, Guide } from "@/app/data/tours";
 import ChinaMap from "@/app/modules/tour-detail/ChinaMap";
 
-export default function PreviewPanel() {
+export default function PreviewPanel({
+  guides = [],
+}: {
+  guides?: (Guide & { id: number })[];
+}) {
   const { control } = useFormContext<TourFormData>();
   const [imageError, setImageError] = useState(false);
 
@@ -101,17 +105,23 @@ export default function PreviewPanel() {
                 </div>
                 <div>
                   <p className="text-white font-bold text-sm leading-tight">
-                    {data.guideName || "Имя гида"}
+                    {data.guideIds && data.guideIds.length > 0
+                      ? guides.find((g) => g.id === data.guideIds![0])?.name
+                      : "Выбрано 0 гидов"}
                   </p>
                   <p className="text-white/40 text-xs">
-                    {data.guideRole || "Роль"}
+                    {data.guideIds && data.guideIds.length > 0
+                      ? guides.find((g) => g.id === data.guideIds![0])?.role
+                      : "Выберите гидов"}
                   </p>
                 </div>
-                {data.guideTelegram && (
-                  <div className="ml-1 p-1.5 rounded-full bg-white/5 hover:bg-accent-cta/20 border border-white/10 hover:border-accent-cta/40 text-white/40 hover:text-accent-cta transition-all">
-                    <Send size={12} />
-                  </div>
-                )}
+                {data.guideIds &&
+                  data.guideIds.length > 0 &&
+                  guides.find((g) => g.id === data.guideIds![0])?.telegram && (
+                    <div className="ml-1 p-1.5 rounded-full bg-white/5 hover:bg-accent-cta/20 border border-white/10 hover:border-accent-cta/40 text-white/40 hover:text-accent-cta transition-all">
+                      <Send size={12} />
+                    </div>
+                  )}
               </div>
 
               <div className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent-cta/10 hover:bg-accent-cta border border-accent-cta/30 hover:border-accent-cta text-accent-cta hover:text-white font-bold text-sm uppercase tracking-widest transition-all duration-300 group/btn whitespace-nowrap">

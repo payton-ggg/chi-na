@@ -14,6 +14,7 @@ import {
 import type { TourFormData } from "./constants/types";
 import { defaultValues } from "./constants/types";
 import { saveTourAction, updateTourAction } from "@/app/actions/toursAction";
+import type { Guide } from "@/app/data/tours";
 
 import BasicInfoSection from "./sections/BasicInfoSection";
 import MediaSection from "./sections/MediaSection";
@@ -31,9 +32,11 @@ type SaveState =
 export default function TourForm({
   initialData,
   tourId,
+  guides = [],
 }: {
   initialData?: any;
   tourId?: number;
+  guides?: (Guide & { id: number })[];
 }) {
   const [preview, setPreview] = useState(false);
   const [saveState, setSaveState] = useState<SaveState>({ status: "idle" });
@@ -56,9 +59,7 @@ export default function TourForm({
             x: l.coordinates?.x || 50,
             y: l.coordinates?.y || 50,
           })),
-          guideName: initialData.guide?.name || "",
-          guideRole: initialData.guide?.role || "",
-          guideTelegram: initialData.guide?.telegram || "",
+          guideIds: initialData.guides?.map((g: any) => g.id) || [],
         }
       : defaultValues,
     mode: "onChange",
@@ -101,11 +102,7 @@ export default function TourForm({
           description: l.description,
           coordinates: { x: l.x, y: l.y },
         })),
-      guide: {
-        name: values.guideName,
-        role: values.guideRole,
-        telegram: values.guideTelegram,
-      },
+      guide_ids: values.guideIds,
     };
 
     let result;
@@ -243,10 +240,10 @@ export default function TourForm({
             <MediaSection />
             <HighlightsSection />
             <LocationsSection />
-            <GuideSection />
+            <GuideSection guides={guides} />
           </div>
 
-          {preview && <PreviewPanel />}
+          {preview && <PreviewPanel guides={guides} />}
         </div>
       </form>
     </FormProvider>

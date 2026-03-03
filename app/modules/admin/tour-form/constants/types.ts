@@ -15,9 +15,7 @@ export interface TourFormData {
   /** useFieldArray requires objects, not bare primitives */
   highlights: { value: string }[];
   locations: LocationDraft[];
-  guideName: string;
-  guideRole: string;
-  guideTelegram: string;
+  guideIds: number[];
 }
 
 export const defaultValues: TourFormData = {
@@ -29,7 +27,5 @@ export const defaultValues: TourFormData = {
   video: "",
   highlights: [{ value: "" }],
   locations: [{ name: "", description: "", x: 70, y: 50 }],
-  guideName: "Лев Логачев",
-  guideRole: "Авторский гид · Шанхай",
-  guideTelegram: "https://t.me/Lihach57",
+  guideIds: [],
 };

@@ -32,10 +32,6 @@ export function generateTsCode(data: TourFormData, nextId: number): string {
     locations: [
 ${locationsCode}
     ],
-    guide: {
-      name: "${data.guideName}",
-      role: "${data.guideRole}",
-      telegram: "${data.guideTelegram}",
-    },
+    guides: [${data.guideIds.join(",")}],
   },`;
 }

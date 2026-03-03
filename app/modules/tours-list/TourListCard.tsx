@@ -51,29 +51,31 @@ export default function TourListCard({ tour, index }: TourListCardProps) {
         </div>
 
         <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-accent-cta/20 border border-accent-cta/30 flex items-center justify-center shrink-0">
-              <Sparkles size={14} className="text-accent-cta" />
+          {tour.guides && tour.guides.length > 0 && (
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-accent-cta/20 border border-accent-cta/30 flex items-center justify-center shrink-0">
+                <Sparkles size={14} className="text-accent-cta" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-sm leading-tight">
+                  {tour.guides[0].name}
+                </p>
+                <p className="text-white/40 text-xs">{tour.guides[0].role}</p>
+              </div>
+              {tour.guides[0].telegram && (
+                <Link
+                  href={tour.guides[0].telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-1 p-1.5 rounded-full bg-white/5 hover:bg-accent-cta/20 border border-white/10 hover:border-accent-cta/40 text-white/40 hover:text-accent-cta transition-all"
+                  aria-label="Telegram гида"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Send size={12} />
+                </Link>
+              )}
             </div>
-            <div>
-              <p className="text-white font-bold text-sm leading-tight">
-                {tour.guide.name}
-              </p>
-              <p className="text-white/40 text-xs">{tour.guide.role}</p>
-            </div>
-            {tour.guide.telegram && (
-              <a
-                href={tour.guide.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-1 p-1.5 rounded-full bg-white/5 hover:bg-accent-cta/20 border border-white/10 hover:border-accent-cta/40 text-white/40 hover:text-accent-cta transition-all"
-                aria-label="Telegram гида"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Send size={12} />
-              </a>
-            )}
-          </div>
+          )}
 
           <Link
             href={`/tours/${tour.slug}`}

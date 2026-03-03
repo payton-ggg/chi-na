@@ -1,16 +1,13 @@
 import AdminHeader from "@/app/modules/admin/AdminHeader";
-import TourForm from "@/app/modules/admin/tour-form/TourForm";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-
 import { getAllGuides } from "@/lib/tours-repository";
+import GuidesList from "@/app/modules/admin/guides/GuidesList";
 
 export const metadata = {
-  title: "Создать тур — Admin",
-  description: "Создание нового тура",
+  title: "Гиды — Admin",
+  description: "Панель управления — управление гидами",
 };
 
-export default async function CreateTourPage() {
+export default async function AdminGuidesPage() {
   const guides = await getAllGuides();
 
   return (
@@ -20,14 +17,8 @@ export default async function CreateTourPage() {
 
       <div className="relative z-10 min-h-screen flex flex-col">
         <AdminHeader />
-        <main className="container mx-auto px-6 py-10 flex-1">
-          <Link
-            href="/admin"
-            className="inline-flex items-center gap-2 text-sm text-light-surface/40 hover:text-white transition-colors mb-8"
-          >
-            <ArrowLeft size={16} /> Назад к списку туров
-          </Link>
-          <TourForm guides={guides} />
+        <main className="container mx-auto px-6 py-14 flex-1">
+          <GuidesList guides={guides} />
         </main>
       </div>
     </div>

@@ -1,6 +1,15 @@
 import { db } from "@/lib/db";
 import type { Guide, LocationInfo, Tour } from "@/app/data/tours";
 
+export interface GuideRow {
+  id: number;
+  name: string;
+  role: string;
+  avatar: string | null;
+  telegram: string | null;
+  price: string | null;
+}
+
 interface TourRow {
   id: number;
   slug: string;
@@ -11,8 +20,7 @@ interface TourRow {
   video: string | null;
   highlights: string;
   locations: string;
-  guide: string;
-  guide_id: number | null;
+  guides: string;
 }
 
 function rowToTour(row: TourRow): Tour {
@@ -26,7 +34,7 @@ function rowToTour(row: TourRow): Tour {
     video: row.video ?? undefined,
     highlights: JSON.parse(row.highlights) as string[],
     locations: JSON.parse(row.locations) as LocationInfo[],
-    guide: typeof row.guide === "string" ? JSON.parse(row.guide) : row.guide,
+    guides: JSON.parse(row.guides) as (Guide & { id: number })[],
   };
 }
 
@@ -37,7 +45,8 @@ export async function createToursTable() {
       name     TEXT    NOT NULL UNIQUE,
       role     TEXT    NOT NULL,
       avatar   TEXT,
-      telegram TEXT
+      telegram TEXT,
+      price    TEXT
     )
   `);
 
@@ -56,6 +65,16 @@ export async function createToursTable() {
       FOREIGN KEY(guide_id) REFERENCES guides(id)
     )
   `);
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS tour_guides (
+      tour_id INTEGER,
+      guide_id INTEGER,
+      PRIMARY KEY (tour_id, guide_id),
+      FOREIGN KEY (tour_id) REFERENCES tours(id) ON DELETE CASCADE,
+      FOREIGN KEY (guide_id) REFERENCES guides(id) ON DELETE CASCADE
+    )
+  `);
 }
 
 // ─── Queries ─────────────────────────────────────────────────────────────────
@@ -63,9 +82,25 @@ export async function createToursTable() {
 const JOIN_GUIDES = `
   SELECT
     t.*,
-    json_object('name', g.name, 'role', g.role, 'avatar', g.avatar, 'telegram', g.telegram) as guide
+    COALESCE(
+      (
+        SELECT json_group_array(
+          json_object(
+            'id', g.id, 
+            'name', g.name, 
+            'role', g.role, 
+            'avatar', g.avatar, 
+            'telegram', g.telegram, 
+            'price', g.price
+          )
+        )
+        FROM tour_guides tg
+        JOIN guides g ON tg.guide_id = g.id
+        WHERE tg.tour_id = t.id
+      ),
+      '[]'
+    ) as guides
   FROM tours t
-  LEFT JOIN guides g ON t.guide_id = g.id
 `;
 
 export async function getAllTours(): Promise<Tour[]> {
@@ -101,6 +136,17 @@ export async function getAllGuides(): Promise<(Guide & { id: number })[]> {
   return result.rows as unknown as (Guide & { id: number })[];
 }
 
+export async function getGuideById(
+  id: number
+): Promise<(Guide & { id: number }) | null> {
+  const result = await db.execute({
+    sql: "SELECT * FROM guides WHERE id = ? LIMIT 1",
+    args: [id],
+  });
+  if (result.rows.length === 0) return null;
+  return result.rows[0] as unknown as Guide & { id: number };
+}
+
 // ─── Mutations ───────────────────────────────────────────────────────────────
 
 export interface CreateTourInput {
@@ -112,14 +158,28 @@ export interface CreateTourInput {
   video?: string;
   highlights: string[];
   locations: LocationInfo[];
-  guide_id?: number;
+  guide_ids?: number[];
+}
+
+export async function setTourGuides(tourId: number, guideIds: number[]) {
+  // Sync tour_guides junction table
+  await db.execute({
+    sql: "DELETE FROM tour_guides WHERE tour_id = ?",
+    args: [tourId],
+  });
+  for (const guideId of guideIds) {
+    await db.execute({
+      sql: "INSERT INTO tour_guides (tour_id, guide_id) VALUES (?, ?)",
+      args: [tourId, guideId],
+    });
+  }
 }
 
 export async function createTour(input: CreateTourInput): Promise<Tour> {
   const result = await db.execute({
     sql: `
-      INSERT INTO tours (slug, title, description, full_description, image, video, highlights, locations, guide_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO tours (slug, title, description, full_description, image, video, highlights, locations)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       RETURNING *
     `,
     args: [
@@ -131,10 +191,14 @@ export async function createTour(input: CreateTourInput): Promise<Tour> {
       input.video ?? null,
       JSON.stringify(input.highlights),
       JSON.stringify(input.locations),
-      input.guide_id ?? null,
     ],
   });
   const newId = (result.rows[0] as unknown as TourRow).id;
+
+  if (input.guide_ids) {
+    await setTourGuides(newId, input.guide_ids);
+  }
+
   return getTourById(newId) as Promise<Tour>;
 }
 
@@ -177,22 +241,97 @@ export async function updateTour(
     sets.push("locations = ?");
     args.push(JSON.stringify(input.locations));
   }
-  if (input.guide_id !== undefined) {
-    sets.push("guide_id = ?");
-    args.push(input.guide_id);
+
+  if (sets.length > 0) {
+    args.push(id);
+    await db.execute({
+      sql: `UPDATE tours SET ${sets.join(", ")} WHERE id = ?`,
+      args: args,
+    });
   }
 
-  if (sets.length === 0) return getTourById(id) as Promise<Tour>;
-
-  args.push(id);
-  await db.execute({
-    sql: `UPDATE tours SET ${sets.join(", ")} WHERE id = ?`,
-    args: args,
-  });
+  if (input.guide_ids !== undefined) {
+    await setTourGuides(id, input.guide_ids);
+  }
 
   return getTourById(id) as Promise<Tour>;
 }
 
 export async function deleteTour(id: number): Promise<void> {
   await db.execute({ sql: "DELETE FROM tours WHERE id = ?", args: [id] });
+  await db.execute({
+    sql: "DELETE FROM tour_guides WHERE tour_id = ?",
+    args: [id],
+  });
+}
+
+export interface CreateGuideInput {
+  name: string;
+  role: string;
+  avatar?: string;
+  telegram?: string;
+  price?: string;
+}
+
+export async function createGuide(
+  input: CreateGuideInput
+): Promise<Guide & { id: number }> {
+  const result = await db.execute({
+    sql: "INSERT INTO guides (name, role, avatar, telegram, price) VALUES (?, ?, ?, ?, ?) RETURNING *",
+    args: [
+      input.name,
+      input.role,
+      input.avatar ?? null,
+      input.telegram ?? null,
+      input.price ?? null,
+    ],
+  });
+  return result.rows[0] as unknown as Guide & { id: number };
+}
+
+export async function updateGuide(
+  id: number,
+  input: Partial<CreateGuideInput>
+): Promise<Guide & { id: number }> {
+  const sets = [];
+  const args = [];
+
+  if (input.name !== undefined) {
+    sets.push("name = ?");
+    args.push(input.name);
+  }
+  if (input.role !== undefined) {
+    sets.push("role = ?");
+    args.push(input.role);
+  }
+  if (input.avatar !== undefined) {
+    sets.push("avatar = ?");
+    args.push(input.avatar);
+  }
+  if (input.telegram !== undefined) {
+    sets.push("telegram = ?");
+    args.push(input.telegram);
+  }
+  if (input.price !== undefined) {
+    sets.push("price = ?");
+    args.push(input.price);
+  }
+
+  if (sets.length === 0)
+    return getGuideById(id) as Promise<Guide & { id: number }>;
+
+  args.push(id);
+  const result = await db.execute({
+    sql: `UPDATE guides SET ${sets.join(", ")} WHERE id = ? RETURNING *`,
+    args: args,
+  });
+  return result.rows[0] as unknown as Guide & { id: number };
+}
+
+export async function deleteGuide(id: number): Promise<void> {
+  await db.execute({ sql: "DELETE FROM guides WHERE id = ?", args: [id] });
+  await db.execute({
+    sql: "DELETE FROM tour_guides WHERE guide_id = ?",
+    args: [id],
+  });
 }

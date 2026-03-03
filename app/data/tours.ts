@@ -3,6 +3,7 @@ export interface Guide {
   role: string;
   avatar?: string; // path to avatar image
   telegram?: string;
+  price?: string;
 }
 
 export interface LocationInfo {
@@ -21,7 +22,7 @@ export interface Tour {
   fullDescription?: string;
   video?: string;
   locations: LocationInfo[];
-  guide: Guide;
+  guides: (Guide & { id: number })[];
 }
 
 export const tours: Tour[] = [
@@ -44,11 +45,15 @@ export const tours: Tour[] = [
         coordinates: { x: 85, y: 55 },
       },
     ],
-    guide: {
-      name: "Лев Логачев",
-      role: "Авторский гид · Шанхай",
-      telegram: "https://t.me/Lihach57",
-    },
+    guides: [
+      {
+        id: 1,
+        name: "Лев Логачев",
+        role: "Авторский гид · Шанхай",
+        telegram: "https://t.me/Lihach57",
+        price: "2500",
+      },
+    ],
   },
   {
     id: 2,
@@ -70,11 +75,15 @@ export const tours: Tour[] = [
         coordinates: { x: 58, y: 60 },
       },
     ],
-    guide: {
-      name: "Лев Логачев",
-      role: "Авторский гид · Шанхай",
-      telegram: "https://t.me/Lihach57",
-    },
+    guides: [
+      {
+        id: 1,
+        name: "Лев Логачев",
+        role: "Авторский гид · Шанхай",
+        telegram: "https://t.me/Lihach57",
+        price: "2500",
+      },
+    ],
   },
   {
     id: 3,
@@ -95,10 +104,14 @@ export const tours: Tour[] = [
         coordinates: { x: 83, y: 55 },
       },
     ],
-    guide: {
-      name: "Лев Логачев",
-      role: "Авторский гид · Шанхай",
-      telegram: "https://t.me/Lihach57",
-    },
+    guides: [
+      {
+        id: 1,
+        name: "Лев Логачев",
+        role: "Авторский гид · Шанхай",
+        telegram: "https://t.me/Lihach57",
+        price: "2500",
+      },
+    ],
   },
 ];
