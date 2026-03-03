@@ -6,6 +6,17 @@ import TourSummary from "./modules/home/TourSummary";
 import HowItWorks from "./modules/home/HowItWorks";
 import Accommodation from "./modules/home/Accommodation";
 import Footer from "./shared/layout/Footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Туры по Китаю с гидом — Шанхай, Горы Аватара",
+  description:
+    "Авторские туры по Китаю с русскоязычным гидом Львом Логачевым. Шанхай, Горы Аватара, Восточная Венеция. Мини-группы до 5 человек, без визы для граждан РФ.",
+  alternates: {
+    canonical: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://tsunamitravel.ru"}/`,
+  },
+};
+
 
 export default function Home() {
   return (

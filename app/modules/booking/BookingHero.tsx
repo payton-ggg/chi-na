@@ -3,7 +3,7 @@ import { Sparkles, ArrowDown } from "lucide-react";
 export default function BookingHero() {
   return (
     <section className="pt-40 pb-20 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10 text-center">
+      <div className="container max-md:-ml-1 mx-auto px-6 relative z-10 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-cta/10 border border-accent-cta/20 mb-10 animate-fade-in">
           <Sparkles size={16} className="text-accent-cta" />
           <span className="text-sm font-semibold text-accent-cta tracking-wide uppercase">

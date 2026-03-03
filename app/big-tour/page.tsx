@@ -3,6 +3,20 @@ import SmoothScroll from "../shared/common/SmoothScroll";
 import ScheduleHero from "../modules/big-tour/ScheduleHero";
 import DaySchedule, { ScheduleDayData } from "../modules/big-tour/DaySchedule";
 import FinalCTA from "../shared/layout/Footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Большой тур по Китаю — 7 дней",
+  description:
+    "Программа 7-дневного тура: Шанхай, горы Аватара Чжанцзяцзе, Восточная Венеция и Диснейленд. Каждый день расписан по часам.",
+  keywords: [
+    "большой тур по китаю",
+    "чжанцзяцзе маршрут",
+    "7 дней китай",
+    "тур шанхай чжанцзяцзе",
+    "программа тура китай",
+  ],
+};
 
 const scheduleData: ScheduleDayData[] = [
   {

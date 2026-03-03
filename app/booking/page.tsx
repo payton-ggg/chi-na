@@ -3,6 +3,19 @@ import BookingHero from "../modules/booking/BookingHero";
 import BookingForm from "../modules/booking/BookingForm";
 import SmoothScroll from "../shared/common/SmoothScroll";
 import { getAllTours } from "@/lib/tours-repository";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Записаться на тур по Китаю",
+  description:
+    "Оставьте заявку на авторскую экскурсию по Китаю. Шанхай, Горы Аватара, Восточная Венеция. Свяжемся и подберём удобный формат.",
+  keywords: [
+    "записаться на тур в китай",
+    "экскурсии шанхай забронировать",
+    "тур китай заявка",
+    "tsunami travel контакты",
+  ],
+};
 
 export default async function BookingPage() {
   const tours = await getAllTours();
