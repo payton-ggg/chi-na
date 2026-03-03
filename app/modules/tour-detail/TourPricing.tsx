@@ -22,8 +22,8 @@ export default function TourPricing({ defaultGuide }: { defaultGuide: Guide }) {
     guides.find((g) => g.id === selectedGuideId) || guides[0];
 
   return (
-    <div className="mt-12 flex flex-col md:flex-row items-start md:items-center gap-6 pt-6 border-t border-white/5">
-      <div className="flex flex-col">
+    <div className="mt-12 flex flex-col md:flex-row items-start mx-auto md:items-center gap-6 pt-6 border-t border-white/5">
+      <div className="flex flex-col mx-auto">
         <span className="text-lg uppercase text-white/40 mb-1">
           Ориентировочная стоимость
         </span>
@@ -35,11 +35,11 @@ export default function TourPricing({ defaultGuide }: { defaultGuide: Guide }) {
 
       <div className="hidden md:block w-px h-8 bg-white/10" />
 
-      <div className="flex flex-col w-full md:w-auto">
+      <div className="flex flex-col w-full mx-auto md:w-auto">
         <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2">
           Сопровождение
         </span>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap mx-auto gap-2">
           {guides.map((g) => (
             <button
               key={g.id}

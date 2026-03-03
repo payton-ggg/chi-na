@@ -6,6 +6,7 @@
 import { createClient } from "@libsql/client";
 import * as dotenv from "dotenv";
 import { resolve } from "path";
+import * as bcrypt from "bcryptjs";
 
 dotenv.config({ path: resolve(process.cwd(), ".env") });
 
@@ -33,11 +34,7 @@ const tours = [
         coordinates: { x: 67, y: 58 },
       },
     ],
-    guide: {
-      name: "Лев Логачев",
-      role: "Авторский гид · Шанхай",
-      telegram: "https://t.me/Lihach57",
-    },
+    guideName: "Лев Логачев",
   },
   {
     slug: "eastern-venice",
@@ -57,11 +54,7 @@ const tours = [
         coordinates: { x: 83, y: 55 },
       },
     ],
-    guide: {
-      name: "Лев Логачев",
-      role: "Авторский гид · Шанхай",
-      telegram: "https://t.me/Lihach57",
-    },
+    guideName: "Лев Логачев",
   },
   {
     slug: "hangzhou",
@@ -81,20 +74,41 @@ const tours = [
         coordinates: { x: 82, y: 60 },
       },
     ],
-    guide: {
-      name: "Лев Логачев",
-      role: "Авторский гид · Шанхай",
-      telegram: "https://t.me/Lihach57",
-    },
+    guideName: "Лев Логачев",
   },
 ];
 
-import * as bcrypt from "bcryptjs";
+const guides = [
+  {
+    name: "Лев Логачев",
+    role: "Авторский гид · Шанхай",
+    telegram: "https://t.me/Lihach57",
+  },
+  {
+    name: "Местный гид",
+    role: "Сопровождающий гид",
+    telegram: null,
+  },
+];
 
 async function main() {
-  console.log("📦 Creating tours table...");
+  console.log("📦 Re-creating guides and tours tables...");
+  await db.execute("DROP TABLE IF EXISTS tours");
+  await db.execute("DROP TABLE IF EXISTS guides");
+
   await db.execute(`
-    CREATE TABLE IF NOT EXISTS tours (
+    CREATE TABLE guides (
+      id       INTEGER PRIMARY KEY AUTOINCREMENT,
+      name     TEXT    NOT NULL UNIQUE,
+      role     TEXT    NOT NULL,
+      avatar   TEXT,
+      telegram TEXT
+    )
+  `);
+  console.log("✅ Guides table ready.");
+
+  await db.execute(`
+    CREATE TABLE tours (
       id               INTEGER PRIMARY KEY AUTOINCREMENT,
       slug             TEXT    NOT NULL UNIQUE,
       title            TEXT    NOT NULL,
@@ -104,7 +118,8 @@ async function main() {
       video            TEXT,
       highlights       TEXT    NOT NULL DEFAULT '[]',
       locations        TEXT    NOT NULL DEFAULT '[]',
-      guide            TEXT    NOT NULL DEFAULT '{}'
+      guide_id         INTEGER,
+      FOREIGN KEY(guide_id) REFERENCES guides(id)
     )
   `);
   console.log("✅ Tours table ready.");
@@ -135,12 +150,32 @@ async function main() {
     console.log("ℹ️ Admin credentials already exist, skipping.");
   }
 
+  for (const guide of guides) {
+    try {
+      await db.execute({
+        sql: `INSERT OR IGNORE INTO guides (name, role, telegram) VALUES (?, ?, ?)`,
+        args: [guide.name, guide.role, guide.telegram ?? null],
+      });
+      console.log(`✅ Seeded guide: ${guide.name}`);
+    } catch (e) {
+      console.error(`❌ Failed guide: ${guide.name}`, e);
+    }
+  }
+
   for (const tour of tours) {
     try {
+      // Find the ID of the guide
+      const guideResult = await db.execute({
+        sql: "SELECT id FROM guides WHERE name = ? LIMIT 1",
+        args: [tour.guideName],
+      });
+      const guideId =
+        guideResult.rows.length > 0 ? (guideResult.rows[0].id as number) : null;
+
       await db.execute({
         sql: `
           INSERT OR IGNORE INTO tours
-            (slug, title, description, full_description, image, video, highlights, locations, guide)
+            (slug, title, description, full_description, image, video, highlights, locations, guide_id)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `,
         args: [
@@ -149,13 +184,13 @@ async function main() {
           tour.description,
           tour.full_description,
           tour.image,
-          tour.video,
+          tour.video ?? null,
           JSON.stringify(tour.highlights),
           JSON.stringify(tour.locations),
-          JSON.stringify(tour.guide),
+          guideId,
         ],
       });
-      console.log(`✅ Seeded: ${tour.title}`);
+      console.log(`✅ Seeded tour: ${tour.title}`);
     } catch (e) {
       console.error(`❌ Failed: ${tour.title}`, e);
     }
