@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Edit2, Trash2, X, CheckCircle, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Guide } from "@/app/data/tours";
 import {
   saveGuideAction,
@@ -98,66 +99,75 @@ export default function GuidesList({
         </div>
       )}
 
-      {(isCreating || editingId) && (
-        <div className="bg-white/5 border border-white/10 p-6 rounded-3xl mb-8 space-y-4">
-          <h2 className="text-xl font-bold text-white mb-4">
-            {isCreating ? "Новый гид" : "Редактировать гида"}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              placeholder="Имя"
-              value={formData.name || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              className="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-3 text-white placeholder-white/20 focus:outline-hidden focus:border-accent-cta/50 transition-colors"
-            />
-            <input
-              type="text"
-              placeholder="Роль (напр. Авторский гид)"
-              value={formData.role || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, role: e.target.value })
-              }
-              className="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-3 text-white placeholder-white/20 focus:outline-hidden focus:border-accent-cta/50 transition-colors"
-            />
-            <input
-              type="text"
-              placeholder="Ссылка на Telegram"
-              value={formData.telegram || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, telegram: e.target.value })
-              }
-              className="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-3 text-white placeholder-white/20 focus:outline-hidden focus:border-accent-cta/50 transition-colors"
-            />
-            <input
-              type="text"
-              placeholder="Цена (число)"
-              value={formData.price || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, price: e.target.value })
-              }
-              className="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-3 text-white placeholder-white/20 focus:outline-hidden focus:border-accent-cta/50 transition-colors"
-            />
-          </div>
-          <div className="flex gap-4 justify-end mt-4">
-            <button
-              onClick={cancel}
-              className="px-6 py-2.5 rounded-xl border border-white/10 text-white/50 hover:text-white"
-            >
-              Отмена
-            </button>
-            <button
-              onClick={save}
-              disabled={loading || !formData.name}
-              className="flex items-center gap-2 px-6 py-2.5 bg-accent-cta text-white rounded-xl disabled:opacity-50"
-            >
-              <CheckCircle size={16} /> Сохранить
-            </button>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {(isCreating || editingId) && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+            animate={{ opacity: 1, height: "auto", marginBottom: 32 }}
+            exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="bg-white/5 border border-white/10 p-6 rounded-3xl space-y-4">
+              <h2 className="text-xl font-bold text-white mb-4">
+                {isCreating ? "Новый гид" : "Редактировать гида"}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Имя"
+                  value={formData.name || ""}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-3 text-white placeholder-white/20 focus:outline-hidden focus:border-accent-cta/50 transition-colors"
+                />
+                <input
+                  type="text"
+                  placeholder="Роль (напр. Авторский гид)"
+                  value={formData.role || ""}
+                  onChange={(e) =>
+                    setFormData({ ...formData, role: e.target.value })
+                  }
+                  className="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-3 text-white placeholder-white/20 focus:outline-hidden focus:border-accent-cta/50 transition-colors"
+                />
+                <input
+                  type="text"
+                  placeholder="Ссылка на Telegram"
+                  value={formData.telegram || ""}
+                  onChange={(e) =>
+                    setFormData({ ...formData, telegram: e.target.value })
+                  }
+                  className="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-3 text-white placeholder-white/20 focus:outline-hidden focus:border-accent-cta/50 transition-colors"
+                />
+                <input
+                  type="text"
+                  placeholder="Цена (число)"
+                  value={formData.price || ""}
+                  onChange={(e) =>
+                    setFormData({ ...formData, price: e.target.value })
+                  }
+                  className="w-full bg-black/20 border border-white/5 rounded-xl px-5 py-3 text-white placeholder-white/20 focus:outline-hidden focus:border-accent-cta/50 transition-colors"
+                />
+              </div>
+              <div className="flex gap-4 justify-end mt-4">
+                <button
+                  onClick={cancel}
+                  className="px-6 py-2.5 rounded-xl border border-white/10 text-white/50 hover:text-white"
+                >
+                  Отмена
+                </button>
+                <button
+                  onClick={save}
+                  disabled={loading || !formData.name}
+                  className="flex items-center gap-2 px-6 py-2.5 bg-accent-cta text-white rounded-xl disabled:opacity-50"
+                >
+                  <CheckCircle size={16} /> Сохранить
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {guides.map((g) => (

@@ -10,6 +10,7 @@ import {
   AlertCircle,
   Loader,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import type { TourFormData } from "./constants/types";
 import { defaultValues } from "./constants/types";
@@ -228,23 +229,46 @@ export default function TourForm({
           </div>
         )}
 
-        <div
+        <motion.div
+          layout
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className={`grid gap-10 ${
             preview
               ? "grid-cols-1 lg:grid-cols-12"
               : "grid-cols-1 max-w-3xl mx-auto"
           }`}
         >
-          <div className={`space-y-6 ${preview ? "lg:col-span-7" : ""}`}>
+          <motion.div
+            layout
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className={`space-y-6 ${preview ? "lg:col-span-7" : ""}`}
+          >
             <BasicInfoSection />
             <MediaSection />
             <HighlightsSection />
             <LocationsSection />
             <GuideSection guides={guides} />
-          </div>
+          </motion.div>
 
-          {preview && <PreviewPanel guides={guides} />}
-        </div>
+          <AnimatePresence>
+            {preview && (
+              <motion.div
+                key="preview-panel"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.1,
+                }}
+                className="lg:col-span-5"
+              >
+                <PreviewPanel guides={guides} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </form>
     </FormProvider>
   );

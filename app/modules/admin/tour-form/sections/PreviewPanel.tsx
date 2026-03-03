@@ -33,7 +33,7 @@ export default function PreviewPanel({
     }));
 
   return (
-    <div className="lg:col-span-5">
+    <div>
       <div className="sticky top-24 space-y-6">
         <p className="text-xs font-black uppercase tracking-[0.3em] text-light-surface/30">
           Предпросмотр
